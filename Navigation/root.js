@@ -1,14 +1,10 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet } from "react-native";
-
 import Home from "../screens/Home";
 import About from "../screens/About";
 import routes from "../utils/routes";
-
-
 import Tabs from "./Tabs";
-//import Drawer from "./drawer";
+
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -33,6 +29,6 @@ const Root = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+
 
 export default Root;
