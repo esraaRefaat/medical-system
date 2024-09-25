@@ -7,7 +7,7 @@ import About from '../screens/About';
 const tab = createBottomTabNavigator();
 const Tabs = () => {
     return (
-        <tab.Navigator>
+        <tab.Navigator screenOptions={{ headerShown: false }}>
             <tab.Screen name={routes.home} component={Home} />
             <tab.Screen name={routes.about} component={About} />
         </tab.Navigator>
