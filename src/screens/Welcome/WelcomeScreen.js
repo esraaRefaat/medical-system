@@ -1,9 +1,9 @@
 import React, { useEffect} from 'react';
-import { View, Image } from 'react-native';
+import { View, Image ,Text} from 'react-native';
 import routes from '../../utils/routes';
 import styles from './styles';
 
-const Splash = ({ navigation  }) => {
+const WelcomeScreen = ({ navigation  }) => {
     useEffect(() => {
         setTimeout(() => {
           navigation.navigate(routes.onboarding);
@@ -12,11 +12,12 @@ const Splash = ({ navigation  }) => {
     
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('../../assets/FaturedIcon.png')} />
+      <Image style={styles.image} source={require('../../assets/welcome.png')} />
+      <Text style={styles.text} >Hello  Cheers Design 👋</Text>
     </View>
   );
 };
 
 
 
-export default Splash;
+export default WelcomeScreen;

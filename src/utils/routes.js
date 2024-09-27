@@ -4,6 +4,7 @@ const routes = Object.freeze({
     tabs: "tabs",
     onboarding: 'onboarding',
     mainapp:'MainApp',
-    splash:'splash'
+    splash:'splash',
+    welcome:'welcome'
 })
 export default routes
