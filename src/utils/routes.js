@@ -3,8 +3,12 @@ const routes = Object.freeze({
     about: "about",
     tabs: "tabs",
     onboarding: 'onboarding',
-    mainapp:'MainApp',
-    splash:'splash',
-    welcome:'welcome'
+    mainapp: 'MainApp',
+    splash: 'splash',
+    welcome: 'welcome',
+    signup: 'signup',
+    login: 'login',
+    forgotPassword:'forgotPassword',
+    newpassword:'newpassword'
 })
 export default routes

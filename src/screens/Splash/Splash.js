@@ -6,7 +6,7 @@ import styles from './styles';
 const Splash = ({ navigation  }) => {
     useEffect(() => {
         setTimeout(() => {
-          navigation.navigate(routes.onboarding);
+          navigation.navigate(routes.signup);
         }, 2500);
       }, []);
     
