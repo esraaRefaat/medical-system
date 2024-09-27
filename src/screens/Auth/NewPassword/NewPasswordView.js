@@ -130,6 +130,9 @@ const NewPasswordView = () => {
                     size={10}
                   />
                 )}
+
+
+                
                 <CustomInput
                   lable={'OTP'}
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
