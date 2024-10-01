@@ -34,7 +34,7 @@ const MidPatient = () => {
       <Pressable
         style={[styles.card, { backgroundColor: "#EDFCF2" }]}
         onPress={() => {
-          navigation.navigate(routes.onboarding);
+          navigation.navigate(routes.specialities);
         }}
       >
         <Image

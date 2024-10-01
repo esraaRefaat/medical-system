@@ -43,10 +43,10 @@ const MidDoc = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: 500 }}>
-            Book an Appointment
+            View your Appointments
           </Text>
           <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
-            find a Doctor or specialist
+            see your upcoming appointments
           </Text>
         </Pressable>
       </View>
@@ -62,10 +62,10 @@ const MidDoc = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: 500 }}>
-            Book an Appointment
+            Patient Medical Record
           </Text>
           <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
-            find your next Doctor or specialist
+            view your patient's medical records
           </Text>
         </Pressable>
         <Pressable
@@ -79,10 +79,10 @@ const MidDoc = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: 500 }}>
-            Book an Appointment
+            Today's Appointments: 0
           </Text>
           <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
-            find a Doctor or specialist
+            check your today's appointments
           </Text>
         </Pressable>
       </View>

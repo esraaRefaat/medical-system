@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <SafeAreaView style={[{ flex: 1 }]}>
       <HomeHeader></HomeHeader>
-      {/* <MidPatient></MidPatient> */}
-      <MidDoc></MidDoc>
+      <MidPatient></MidPatient>
+      {/* <MidDoc></MidDoc> */}
       <News></News>
     </SafeAreaView>
   );
