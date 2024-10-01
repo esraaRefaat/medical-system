@@ -11,8 +11,7 @@ import SignUpView from "../screens/Auth/SignUp/SignUpView"
 import LoginView from "../screens/Auth/Login/loginView";
 import ForgotPasswordView from "../screens/Auth/ForgotPassword/ForgotPasswordView";
 import NewPasswordView from "../screens/Auth/NewPassword/NewPasswordView";
-
-
+import Specialities from "../screens/specialities";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -26,10 +25,10 @@ const Root = () => {
       <stack.Screen name={routes.forgotPassword} component={ForgotPasswordView} />
       <stack.Screen name={routes.newpassword} component={NewPasswordView} />
       <stack.Screen name={routes.mainapp} component={Tabs} />
+      <stack.Screen name={routes.specialities} component={Specialities} />
     </stack.Navigator>
   );
 };
 
-
-
 export default Root;
+
