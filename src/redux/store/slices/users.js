@@ -12,6 +12,17 @@ export const authAction = createAsyncThunk(
     }
   }
 );
+export const getDocs = createAsyncThunk(
+  "auth",
+  async ({ userData, url }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(url, userData);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
