@@ -64,7 +64,7 @@ const Onboarding = ({ navigation }) => {
           Choose a suitable time and date to meet your preferred doctor. Begin your journey to better{'\n'}health!
         </Text>
         <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonStartedPrimary} onPress={() => navigation.replace(routes.mainapp, { screen: routes.home })}>
+        <TouchableOpacity style={styles.buttonStartedPrimary} onPress={() => navigation.replace(routes.signup)}>
           <Text style={styles.buttonStartedPrimaryText}>Get Started!</Text>
         </TouchableOpacity>
         </View>
