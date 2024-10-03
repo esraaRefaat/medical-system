@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     backbuttontouch: {
-       width:24,
-       height:24,
+        width: 24,
+        height: 24,
     },
     logoText: {
         alignSelf: "flex-start",
@@ -37,16 +37,31 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     buttonStyle: {
-        marginTop:70,
+        marginTop: 70,
         backgroundColor: PRIMARY,
         alignSelf: 'center',
     },
     accountView: {
         flexDirection: 'row',
         alignSelf: 'center',
-        position:'absolute',
-        bottom:35
+        position: 'absolute',
+        bottom: 35
     },
+    radioView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 16
+    },
+    ShowMsgstyle: {
+        height: 60,
+        borderRadius: 10,
+        marginHorizontal: 25,
+        position: 'absolute',
+        bottom: 16,
+        width: '90%',
+        alignSelf: 'center'
+      }
+
 
 })
 

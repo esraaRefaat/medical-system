@@ -1,20 +1,26 @@
 import React, { useState, useCallback } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, StackActions } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
   View,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Text
 } from 'react-native';
 import styles from './styles';
 import CustomText from '../../../components/customText';
 import CustomInput from '../../../components/customInput';
 import CustomButton from '../../../components/customButton';
-import { SMS, PASSWORD, BACK_Arrow, User } from '../../../assets/svgIcons';
-import { TEXT_GREY } from '../../../styles/colors';
+import RadioButtonGroup from '../../../components/RadioButtonGroup';
+import { SMS, PASSWORD, BACK_Arrow, User, ALERT_MSG } from '../../../assets/svgIcons';
 import routes from '../../../utils/routes';
+import { Formik, Field } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { authAction } from '../../../redux/store/slices/authSlice';
+import { APP_BASE_URL, SIGN_UP } from '@env';
+import { showMessage } from "react-native-flash-message";
+import { TEXT_GREY } from '../../../styles/colors';
 
 
 
@@ -41,9 +47,37 @@ const SignupSchema = Yup.object().shape({
 });
 const SignUpView = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch()
   const [error, setError] = useState('');
+  const [current, setCurrent] = useState("patient");
+  const Options = [
+    { label: 'Patient', value: 'patient' },
+    { label: 'Doctor', value: 'doctor' },
+    { label: 'Admin', value: 'admin' },
+  ];
 
   const register_user = useCallback((values) => {
+    dispatch(authAction({ userData: values, url: APP_BASE_URL + SIGN_UP }))
+      .unwrap()
+      .then((response) => {
+       // console.log('jhhjhjhjhjhjhk',response)
+        navigation.dispatch(
+          StackActions.replace(routes.mainapp, { screen: routes.home })
+        )
+      })
+      .catch((error) => {
+        //console.log(error.error)
+        showMessage({
+          type: 'default',
+          message: ' ' + error.error,
+          description: '',
+          backgroundColor: '#d7dbdd',
+          color: TEXT_GREY,
+          textStyle: 'center',
+          icon: props => <ALERT_MSG {...props} color={TEXT_GREY} />,
+          style: styles.ShowMsgstyle
+        });
+      });
   }, [])
 
 
@@ -54,15 +88,15 @@ const SignUpView = () => {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps='handled'
         contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.backbutton}>
-          <TouchableOpacity
+        <View style={[styles.backbutton, { width: 24, height: 24 }]}>
+          {/* <TouchableOpacity
             activeOpacity={1}
             style={styles.backbuttontouch}
             onPress={() => {
               navigation.goBack()
             }}>
             <BACK_Arrow />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <CustomText
           text={'Register'}
@@ -163,9 +197,9 @@ const SignUpView = () => {
                   password={true}
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
                   placeholder={'Confirm your password'}
-                  value={values.confirmPassword}
-                  onChangeText={handleChange('confirmPassword')}
-                  Blur={handleBlur('confirmPassword')}
+                  value={values.rePassword}
+                  onChangeText={handleChange("rePassword")}
+                  Blur={handleBlur("rePassword")}
                   forceLable={true}
                   TextInputHeight={18}
                   TextInputSize={14}
@@ -173,19 +207,41 @@ const SignUpView = () => {
                   leftIcon={<PASSWORD />}
                   lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
                 />
-                {errors.confirmPassword && touched.confirmPassword && (
+                {errors.rePassword && touched.rePassword && (
                   <CustomText
-                    text={errors.confirmPassword}
+                    text={errors.rePassword}
                     color='DARK_RED'
                     fontFamily="Regular"
                     size={10}
                   />
                 )}
+                <View style={styles.radioView}>
+                  <CustomText
+                    text={"Select Role :"}
+                    color="TEXT_GREY"
+                    fontFamily='Medium'
+                    size={14}
+                    style={{ marginRight: 5 }}
+                  />
+                  {errors.role && touched.role && (
+                    <CustomText
+                      text={errors.role}
+                      color='DARK_RED'
+                      fontFamily="Regular"
+                      size={10}
+                    />
+                  )}
+                </View>
+                <Field
+                  name="role"
+                  component={RadioButtonGroup}
+                  options={Options}
+                />
               </View>
               <CustomButton
                 text={'Sign Up'}
                 containerStyle={styles.buttonStyle}
-                disabled={!isValid}
+                // disabled={!isValid}
                 onPress={handleSubmit}
               />
             </>

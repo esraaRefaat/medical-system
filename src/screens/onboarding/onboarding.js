@@ -30,7 +30,7 @@ const Onboarding = ({ navigation }) => {
         We will assist you in efficiently and easily{'\n'}scheduling appointments with doctors.{'\n'}Let's get started!
         </Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace(routes.mainapp, { screen: routes.home })}>
+          <TouchableOpacity style={styles.button} onPress={() =>navigation.replace(routes.signup)}>
             <Text style={styles.buttonText}>Skip</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonPrimary} onPress={handleNext}>
@@ -47,7 +47,7 @@ const Onboarding = ({ navigation }) => {
         Select the medical specialization you need so we can tailor your experience.
         </Text>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace(routes.mainapp, { screen: routes.home })}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.replace(routes.signup)}>
             <Text style={styles.buttonText}>Skip</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonPrimary} onPress={handleNext}>

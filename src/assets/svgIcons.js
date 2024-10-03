@@ -144,3 +144,28 @@ export const OTP = ({ props }) => (
     />
   </Svg>
 )
+export const ALERT_MSG = ({ props, color }) => (
+  <Svg
+    width={20}
+    height={20}
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <Path
+      d="M10 6.666v4.167M3.334 5a8.336 8.336 0 006.667 13.333c4.6 0 8.333-3.734 8.333-8.334s-3.733-8.333-8.333-8.333c-1.192 0-2.334.25-3.359.708"
+      stroke={color}
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M9.995 13.334h.008"
+      stroke={color}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+)
