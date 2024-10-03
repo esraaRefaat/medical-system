@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, StackActions } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,9 +12,13 @@ import styles from './styles';
 import CustomText from '../../../components/customText';
 import CustomInput from '../../../components/customInput';
 import CustomButton from '../../../components/customButton';
-import { SMS, PASSWORD, BACK_Arrow, User } from '../../../assets/svgIcons';
+import { SMS, PASSWORD, BACK_Arrow, User, ALERT_MSG } from '../../../assets/svgIcons';
 import { TEXT_GREY } from '../../../styles/colors';
 import routes from '../../../utils/routes';
+import { useDispatch, useSelector } from "react-redux";
+import { sendEmailAction } from "../../../redux/store/slices/forgetpassword";
+import { APP_BASE_URL, FORGET_PASSWORD } from '@env';
+import { showMessage } from "react-native-flash-message";
 
 
 
@@ -26,8 +30,34 @@ const ForgotPassword = Yup.object().shape({
 });
 const ForgotPasswordView = () => {
   const navigation = useNavigation();
- 
+  const dispatch = useDispatch()
+
   const forgot_password = useCallback((values) => {
+    dispatch(sendEmailAction({ userData: values, url: APP_BASE_URL + FORGET_PASSWORD }))
+      .unwrap()
+      .then((response) => {
+        console.log('jhhjhjhjhjhjhk', response)
+        navigation.dispatch(
+          StackActions.replace(routes.newpassword, {
+           
+              useremail: values.email ,
+            
+            })
+        )
+      })
+      .catch((error) => {
+        console.log('err', error.error)
+        showMessage({
+          type: 'default',
+          message: ' ' + error.error,
+          description: '',
+          backgroundColor: '#d7dbdd',
+          color: TEXT_GREY,
+          textStyle: 'center',
+          icon: props => <ALERT_MSG {...props} color={TEXT_GREY} />,
+          style: styles.ShowMsgstyle
+        });
+      });
   }, [])
 
 
@@ -68,8 +98,8 @@ const ForgotPasswordView = () => {
           }}
           validationSchema={ForgotPassword}
           onSubmit={values => {
+            console.log('val', values.email)
             forgot_password(values)
-          // navigation.navigate(routes.newpassword)
           }}
         >
           {({ values, errors, touched, handleChange, setFieldTouched, isValid, handleSubmit, handleBlur }) => (
@@ -100,7 +130,7 @@ const ForgotPasswordView = () => {
               <CustomButton
                 text={'Reset Password'}
                 containerStyle={styles.buttonStyle}
-               // disabled={!isValid}
+                // disabled={!isValid}
                 onPress={handleSubmit}
               />
             </>

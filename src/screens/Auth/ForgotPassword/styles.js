@@ -47,8 +47,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 35
     },
-   
-
+    ShowMsgstyle: {
+        height: 60,
+        borderRadius: 10,
+        marginHorizontal: 25,
+        position: 'absolute',
+        bottom: 16,
+        width: '90%',
+        alignSelf: 'center'
+      }
 })
 
 export default styles;

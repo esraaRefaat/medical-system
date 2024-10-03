@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation , StackActions } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,15 +12,19 @@ import styles from './styles';
 import CustomText from '../../../components/customText';
 import CustomInput from '../../../components/customInput';
 import CustomButton from '../../../components/customButton';
-import { SMS, PASSWORD, BACK_Arrow, User, OTP } from '../../../assets/svgIcons';
+import { SMS, PASSWORD, BACK_Arrow, User, OTP, ALERT_MSG } from '../../../assets/svgIcons';
 import { TEXT_GREY } from '../../../styles/colors';
 import routes from '../../../utils/routes';
-
+import { useDispatch, useSelector } from "react-redux";
+import { setPasswordAction } from "../../../redux/store/slices/setPassword";
+import { APP_BASE_URL, SET_NEW_PASSWORD } from '@env';
+import { showMessage } from "react-native-flash-message";
+import { useRoute } from '@react-navigation/native';
 
 
 const passwordPattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-const SignupSchema = Yup.object().shape({
-  password: Yup.string()
+const NewPasswordSchema = Yup.object().shape({
+  newPassword: Yup.string()
     .required("Required")
     .matches(
       passwordPattern,
@@ -28,15 +32,40 @@ const SignupSchema = Yup.object().shape({
     ),
   rePassword: Yup.string()
     .min(8)
-    .oneOf([Yup.ref("password")], "your passwords do not match")
+    .oneOf([Yup.ref("newPassword")], "your passwords do not match")
     .required("Required"),
-  OTP: Yup.string()
+  otp: Yup.string()
     .required('Required').length(6),
 });
 const NewPasswordView = () => {
   const navigation = useNavigation();
- 
-  const register_user = useCallback((values) => {
+  const dispatch = useDispatch()
+  const route = useRoute()
+
+  //console.log('email', route.params.useremail)
+
+  const new_password = useCallback((values) => {
+    dispatch(setPasswordAction({ userData: values, url: APP_BASE_URL + SET_NEW_PASSWORD }))
+      .unwrap()
+      .then((response) => {
+        console.log('jhhjhjhjhjhjhk', response)
+        navigation.dispatch(
+          StackActions.replace(routes.login)
+        )
+      })
+      .catch((error) => {
+        console.log('err', error.error)
+        showMessage({
+          type: 'default',
+          message: ' ' + error.error,
+          description: '',
+          backgroundColor: '#d7dbdd',
+          color: TEXT_GREY,
+          textStyle: 'center',
+          icon: props => <ALERT_MSG {...props} color={TEXT_GREY} />,
+          style: styles.ShowMsgstyle
+        });
+      });
   }, [])
 
 
@@ -58,7 +87,7 @@ const NewPasswordView = () => {
           </TouchableOpacity>
         </View>
         <CustomText
-         text={'Pick a new Password'}
+          text={'Pick a new Password'}
           color='GREY'
           fontFamily='bold'
           size={24}
@@ -73,13 +102,15 @@ const NewPasswordView = () => {
         />
         <Formik
           initialValues={{
-            password: "",
+            email: route.params.useremail,
+            newPassword: "",
             rePassword: "",
-            OTP: ''
+            otp: ''
           }}
-          validationSchema={SignupSchema}
+          validationSchema={NewPasswordSchema}
           onSubmit={values => {
-            register_user(values)
+            console.log('vaaaal', values)
+            new_password(values)
           }}
         >
           {({ values, errors, touched, handleChange, setFieldTouched, isValid, handleSubmit, handleBlur }) => (
@@ -91,17 +122,17 @@ const NewPasswordView = () => {
                   containerStyle={[styles.emailInput, { marginTop: 32 }]}
                   placeholder={'Enter your password'}
                   value={values.password}
-                  onChangeText={handleChange('password')}
-                  Blur={handleBlur('password')}
+                  onChangeText={handleChange('newPassword')}
+                  Blur={handleBlur('newPassword')}
                   forceLable={true}
                   TextInputHeight={18}
                   TextInputSize={14}
                   leftIcon={<PASSWORD />}
                   lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
                 />
-                {errors.password && touched.password && (
+                {errors.newPassword && touched.newPassword && (
                   <CustomText
-                    text={errors.password}
+                    text={errors.newPassword}
                     color='DARK_RED'
                     fontFamily="Regular"
                     size={10}
@@ -113,8 +144,8 @@ const NewPasswordView = () => {
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
                   placeholder={'Confirm your password'}
                   value={values.confirmPassword}
-                  onChangeText={handleChange('confirmPassword')}
-                  Blur={handleBlur('confirmPassword')}
+                  onChangeText={handleChange('rePassword')}
+                  Blur={handleBlur('rePassword')}
                   forceLable={true}
                   TextInputHeight={18}
                   TextInputSize={14}
@@ -122,9 +153,9 @@ const NewPasswordView = () => {
                   leftIcon={<PASSWORD />}
                   lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
                 />
-                {errors.confirmPassword && touched.confirmPassword && (
+                {errors.rePassword && touched.rePassword && (
                   <CustomText
-                    text={errors.confirmPassword}
+                    text={errors.rePassword}
                     color='DARK_RED'
                     fontFamily="Regular"
                     size={10}
@@ -132,14 +163,14 @@ const NewPasswordView = () => {
                 )}
 
 
-                
+
                 <CustomInput
                   lable={'OTP'}
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
                   placeholder={'OTP'}
                   value={values.confirmPassword}
-                  onChangeText={handleChange('OTP')}
-                  Blur={handleBlur('OTP')}
+                  onChangeText={handleChange('otp')}
+                  Blur={handleBlur('otp')}
                   forceLable={true}
                   TextInputHeight={18}
                   TextInputSize={14}
@@ -147,9 +178,9 @@ const NewPasswordView = () => {
                   leftIcon={<OTP />}
                   lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
                 />
-                {errors.OTP && touched.OTP && (
+                {errors.otp && touched.otp && (
                   <CustomText
-                    text={errors.OTP}
+                    text={errors.otp}
                     color='DARK_RED'
                     fontFamily="Regular"
                     size={10}
@@ -159,7 +190,7 @@ const NewPasswordView = () => {
               <CustomButton
                 text={'Set New Password'}
                 containerStyle={styles.buttonStyle}
-                disabled={!isValid}
+                // disabled={!isValid}
                 onPress={handleSubmit}
               />
             </>
