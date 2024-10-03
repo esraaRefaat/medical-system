@@ -18,6 +18,8 @@ import routes from '../../../utils/routes';
 
 
 
+
+
 const passwordPattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
