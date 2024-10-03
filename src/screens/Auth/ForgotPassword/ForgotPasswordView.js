@@ -19,7 +19,7 @@ import routes from '../../../utils/routes';
 
 
 
-const SignupSchema = Yup.object().shape({
+const ForgotPassword = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
@@ -27,7 +27,7 @@ const SignupSchema = Yup.object().shape({
 const ForgotPasswordView = () => {
   const navigation = useNavigation();
  
-  const register_user = useCallback((values) => {
+  const forgot_password = useCallback((values) => {
   }, [])
 
 
@@ -65,12 +65,11 @@ const ForgotPasswordView = () => {
         <Formik
           initialValues={{
             email: "",
-            password: "",
           }}
-          validationSchema={SignupSchema}
+          validationSchema={ForgotPassword}
           onSubmit={values => {
-           // register_user(values)
-           navigation.navigate(routes.newpassword)
+            forgot_password(values)
+          // navigation.navigate(routes.newpassword)
           }}
         >
           {({ values, errors, touched, handleChange, setFieldTouched, isValid, handleSubmit, handleBlur }) => (
@@ -101,7 +100,7 @@ const ForgotPasswordView = () => {
               <CustomButton
                 text={'Reset Password'}
                 containerStyle={styles.buttonStyle}
-                disabled={!isValid}
+               // disabled={!isValid}
                 onPress={handleSubmit}
               />
             </>

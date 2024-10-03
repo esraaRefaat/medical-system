@@ -12,14 +12,19 @@ import styles from './styles';
 import CustomText from '../../../components/customText';
 import CustomInput from '../../../components/customInput';
 import CustomButton from '../../../components/customButton';
-import { SMS, PASSWORD, BACK_Arrow, User } from '../../../assets/svgIcons';
+import { SMS, PASSWORD, BACK_Arrow, User , ALERT_MSG} from '../../../assets/svgIcons';
 import { TEXT_GREY } from '../../../styles/colors';
 import routes from '../../../utils/routes';
+import { useDispatch, useSelector } from "react-redux";
+import { authAction } from '../../../redux/store/slices/authSlice';
+import { APP_BASE_URL, LOGIN } from '@env';
+import { showMessage } from "react-native-flash-message";
+
 
 
 
 const passwordPattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-const SignupSchema = Yup.object().shape({
+const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email')
     .required('Required'),
@@ -32,8 +37,30 @@ const SignupSchema = Yup.object().shape({
 });
 const LoginView = () => {
   const navigation = useNavigation();
- 
-  const register_user = useCallback((values) => {
+  const dispatch = useDispatch()
+
+  const login_user = useCallback((values) => {
+    dispatch(authAction({ userData: values, url: APP_BASE_URL + LOGIN }))
+    .unwrap()
+    .then((response) => {
+     console.log('jhhjhjhjhjhjhk',response)
+      // navigation.dispatch(
+      //   StackActions.replace(routes.mainapp, { screen: routes.home })
+      // )
+    })
+    .catch((error) => {
+      console.log('err',error.error)
+      showMessage({
+        type: 'default',
+        message: ' ' + error.error,
+        description: '',
+        backgroundColor: '#d7dbdd',
+        color: TEXT_GREY,
+        textStyle: 'center',
+        icon: props => <ALERT_MSG {...props} color={TEXT_GREY} />,
+        style: styles.ShowMsgstyle
+      });
+    });
   }, [])
 
 
@@ -73,10 +100,9 @@ const LoginView = () => {
             email: "",
             password: "",
           }}
-          validationSchema={SignupSchema}
+          validationSchema={SignInSchema}
           onSubmit={values => {
-           // register_user(values)
-           
+            login_user(values)
           }}
         >
           {({ values, errors, touched, handleChange, setFieldTouched, isValid, handleSubmit, handleBlur }) => (
@@ -125,10 +151,10 @@ const LoginView = () => {
                     size={10}
                   />
                 )}
-              <TouchableOpacity
+                <TouchableOpacity
                   activeOpacity={1}
                   onPress={() => {
-                   navigation.navigate(routes.forgotPassword)
+                    navigation.navigate(routes.forgotPassword)
                   }}>
                   <CustomText
                     text={'Forgot Password'}
@@ -142,7 +168,7 @@ const LoginView = () => {
               <CustomButton
                 text={'Sign In'}
                 containerStyle={styles.buttonStyle}
-                disabled={!isValid}
+               // disabled={!isValid}
                 onPress={handleSubmit}
               />
             </>
@@ -158,7 +184,7 @@ const LoginView = () => {
             size={14}
           />
           <TouchableOpacity onPress={() => {
-          navigation.navigate(routes.signup)
+            navigation.navigate(routes.signup)
           }}>
             <CustomText
               text={' Register'}

@@ -62,10 +62,10 @@ const SignUpView = () => {
     dispatch(authAction({ userData: values, url: APP_BASE_URL + SIGN_UP }))
       .unwrap()
       .then((response) => {
-       // console.log('jhhjhjhjhjhjhk',response)
-        navigation.dispatch(
-          StackActions.replace(routes.mainapp, { screen: routes.home })
-        )
+        console.log('jhhjhjhjhjhjhk',response)
+        // navigation.dispatch(
+        //   StackActions.replace(routes.mainapp, { screen: routes.home })
+        // )
       })
       .catch((error) => {
         //console.log(error.error)

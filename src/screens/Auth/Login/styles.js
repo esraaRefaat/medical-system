@@ -52,6 +52,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         height: 26
     },
+    ShowMsgstyle: {
+        height: 60,
+        borderRadius: 10,
+        marginHorizontal: 25,
+        position: 'absolute',
+        bottom: 16,
+        width: '90%',
+        alignSelf: 'center'
+      }
 
 })
 
