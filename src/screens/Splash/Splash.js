@@ -20,12 +20,12 @@ const Splash = () => {
       }
       else {
         setTimeout(function () {
-          // navigation.dispatch(
-          //   StackActions.replace(routes.signup)
-          // )
           navigation.dispatch(
-            StackActions.replace(routes.medicalrecords)
+            StackActions.replace(routes.signup)
           )
+          // navigation.dispatch(
+          //   StackActions.replace(routes.medicalrecords)
+          // )
         }, 1500);
       }
     })

@@ -60,7 +60,7 @@ export default function MedicalRecords({ navigation }) {
                 <Text style={styles.notificationIcon}></Text>
             </View>
             <FlatList
-                data={records}
+                data={[]}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 ListEmptyComponent={<EmptyListComponent />}
