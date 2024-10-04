@@ -11,6 +11,7 @@ const routes = Object.freeze({
     forgotPassword:'forgotPassword',
     newpassword:'newpassword',
     specialities: "specialities",
+    medicalrecords:'medicalrecords'
 })
 export default routes
  
