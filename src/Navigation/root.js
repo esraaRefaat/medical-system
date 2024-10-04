@@ -12,6 +12,9 @@ import LoginView from "../screens/Auth/Login/loginView";
 import ForgotPasswordView from "../screens/Auth/ForgotPassword/ForgotPasswordView";
 import NewPasswordView from "../screens/Auth/NewPassword/NewPasswordView";
 import Specialities from "../screens/specialities";
+import ConfirmAppointment from "../screens/Appoinments/ConfirmAppointment";
+import AppointmentSuccess from "../screens/Appoinments/AppointmentSuccess";
+import FindDoctor from '../screens/FindDoctor/FindDoctor'
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -26,6 +29,9 @@ const Root = () => {
       <stack.Screen name={routes.newpassword} component={NewPasswordView} />
       <stack.Screen name={routes.mainapp} component={Tabs} />
       <stack.Screen name={routes.specialities} component={Specialities} />
+      <stack.Screen name={routes.confirmAppointment} component={ConfirmAppointment} />
+      <stack.Screen name={routes.appointmentSuccess} component={AppointmentSuccess} />
+      <stack.Screen name={routes.findDoctor} component={FindDoctor} />
     </stack.Navigator>
   );
 };

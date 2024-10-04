@@ -1,14 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import ChooseDay from '../../components/ChooseDay'
 import ChooseTime from '../../components/ChooseTime'
 import TouchableButton from '../../components/TouchableButton'
+import * as NavigationBar from 'expo-navigation-bar';
 
 
 
-const AppointmentVisitTime = () => {
+const ConfirmAppointment = () => {
+    const [day, setDay] = useState();
+    const [time, setTime] = useState();
+
+    useEffect(() => {
+        NavigationBar.setBackgroundColorAsync('white');
+    }, [])
     return (
         <SafeAreaView>
             <View style={styles.container}>
@@ -18,8 +25,8 @@ const AppointmentVisitTime = () => {
 
                 </View>
 
-                <ChooseDay />
-                <ChooseTime title={'Morning'} />
+                <ChooseDay activeDay={day} setDay={setDay} data={[{ id: 1, dayName: 'Wed', dayNumber: 10, status: 'active' }, { id: 2, dayName: 'Wed', dayNumber: 11, status: 'disabled' }, { id: 3, dayName: 'Wed', dayNumber: 12, status: 'available' }]} />
+                <ChooseTime title={'Morning'} activeTime={time} setActiveTime={setTime} />
                 <ChooseTime title={'Afternoon'} />
 
                 <View style={styles.bottomAction}>
@@ -34,7 +41,7 @@ const AppointmentVisitTime = () => {
     )
 }
 
-export default AppointmentVisitTime
+export default ConfirmAppointment
 
 const styles = StyleSheet.create({
     container: {

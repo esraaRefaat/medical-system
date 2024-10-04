@@ -11,7 +11,7 @@ const getFormattedDate = () => {
     return `${month} ${year}`
 }
 
-const ChooseDay = () => {
+const ChooseDay = ({ data, activeDay, setDay }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.h2}>Choose Day, {getFormattedDate()}</Text>
@@ -19,9 +19,9 @@ const ChooseDay = () => {
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
                 contentContainerStyle={{ gap: 16 }}
-                data={[{ id: 1, DayName: 'Wed', DayNumber: 10, status: 'active' }, { id: 2, DayName: 'Wed', DayNumber: 10, status: 'disabled' }, { id: 3, DayName: 'Wed', DayNumber: 10, status: 'available' }]}
+                data={data}
                 keyExtractor={(day) => day.id}
-                renderItem={(day) => <Day dayName={day.item.DayName} dayNumber={day.item.DayNumber} />}
+                renderItem={({ item }) => <Day onPress={() => setDay(item.dayNumber)} dayName={item.dayName} dayNumber={item.dayNumber} active={(activeDay == item.dayNumber)} disapled={item.disabled} />}
             />
         </View>
     )
@@ -39,5 +39,4 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-
 })
