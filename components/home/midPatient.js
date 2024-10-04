@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../src/utils/routes";
-
+// componenet
 const MidPatient = () => {
   const navigation = useNavigation();
   return (
