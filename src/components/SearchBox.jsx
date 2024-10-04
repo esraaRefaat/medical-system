@@ -1,17 +1,20 @@
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import SearchIcon from './Icons/SearchIcon'
 
-const SearchBox = ({ searchName, setSearchName }) => {
+const SearchBox = ({ setSearchName }) => {
     const input = useRef(null)
+    const [searchValue, setSearchValue] = useState('')
     return (
         <TouchableOpacity activeOpacity={1} onPress={() => {
             input.current.focus();
         }}>
             <View style={styles.container}>
                 <SearchIcon />
-                <TextInput ref={input} style={styles.textInput} value={searchName} placeholder='Search Doctor' onChange={(e) => {
-                    setSearchName(e)
+                <TextInput ref={input} style={styles.textInput} value={searchValue} placeholder='Search Doctor' onChangeText={(e) => {
+                    setSearchValue(e)
+                }} onSubmitEditing={(e) => {
+                    setSearchName(searchValue);
                 }} />
             </View>
         </TouchableOpacity>

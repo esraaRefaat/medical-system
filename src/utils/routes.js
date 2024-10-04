@@ -8,10 +8,13 @@ const routes = Object.freeze({
     welcome: 'welcome',
     signup: 'signup',
     login: 'login',
-    forgotPassword:'forgotPassword',
-    newpassword:'newpassword',
+    forgotPassword: 'forgotPassword',
+    newpassword: 'newpassword',
     specialities: "specialities",
-    medicalrecords:'medicalrecords'
+    medicalrecords:'medicalrecords',
+    confirmAppointment: "confirmAppointment",
+    appointmentSuccess: 'appointmentSuccess',
+    findDoctor: 'findDoctor'
 })
 export default routes
- 
+

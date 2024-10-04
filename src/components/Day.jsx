@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Day = ({ dayName, dayNumber, status }) => {
+const Day = ({ dayName, dayNumber, active, disapled, onPress }) => {
     return (
-        <View style={{ ...styles.container, }}>
-            <Text>{dayName}</Text>
-            <Text style={styles.bold}>{dayNumber}</Text>
-        </View>
+
+        <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={[styles.container, disapled && styles.disapled, (active && !disapled) && styles.active]}>
+            <Text style={[disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayName}</Text>
+            <Text style={[styles.bold, disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayNumber}</Text>
+        </TouchableOpacity>
     )
 }
 
@@ -23,17 +24,21 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         gap: 4
     },
-    active: {
-        backgroundColor: '#0f5dd0',
-        borderColor: '#0f5dd0',
-        color: 'white',
-    },
-    disapled: {
-        color: '#9fa0a7',
-        backgroundColor: '#e4e6ea'
-    },
     bold: {
         fontSize: 20,
         fontWeight: 'bold'
+    },
+    disapled: {
+        backgroundColor: '#e4e6ea'
+    },
+    disapledText: {
+        color: '#9fa0a7',
+    },
+    active: {
+        backgroundColor: '#0f5dd0',
+        borderColor: '#0f5dd0',
+    },
+    activeText: {
+        color: 'white'
     }
 })

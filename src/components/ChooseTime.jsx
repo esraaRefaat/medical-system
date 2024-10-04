@@ -13,7 +13,7 @@ const ChooseTime = ({ title }) => {
                 contentContainerStyle={{ gap: 16 }}
                 data={[{ id: 1, time: '10:00' }, { id: 2, time: '10:00' }, { id: 3, time: '10:00' }, { id: 4, time: '10:00' }]}
                 keyExtractor={(time) => time.id}
-                renderItem={(time) => <TimeSet time={time.item.time} />}
+                renderItem={(time) => <TimeSet onPress={() => { }} time={time.item.time} />}
             />
         </View>
     )
