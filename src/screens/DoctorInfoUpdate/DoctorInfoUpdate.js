@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState, useCallback } from "react";
-import { SafeAreaView, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
+import { SafeAreaView, Text, TextInput, TouchableOpacity, View, Alert, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -9,7 +9,6 @@ import { APP_BASE_URL, UPDATE_DR_INFO } from "@env";
 import { putWithTokenAction } from "../../redux/store/slices/putWithTokenSlice.js";
 import styles from './styles';
 import CustomButton from "../../components/customButton.js";
-import { ScrollView } from "react-native-gesture-handler";
 import CustomText from "../../components/customText.js";
 import { BACK_Arrow } from "../../assets/svgIcons.js";
 
@@ -99,6 +98,11 @@ const DoctorInfoUpdateView = () => {
   return (
     <SafeAreaView style={styles.container}>
 
+<ScrollView
+        horizontal={false}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps='handled'
+        contentContainerStyle={{ flexGrow: 1 }}>
                   <View style={styles.backbutton}>
           <TouchableOpacity
             activeOpacity={0.7}
@@ -195,6 +199,7 @@ const DoctorInfoUpdateView = () => {
           </View>
         )}
       </Formik>
+      </ScrollView>
     </SafeAreaView>
   );
 };
