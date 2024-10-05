@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store/store";
 import { useFonts } from 'expo-font';
 import FlashMessage from "react-native-flash-message";
+import ConfirmAppointment from './src/screens/Appoinments/ConfirmAppointment';
 
 
 export default function App() {
@@ -17,20 +18,21 @@ export default function App() {
     'Regular': require('./src/assets/fonts/Manrope-Regular.ttf'),
     'SemiBold': require('./src/assets/fonts/Manrope-SemiBold.ttf'),
   });
-  if(!loaded){
+  if (!loaded) {
     return null
   }
   return (
     <>
-    <Provider store={store}>
-      <NavigationContainer>
+      <Provider store={store}>
+        {/* <NavigationContainer>
         <Root></Root>
-      </NavigationContainer>
-      <StatusBar hidden></StatusBar>
-    </Provider>
+      </NavigationContainer> */}
+        <ConfirmAppointment />
+        {/* <StatusBar hidden></StatusBar> */}
+      </Provider>
 
-<FlashMessage position="bottom" />
-</>
+      <FlashMessage position="bottom" />
+    </>
 
   );
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import DoctorAvatar from './DoctorAvatar'
 import Star from './Icons/Star'
 
-export default function DoctorCard({ avatar, fullName, specialization, idr, rating }) {
+export default function DoctorCard({ avatar, fullName, specialization, fees, rating }) {
     return (
         <View style={styles.cardRow}>
             <View style={styles.avatarSection}>
@@ -12,7 +12,7 @@ export default function DoctorCard({ avatar, fullName, specialization, idr, rati
             <View style={styles.infoColumn}>
                 <Text style={styles.boldText}>Dr. {fullName}</Text>
                 <Text style={styles.grayText}>{specialization}</Text>
-                <Text style={styles.boldText}>IDR. {idr}</Text>
+                <Text style={styles.boldText}>{fees} $</Text>
             </View>
             <View style={styles.rating}>
                 <Star />

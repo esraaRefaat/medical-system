@@ -20,7 +20,7 @@ const ChooseDay = ({ data, activeDay, setDay }) => {
                 horizontal={true}
                 contentContainerStyle={{ gap: 16 }}
                 data={data}
-                keyExtractor={(day) => day.id}
+                keyExtractor={(day) => day.dayNumber}
                 renderItem={({ item }) => <Day onPress={() => setDay(item.dayNumber)} dayName={item.dayName} dayNumber={item.dayNumber} active={(activeDay == item.dayNumber)} disapled={item.disabled} />}
             />
         </View>

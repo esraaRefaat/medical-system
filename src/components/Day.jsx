@@ -4,7 +4,7 @@ import React from 'react'
 const Day = ({ dayName, dayNumber, active, disapled, onPress }) => {
     return (
 
-        <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={[styles.container, disapled && styles.disapled, (active && !disapled) && styles.active]}>
+        <TouchableOpacity disabled={disapled} activeOpacity={0.8} onPress={onPress} style={[styles.container, disapled && styles.disapled, (active && !disapled) && styles.active]}>
             <Text style={[disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayName}</Text>
             <Text style={[styles.bold, disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayNumber}</Text>
         </TouchableOpacity>
