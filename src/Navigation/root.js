@@ -16,6 +16,7 @@ import MedicalRecords from "../screens/MedicalRecords/MedicalRecords";
 import ConfirmAppointment from "../screens/Appoinments/ConfirmAppointment";
 import AppointmentSuccess from "../screens/Appoinments/AppointmentSuccess";
 import FindDoctor from '../screens/FindDoctor/FindDoctor'
+import DoctorInfoUpdateView from "../screens/DoctorInfoUpdate/DoctorInfoUpdate.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -34,6 +35,9 @@ const Root = () => {
       <stack.Screen name={routes.confirmAppointment} component={ConfirmAppointment} />
       <stack.Screen name={routes.appointmentSuccess} component={AppointmentSuccess} />
       <stack.Screen name={routes.findDoctor} component={FindDoctor} />
+      <stack.Screen name={routes.doctorInfoUpdate} component={DoctorInfoUpdateView} />
+
+
     </stack.Navigator>
   );
 };
