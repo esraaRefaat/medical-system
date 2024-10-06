@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store/store";
 import { useFonts } from 'expo-font';
 import FlashMessage from "react-native-flash-message";
-import ConfirmAppointment from './src/screens/Appoinments/ConfirmAppointment';
 
 
 export default function App() {
@@ -24,11 +23,10 @@ export default function App() {
   return (
     <>
       <Provider store={store}>
-        {/* <NavigationContainer>
-        <Root></Root>
-      </NavigationContainer> */}
-        <ConfirmAppointment />
-        {/* <StatusBar hidden></StatusBar> */}
+        <NavigationContainer>
+          <Root></Root>
+        </NavigationContainer>
+        <StatusBar hidden></StatusBar>
       </Provider>
 
       <FlashMessage position="bottom" />
