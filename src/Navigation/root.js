@@ -28,7 +28,7 @@ const Root = () => {
       screenOptions={{ headerShown: false }}
       initialRouteName="Splash"
     >
-      <stack.Screen name={routes.Profile} component={Profile} />
+    
       <stack.Screen name={routes.splash} component={Splash} />
       <stack.Screen name={routes.welcome} component={WelcomeScreen} />
       <stack.Screen name={routes.onboarding} component={Onboarding} />
@@ -54,7 +54,7 @@ const Root = () => {
       <stack.Screen name={routes.addrecordscreen} component={AddRecordScreen} />
       <stack.Screen name={routes.recorddetails} component={RecordDetailsScreen} />
       <stack.Screen name={routes.doctorInfoUpdate} component={DoctorInfoUpdateView} />
-
+      <stack.Screen name={routes.Profile} component={Profile} />
 
     </stack.Navigator>
   );

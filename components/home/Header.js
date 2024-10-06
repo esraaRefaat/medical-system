@@ -36,10 +36,10 @@ const HomeHeader = () => {
 
 const styles = StyleSheet.create({
   container: { padding: 16 },
-  hiText: { fontSize: 20, fontWeight: 500 },
+  hiText: { fontSize: 20, fontWeight: 'bold' },
   mayText: {
     fontSize: 14,
-    fontWeight: 400,
+    fontWeight:'medium',
     color: "rgb(63,63,70)",
     marginTop: 4,
   },

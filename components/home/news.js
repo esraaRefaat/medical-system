@@ -37,7 +37,7 @@ const News = () => {
                 fontSize: 14,
                 fontWeight: 500,
                 color: "white",
-                lineHeight: "24px",
+                lineHeight: 24,
               }}
             >
               Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
@@ -66,7 +66,7 @@ const News = () => {
                 fontSize: 14,
                 fontWeight: 500,
                 color: "white",
-                lineHeight: "24px",
+                lineHeight: 24,
               }}
             >
               Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
@@ -95,7 +95,7 @@ const News = () => {
                 fontSize: 14,
                 fontWeight: 500,
                 color: "white",
-                lineHeight: "24px",
+                lineHeight: 24,
               }}
             >
               Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
