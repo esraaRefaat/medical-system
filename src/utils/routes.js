@@ -18,6 +18,9 @@ const routes = Object.freeze({
     addrecordscreen:'addrecordscreen',
     recorddetails:'recorddetails',
     doctorInfoUpdate:'doctorInfoUpdate',
+    Profile: "Profile",
 })
-export default routes
+
+
+export default routes;
 
