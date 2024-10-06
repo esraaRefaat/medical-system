@@ -1,16 +1,16 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import FilterIcon from './Icons/FilterIcon'
+import EnterArrow from './Icons/EnterArrow'
 
-const FilterButton = () => {
+const EnterButton = () => {
     return (
         <View style={styles.container}>
-            <FilterIcon />
+            <EnterArrow />
         </View>
     )
 }
 
-export default FilterButton
+export default EnterButton
 
 const styles = StyleSheet.create({
     container: {

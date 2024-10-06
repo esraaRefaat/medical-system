@@ -3,7 +3,7 @@ import React from 'react'
 import TimeSet from './TimeSet';
 
 
-const ChooseTime = ({ title }) => {
+const ChooseTime = ({ title, data, activeTimeId, setActiveTimeId }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.h2}>{title} Set</Text>
@@ -11,9 +11,9 @@ const ChooseTime = ({ title }) => {
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
                 contentContainerStyle={{ gap: 16 }}
-                data={[{ id: 1, time: '10:00' }, { id: 2, time: '10:00' }, { id: 3, time: '10:00' }, { id: 4, time: '10:00' }]}
-                keyExtractor={(time) => time.id}
-                renderItem={(time) => <TimeSet onPress={() => { }} time={time.item.time} />}
+                data={data}
+                keyExtractor={(time) => time._id}
+                renderItem={({ item }) => <TimeSet onPress={() => { setActiveTimeId(item._id) }} active={activeTimeId === item._id} time={item.time} disapled={item.disapled} />}
             />
         </View>
     )

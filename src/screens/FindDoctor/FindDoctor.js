@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet, FlatList, ActivityIndicator, } from 'react-native'
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, Dimensions } from 'react-native'
 import React, { useEffect, useState, useRef } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DoctorCard from '../../components/DoctorCard';
 import SearchBox from '../../components/SearchBox';
-import FilterButton from '../../components/FilterButton';
+import EnterButton from '../../components/EnterButton';
 import axios from 'axios';
 import * as NavigationBar from 'expo-navigation-bar';
 import FAB from '../../components/FAB';
@@ -12,10 +12,12 @@ import TopArrow from '../../components/Icons/TopArrow';
 
 const solidBlue = '#1552b4';
 
+axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
+
 //route, navigation
 //route.params ||
 export default function FindDoctor({ }) {
-    const { drSpecialties } = { drSpecialties: 'dermatology' };
+    const { drSpecialties } = { drSpecialties: 'ear-nose-and-throat' };
     const [searchName, setSearchName] = useState('');
     const [page, setPage] = useState(1);
     const [doctors, setDoctors] = useState([]);
@@ -31,7 +33,8 @@ export default function FindDoctor({ }) {
 
     const fetchDoctors = async (cb) => {
         try {
-            let endpoint = `/users?role=doctor&verifiedDoctor=true&page=${page}`;
+            const verifiedDoctor = 'pending'
+            let endpoint = `/users?role=doctor&verifiedDoctor=${verifiedDoctor}&page=${page}`;
             if (searchName)
                 endpoint += `&keyword=${searchName}`
             if (drSpecialties)
@@ -42,6 +45,8 @@ export default function FindDoctor({ }) {
 
             if (res.data.document.length < 10)
                 setShowLoading(false);
+
+            console.log(res)
 
         } catch (e) {
             console.log(e)
@@ -79,6 +84,7 @@ export default function FindDoctor({ }) {
         <SafeAreaView >
 
             <FlatList
+                style={{ height: '100%' }}
                 ref={flatListRef}
                 ListHeaderComponent={
                     <View style={styles.listHeader}>
@@ -86,36 +92,38 @@ export default function FindDoctor({ }) {
                             <View style={styles.searchBox}>
                                 <SearchBox setSearchName={setSearchName} />
                             </View>
-                            <FilterButton />
+                            <EnterButton />
                         </View>
                     </View>
 
                 }
-                data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]}
-                keyExtractor={i => i}
+                data={doctors}
+                keyExtractor={_id => _id}
                 contentContainerStyle={{ gap: 16 }}
                 ItemSeparatorComponent={() => <View style={{ height: 38 }} />}
                 renderItem={
-                    () => <DoctorCard
+                    ({ item }) => <DoctorCard
                         avatar={'https://s3-alpha-sig.figma.com/img/78ba/f237/b32634d9f131723a21fb54a51b0dc114?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=L8xYoPM28s5uBmO-rNZGuZ37lV2WltP0Jgc3bqWKevJ6gaJOAPMafIzWDVMfkJfY-jOi7H-JaDLufs9-pRmJEw2hjmdJk0h-mUbsahCez9GvDbjG3fcbqmOtm~ogOxnd6gEVybUqtTinrN13H1ToQ-KWTkCj64hJF2OnO1Jwk6Faa8GJuEJJO2RveyzGQYa0kQMeW-~rFV8FTDCF1w9dlOjFI3~cz2Wv-vf50nU4KLyBn83FAxembCH85Dcck1sNu7uvYViutvixrTxCZ2aOIyKRSZCEm2sO-eS4-4P2sOaL8kO3M5N-grbq5~~91I9DhLO60G0Sr3zpFNVaaITlfw__'}
-                        fullName={'Patric Ahoy'}
-                        specialization={'Ear Nose and Throat Specialist'}
-                        idr={'120.000'}
-                        rating={'4.5'}
+                        fullName={item.name}
+                        specialization={item.drSpecialties}
+                        fees={item.drSessionFees}
+                        rating={item.rating}
                     />
                 }
                 ListFooterComponent={
                     () => {
-                        return showLoading ?
-                            <ActivityIndicator size={50} color={solidBlue} /> :
-                            <Text style={styles.endText}>✋ No More Doctors</Text>
+                        return (
+                            showLoading ?
+                                <ActivityIndicator size={50} color={solidBlue} /> :
+                                <Text style={styles.endText}>✋ No More Doctors</Text>
+                        )
                     }
                 }
-                ListFooterComponentStyle={{ paddingVertical: 16 }}
+                ListFooterComponentStyle={doctors.length === 0 ? { paddingTop: Dimensions.get('window').height / 3 } : { paddingVertical: 16 }}
                 onScroll={handleScroll}
                 scrollEventThrottle={16}
                 onEndReached={() => {
-                    if (showLoading)
+                    if (showLoading && doctors.length >= 10)
                         setPage((prevState) => {
                             return prevState + 1
                         })

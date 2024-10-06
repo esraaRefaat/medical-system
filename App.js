@@ -17,20 +17,20 @@ export default function App() {
     'Regular': require('./src/assets/fonts/Manrope-Regular.ttf'),
     'SemiBold': require('./src/assets/fonts/Manrope-SemiBold.ttf'),
   });
-  if(!loaded){
+  if (!loaded) {
     return null
   }
   return (
     <>
-    <Provider store={store}>
-      <NavigationContainer>
-        <Root></Root>
-      </NavigationContainer>
-      <StatusBar hidden></StatusBar>
-    </Provider>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Root></Root>
+        </NavigationContainer>
+        <StatusBar hidden></StatusBar>
+      </Provider>
 
-<FlashMessage position="bottom" />
-</>
+      <FlashMessage position="bottom" />
+    </>
 
   );
 }
