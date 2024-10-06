@@ -35,7 +35,7 @@ const News = () => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 color: "white",
                 lineHeight: 24,
               }}
@@ -43,7 +43,7 @@ const News = () => {
               Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
             </Text>
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-              <Text style={{ fontSize: 12, fontWeight: 400, color: "white" }}>
+              <Text style={{ fontSize: 12, fontWeight: "400", color: "white" }}>
                 Read more
               </Text>
               <AntDesign name="arrowright" size={12} color="white" />
@@ -64,7 +64,7 @@ const News = () => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 color: "white",
                 lineHeight: 24,
               }}
@@ -72,7 +72,7 @@ const News = () => {
               Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
             </Text>
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-              <Text style={{ fontSize: 12, fontWeight: 400, color: "white" }}>
+              <Text style={{ fontSize: 12, fontWeight: "400", color: "white" }}>
                 Read more
               </Text>
               <AntDesign name="arrowright" size={12} color="white" />
@@ -93,7 +93,7 @@ const News = () => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: 500,
+                fontWeight: "500",
                 color: "white",
                 lineHeight: 24,
               }}
@@ -101,7 +101,7 @@ const News = () => {
               Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
             </Text>
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-              <Text style={{ fontSize: 12, fontWeight: 400, color: "white" }}>
+              <Text style={{ fontSize: 12, fontWeight: "400", color: "white" }}>
                 Read more
               </Text>
               <AntDesign name="arrowright" size={12} color="white" />

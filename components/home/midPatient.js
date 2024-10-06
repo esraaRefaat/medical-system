@@ -24,10 +24,10 @@ const MidPatient = () => {
           source={require("../../src/assets/home/icon1.png")}
           style={{ marginBottom: 20 }}
         ></Image>
-        <Text style={{ fontSize: 16, fontWeight: 500 }}>
+        <Text style={{ fontSize: 16, fontWeight: "500" }}>
           Book an Appointment
         </Text>
-        <Text style={{ fontSize: 13, fontWeight: 400, color: "#71717A" }}>
+        <Text style={{ fontSize: 13, fontWeight: "400", color: "#71717A" }}>
           find a Doctor or specialist
         </Text>
       </Pressable>
@@ -41,10 +41,10 @@ const MidPatient = () => {
           source={require("../../src/assets/home/icon2.png")}
           style={{ marginBottom: 20 }}
         ></Image>
-        <Text style={{ fontSize: 16, fontWeight: 500 }}>
+        <Text style={{ fontSize: 16, fontWeight: "500" }}>
           Browse by speciality
         </Text>
-        <Text style={{ fontSize: 13, fontWeight: 400, color: "#71717A" }}>
+        <Text style={{ fontSize: 13, fontWeight: "400", color: "#71717A" }}>
           find your doctor
         </Text>
       </Pressable>
@@ -58,10 +58,10 @@ const MidPatient = () => {
           source={require("../../src/assets/home/Icon3.png")}
           style={{ marginBottom: 20 }}
         ></Image>
-        <Text style={{ fontSize: 16, fontWeight: 500 }}>
+        <Text style={{ fontSize: 16, fontWeight: "500" }}>
           View your medical records
         </Text>
-        <Text style={{ fontSize: 13, fontWeight: 400, color: "#71717A" }}>
+        <Text style={{ fontSize: 13, fontWeight: "400", color: "#71717A" }}>
           find a Doctor or specialist
         </Text>
       </Pressable>
