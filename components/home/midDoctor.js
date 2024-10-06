@@ -25,10 +25,10 @@ const MidDoc = () => {
             source={require("../../src/assets/home/icon1.png")}
             style={{ marginBottom: 15 }}
           ></Image>
-          <Text style={{ fontSize: 18, fontWeight: 500 }}>
+          <Text style={{ fontSize: 18, fontWeight: "500" }}>
             Set your Appointments
           </Text>
-          <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
             Set your availability as you see fit
           </Text>
         </Pressable>
@@ -42,10 +42,10 @@ const MidDoc = () => {
             source={require("../../src/assets/home/icon2.png")}
             style={{ marginBottom: 15 }}
           ></Image>
-          <Text style={{ fontSize: 18, fontWeight: 500 }}>
+          <Text style={{ fontSize: 18, fontWeight: "500" }}>
             View your Appointments
           </Text>
-          <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
             see your upcoming appointments
           </Text>
         </Pressable>
@@ -61,10 +61,10 @@ const MidDoc = () => {
             source={require("../../src/assets/home/Icon3.png")}
             style={{ marginBottom: 15 }}
           ></Image>
-          <Text style={{ fontSize: 18, fontWeight: 500 }}>
+          <Text style={{ fontSize: 18, fontWeight: "500" }}>
             Patient Medical Record
           </Text>
-          <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
             view your patient's medical records
           </Text>
         </Pressable>
@@ -78,10 +78,10 @@ const MidDoc = () => {
             source={require("../../src/assets/home/icon4.png")}
             style={{ marginBottom: 15 }}
           ></Image>
-          <Text style={{ fontSize: 18, fontWeight: 500 }}>
+          <Text style={{ fontSize: 18, fontWeight: "500" }}>
             Today's Appointments: 0
           </Text>
-          <Text style={{ fontSize: 14, fontWeight: 400, color: "#71717A" }}>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
             check your today's appointments
           </Text>
         </Pressable>
