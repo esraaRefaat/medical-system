@@ -55,7 +55,7 @@ const SignUpView = () => {
   const Options = [
     { label: 'Patient', value: 'patient' },
     { label: 'Doctor', value: 'doctor' },
-    { label: 'Admin', value: 'admin' },
+    // { label: 'Admin', value: 'admin' },
   ];
 
   const register_user = useCallback((values) => {

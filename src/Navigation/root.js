@@ -13,6 +13,8 @@ import ForgotPasswordView from "../screens/Auth/ForgotPassword/ForgotPasswordVie
 import NewPasswordView from "../screens/Auth/NewPassword/NewPasswordView";
 import Specialities from "../screens/specialities";
 import MedicalRecords from "../screens/MedicalRecords/MedicalRecords";
+import AddRecordScreen from "../screens/AddNewRecord/NewRecordScreen";
+import RecordDetailsScreen from "../screens/RecordDetails/RecordDetailsScreen";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -28,6 +30,8 @@ const Root = () => {
       <stack.Screen name={routes.mainapp} component={Tabs} />
       <stack.Screen name={routes.specialities} component={Specialities} />
       <stack.Screen name={routes.medicalrecords} component={MedicalRecords} />
+      <stack.Screen name={routes.addrecordscreen} component={AddRecordScreen} />
+      <stack.Screen name={routes.recorddetails} component={RecordDetailsScreen} />
     </stack.Navigator>
   );
 };

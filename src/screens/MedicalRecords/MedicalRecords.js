@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { SMS, PASSWORD, BACK_Arrow, User, ALERT_MSG } from '../../assets/svgIcons';
 import { GREY, PRIMARY, TEXT_GREY } from '../../styles/colors';
 import styles from './styles';
+import routes from '../../utils/routes';
 
 export default function MedicalRecords({ navigation }) {
     const [records, setRecords] = useState([
@@ -19,20 +20,24 @@ export default function MedicalRecords({ navigation }) {
     ]);
 
     const renderItem = ({ item }) => (
-        <View style={styles.card}>
-            <View style={styles.dateContainer}>
-                <Text style={styles.dateText}>{item.date}</Text>
-                <Text style={styles.newBadge}>NEW</Text>
+        <TouchableOpacity
+            onPress={() => navigation.navigate(routes.recorddetails, { record: item })}
+        >
+            <View style={styles.card}>
+                <View style={styles.dateContainer}>
+                    <Text style={styles.dateText}>{item.date}</Text>
+                    <Text style={styles.newBadge}>NEW</Text>
+                </View>
+                <View style={styles.recordContent}>
+                    <Text ellipsizeMode='tail' numberOfLines={1} style={styles.recordTitle}>Records added by {item.by}</Text>
+                    <Text style={styles.recordSubtitle}>{item.title}</Text>
+                    <Text style={styles.prescription}>1 Prescription</Text>
+                </View>
+                <TouchableOpacity style={styles.moreButton}>
+                    <Text style={styles.moreIcon}>•••</Text>
+                </TouchableOpacity>
             </View>
-            <View style={styles.recordContent}>
-                <Text ellipsizeMode='tail' numberOfLines={1} style={styles.recordTitle}>Records added by {item.by}</Text>
-                <Text style={styles.recordSubtitle}>{item.title}</Text>
-                <Text style={styles.prescription}>1 Prescription</Text>
-            </View>
-            <TouchableOpacity style={styles.moreButton}>
-                <Text style={styles.moreIcon}>•••</Text>
-            </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
     );
     const EmptyListComponent = () => (
         <View>
@@ -48,7 +53,7 @@ export default function MedicalRecords({ navigation }) {
             </Text>
         </View>
     );
-    
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -69,7 +74,7 @@ export default function MedicalRecords({ navigation }) {
             <View style={styles.footerButtons}>
                 <TouchableOpacity
                     style={styles.addButton}
-                    onPress={() => navigation.navigate('MedicalRecord')}
+                    onPress={() => navigation.navigate(routes.addrecordscreen)}
                 >
                     <Text style={styles.footerButtonText}>Add a new record</Text>
                 </TouchableOpacity>
