@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
@@ -7,6 +7,7 @@ import ChooseTime from '../../components/ChooseTime'
 import TouchableButton from '../../components/TouchableButton'
 import * as NavigationBar from 'expo-navigation-bar';
 import axios from 'axios'
+import { useRoute } from '@react-navigation/native'
 
 // {{BaseUrl}}/api/v1/users/${doctorId} -> to get the created Appointments
 
@@ -17,10 +18,11 @@ axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
 
 
 const ConfirmAppointment = () => {
+    // const route = useRoute();
+    // const { doctorId, } = route.params;
     const [day, setDay] = useState();
-    const [time, setTime] = useState();
+    const [timeId, setTimeId] = useState();
     const [appointments, setAppointments] = useState([]);
-    const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
 
 
 
@@ -34,6 +36,23 @@ const ConfirmAppointment = () => {
             console.log(err)
         }
 
+    }
+
+    const confirmAppointment = async () => {
+        try {
+            if (timeId) {
+                const token = 'testtoken';
+                axios.put(`/appointments/book/${timeId}`, {}, {
+                    headers: {
+                        token: token
+                    }
+                });
+            } else {
+                Alert.alert('Please Choose Specific Date And Time')
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     useEffect(() => {
@@ -55,11 +74,27 @@ const ConfirmAppointment = () => {
 
                 <ChooseDay activeDay={day} setDay={setDay} data={appointments ? Object.values(appointments) : []} />
 
-                {appointments[day]?.appointmentsAM?.length > 0 && <ChooseTime title={'Morning'} activeTime={time} setActiveTime={setTime} data={appointments[day].appointmentsAM} />}
-                {appointments[day]?.appointmentsPM?.length > 0 && <ChooseTime title={'Afternoon'} activeTime={time} setActiveTime={setTime} data={appointments[day].appointmentsPM} />}
+                {
+                    appointments[day]?.appointmentsAM?.length > 0 &&
+                    <ChooseTime
+                        title={'Morning'}
+                        activeTimeId={timeId}
+                        setActiveTimeId={setTimeId}
+                        data={sortAppointments(appointments[day].appointmentsAM)}
+                    />
+                }
+                {
+                    appointments[day]?.appointmentsPM?.length > 0 &&
+                    <ChooseTime
+                        title={'Afternoon'}
+                        activeTimeId={timeId}
+                        setActiveTimeId={setTimeId}
+                        data={sortAppointments(appointments[day].appointmentsPM)}
+                    />
+                }
 
                 <View style={styles.bottomAction}>
-                    <TouchableButton onPress={() => { }} title={'Confirm'} />
+                    <TouchableButton onPress={() => { confirmAppointment() }} title={'Confirm'} />
                 </View>
 
             </View>
@@ -105,6 +140,10 @@ const styles = StyleSheet.create({
     }
 })
 
+function sortAppointments(appointments) {
+    return appointments.sort((a, b) => { if (a.time < b.time) return -1; else return 1; })
+}
+
 function convertDateString(dateString) {
     const date = new Date(dateString);
     const options = { weekday: 'short' }; // Use 'long' for full name
@@ -137,80 +176,9 @@ const pretifyAppointmentsData = (data) => {
             pretifiedAppointments[dayNumber].appointmentsAM.push(timeInfo)
         else pretifiedAppointments[dayNumber].appointmentsPM.push(timeInfo)
     });
-    return pretifiedAppointments;
 
-    // "createdAppointments": [
-    //     {
-    //         "_id": "6701825648961721774d79d8",
-    //         "date": "2024-10-01T00:00:00.000Z",
-    //         "time": "15:30",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:15:50.200Z",
-    //         "updatedAt": "2024-10-05T18:15:50.200Z",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6701826848961721774d79dd",
-    //         "date": "2024-10-08T00:00:00.000Z",
-    //         "time": "15:30",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:16:08.394Z",
-    //         "updatedAt": "2024-10-05T18:16:08.394Z",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6701826d48961721774d79e2",
-    //         "date": "2024-10-08T00:00:00.000Z",
-    //         "time": "11:30",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:16:13.909Z",
-    //         "updatedAt": "2024-10-05T18:16:13.909Z",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6701827548961721774d79e7",
-    //         "date": "2024-10-08T00:00:00.000Z",
-    //         "time": "12:30",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:16:21.376Z",
-    //         "updatedAt": "2024-10-05T18:16:21.376Z",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6701827b48961721774d79ec",
-    //         "date": "2024-10-08T00:00:00.000Z",
-    //         "time": "12:00",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:16:27.595Z",
-    //         "updatedAt": "2024-10-05T18:16:27.595Z",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6701828648961721774d79f1",
-    //         "date": "2024-10-09T00:00:00.000Z",
-    //         "time": "12:30",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:16:38.676Z",
-    //         "updatedAt": "2024-10-05T18:16:38.676Z",
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6701828c48961721774d79f6",
-    //         "date": "2024-10-09T00:00:00.000Z",
-    //         "time": "11:30",
-    //         "status": "available",
-    //         "doctor": "6701691de460030022321398",
-    //         "createdAt": "2024-10-05T18:16:44.530Z",
-    //         "updatedAt": "2024-10-05T18:16:44.530Z",
-    //         "__v": 0
-    //     }
-    // ],
+
+    return pretifiedAppointments;
 
     // {
     //     5: {
@@ -223,3 +191,76 @@ const pretifyAppointmentsData = (data) => {
     // }
 }
 
+
+// "createdAppointments": [
+//     {
+//         "_id": "6701825648961721774d79d8",
+//         "date": "2024-10-01T00:00:00.000Z",
+//         "time": "15:30",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:15:50.200Z",
+//         "updatedAt": "2024-10-05T18:15:50.200Z",
+//         "__v": 0
+//     },
+//     {
+//         "_id": "6701826848961721774d79dd",
+//         "date": "2024-10-08T00:00:00.000Z",
+//         "time": "15:30",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:16:08.394Z",
+//         "updatedAt": "2024-10-05T18:16:08.394Z",
+//         "__v": 0
+//     },
+//     {
+//         "_id": "6701826d48961721774d79e2",
+//         "date": "2024-10-08T00:00:00.000Z",
+//         "time": "11:30",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:16:13.909Z",
+//         "updatedAt": "2024-10-05T18:16:13.909Z",
+//         "__v": 0
+//     },
+//     {
+//         "_id": "6701827548961721774d79e7",
+//         "date": "2024-10-08T00:00:00.000Z",
+//         "time": "12:30",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:16:21.376Z",
+//         "updatedAt": "2024-10-05T18:16:21.376Z",
+//         "__v": 0
+//     },
+//     {
+//         "_id": "6701827b48961721774d79ec",
+//         "date": "2024-10-08T00:00:00.000Z",
+//         "time": "12:00",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:16:27.595Z",
+//         "updatedAt": "2024-10-05T18:16:27.595Z",
+//         "__v": 0
+//     },
+//     {
+//         "_id": "6701828648961721774d79f1",
+//         "date": "2024-10-09T00:00:00.000Z",
+//         "time": "12:30",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:16:38.676Z",
+//         "updatedAt": "2024-10-05T18:16:38.676Z",
+//         "__v": 0
+//     },
+//     {
+//         "_id": "6701828c48961721774d79f6",
+//         "date": "2024-10-09T00:00:00.000Z",
+//         "time": "11:30",
+//         "status": "available",
+//         "doctor": "6701691de460030022321398",
+//         "createdAt": "2024-10-05T18:16:44.530Z",
+//         "updatedAt": "2024-10-05T18:16:44.530Z",
+//         "__v": 0
+//     }
+// ],
