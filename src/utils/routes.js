@@ -17,6 +17,7 @@ const routes = Object.freeze({
     findDoctor: 'findDoctor',
     addrecordscreen:'addrecordscreen',
     recorddetails:'recorddetails',
+    doctorInfoUpdate:'doctorInfoUpdate',
 })
 export default routes
 
