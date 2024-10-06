@@ -9,6 +9,8 @@ export const putWithTokenAction = createAsyncThunk(
       const response = await axios.put(url, userData, {
         headers: {
           token: token,  // Set the token in the request headers
+          'Content-Type': 'multipart/form-data', // Ensure correct Content-Type
+
         },
       });
       return response.data; // Return the response data if the request is successful

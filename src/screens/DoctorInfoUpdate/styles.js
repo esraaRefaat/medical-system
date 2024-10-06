@@ -1,4 +1,5 @@
 // src/screens/DoctorInfoUpdateView/styles.js
+
 import { StyleSheet } from 'react-native';
 import { DARK_ORANGE, SEMI_GRAY, WHITE, GRAY, BLACK, PRIMARY, TEXT_GREY, DARK_RED } from '../../styles/colors';
 
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 8,
+    position: 'relative',
   },
   profileImage: {
     width: '100%',
@@ -106,6 +108,7 @@ const styles = StyleSheet.create({
   removeImageText: {
     color: WHITE,
     fontWeight: 'bold',
+    fontSize: 12,
   },
   buttonStyle: {
     marginTop: 30,
@@ -158,6 +161,11 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 12,
     borderRadius: 8,
+  },
+  errorText: {
+    color: DARK_RED,
+    fontSize: 12,
+    marginTop: 4,
   },
 });
 
