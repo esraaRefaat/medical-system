@@ -8,7 +8,7 @@ const RadioButtonGroup = ({ field, options, form }) => {
   const { setFieldValue } = form;
 
   return (
-    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:16}}>
+    <View style={{marginTop:16}}>
       {options.map((option) => (
         <TouchableOpacity
           key={option.value}
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   radioContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom:10
   },
   radioButton: {
     height: 20,

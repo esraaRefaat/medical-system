@@ -66,7 +66,7 @@ const CustomInput = ({
                             ]}
                             placeholder={placeholder}
                             placeholderTextColor={'#8D8D8D'}
-                            fontFamily={Platform.OS === 'ios' ? 'SFProDisplay-Regular' : 'SFPRODISPLAYREGULAR'}
+                            fontFamily={'Regular'}
                             keyboardType={keyboardType}
                             autoFocus={autoFocus}
                             editable={editable}
