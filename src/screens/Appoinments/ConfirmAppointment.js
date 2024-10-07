@@ -41,7 +41,7 @@ const ConfirmAppointment = () => {
     const confirmAppointment = async () => {
         try {
             if (timeId) {
-                const token = 'testtoken';
+                const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAwM2Y0YjczNjIyODkzNjgzNGQ3YTQiLCJyb2xlIjoicGF0aWVudCIsImlhdCI6MTcyODI5MjA0M30.s_4bJgXeBqYtY_lI03H0s5Ai9JYwXSe4ncKwa8qsRXM';
                 axios.put(`/appointments/book/${timeId}`, {}, {
                     headers: {
                         token: token
@@ -173,9 +173,8 @@ const pretifyAppointmentsData = (data) => {
             }
         }
 
-        const timeInfo = { time: appointment.time, _id: appointment._id, disabled: appointment.status !== 'available' }
-
-        if (Number(appointment.time.split(':')) < 12)
+        const timeInfo = { time: appointment.time, _id: appointment._id, disabled: appointment.status === 'booked' }
+        if (Number(appointment.time.split(':')[0]) < 12)
             pretifiedAppointments[key].appointmentsAM.push(timeInfo)
         else pretifiedAppointments[key].appointmentsPM.push(timeInfo)
     });

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Calendar } from 'react-native-calendars'
 import dayjs from 'dayjs'
 import DatePickerArrow from '../../components/DatePickerArrow'
+import TimePicker from '../../components/TimePicker'
 
 axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
 
@@ -21,18 +22,26 @@ const CreateAppointment = () => {
 
     const confirmAppointments = async () => {
         try {
-            if (markedDates.length !== 0) { // edit this line
-                const token = 'testtoken';
-                axios.post('/appointments', {
-                    "date": "2024-10-01",
-                    "time": "15:30"
-                }, {
-                    headers: {
-                        token: token
-                    }
+            const markedDatesKeys = Object.keys(markedDates);
+            console.log(markedDatesKeys, startTime, endTime)
+            if (markedDatesKeys.length !== 0 && startTime && endTime) {
+                const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAxNjkxZGU0NjAwMzAwMjIzMjEzOTgiLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzI4MjkxMjY2fQ.-9_0thEPX8uhzhSvcl01Y2PHThtONY7ljVeK7xQyAoc';
+                const timeSlots = generateTimeSlots(startTime, endTime, 30)
+                markedDatesKeys.forEach(async (date) => {
+                    timeSlots.forEach(async (time) => {
+                        await axios.post('/appointments', {
+                            date,
+                            time
+                        }, {
+                            headers: {
+                                token: token
+                            }
+                        });
+                        await new Promise((resolve) => {
+                            setTimeout(() => resolve, 3000)
+                        })
+                    })
                 });
-
-
 
             } else {
                 Alert.alert('Please Choose Specific Ranges')
@@ -83,6 +92,11 @@ const CreateAppointment = () => {
                         }}
                         onMonthChange={month => { }}
                     />
+
+
+                    <TimePicker time={startTime} setTime={setStartTime} />
+                    <TimePicker time={endTime} setTime={setEndTime} />
+
 
                 </ScrollView>
                 <View style={styles.bottomAction}>
@@ -162,4 +176,18 @@ const getFormatedKey = (pressedDate) => {
     const date = new Date(pressedDate.year, pressedDate.month - 1, pressedDate.day);
     const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     return key
+}
+
+
+function generateTimeSlots(startTime, endTime, interval) {
+    const times = [];
+    let currentTime = new Date(`1970-01-01T${startTime}:00`);
+    const endTimeDate = new Date(`1970-01-01T${endTime}:00`);
+
+    while (currentTime < endTimeDate) {
+        times.push(currentTime.toTimeString().slice(0, 5));
+        currentTime.setMinutes(currentTime.getMinutes() + interval);
+    }
+
+    return times;
 }
