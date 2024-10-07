@@ -1,12 +1,12 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Day = ({ dayName, dayNumber, active, disapled, onPress }) => {
+const Day = ({ dayName, dayNumber, active, disapled, onPress, month }) => {
     return (
 
         <TouchableOpacity disabled={disapled} activeOpacity={0.8} onPress={onPress} style={[styles.container, disapled && styles.disapled, (active && !disapled) && styles.active]}>
             <Text style={[disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayName}</Text>
-            <Text style={[styles.bold, disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayNumber}</Text>
+            <Text style={[styles.bold, disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{dayNumber + '/' + month}</Text>
         </TouchableOpacity>
     )
 }

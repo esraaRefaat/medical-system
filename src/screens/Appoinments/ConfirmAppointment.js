@@ -20,7 +20,7 @@ axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
 const ConfirmAppointment = () => {
     // const route = useRoute();
     // const { doctorId, } = route.params;
-    const [day, setDay] = useState();
+    const [key, setKey] = useState();
     const [timeId, setTimeId] = useState();
     const [appointments, setAppointments] = useState([]);
 
@@ -72,24 +72,24 @@ const ConfirmAppointment = () => {
 
                 </View>
 
-                <ChooseDay activeDay={day} setDay={setDay} data={appointments ? Object.values(appointments) : []} />
+                <ChooseDay activeKey={key} setActiveKey={setKey} data={appointments ? Object.values(appointments) : []} />
 
                 {
-                    appointments[day]?.appointmentsAM?.length > 0 &&
+                    appointments[key]?.appointmentsAM?.length > 0 &&
                     <ChooseTime
                         title={'Morning'}
                         activeTimeId={timeId}
                         setActiveTimeId={setTimeId}
-                        data={sortAppointments(appointments[day].appointmentsAM)}
+                        data={sortAppointments(appointments[key].appointmentsAM)}
                     />
                 }
                 {
-                    appointments[day]?.appointmentsPM?.length > 0 &&
+                    appointments[key]?.appointmentsPM?.length > 0 &&
                     <ChooseTime
                         title={'Afternoon'}
                         activeTimeId={timeId}
                         setActiveTimeId={setTimeId}
-                        data={sortAppointments(appointments[day].appointmentsPM)}
+                        data={sortAppointments(appointments[key].appointmentsPM)}
                     />
                 }
 
@@ -150,6 +150,7 @@ function convertDateString(dateString) {
     const dayName = new Intl.DateTimeFormat('en-US', options).format(date);
 
     return {
+        month: date.getUTCMonth() + 1,
         dayNumber: date.getUTCDate(),
         dayName: dayName
     };
@@ -159,9 +160,11 @@ function convertDateString(dateString) {
 const pretifyAppointmentsData = (data) => {
     const pretifiedAppointments = {}
     data.forEach(appointment => {
-        const { dayName, dayNumber } = convertDateString(appointment.date);
-        if (!pretifiedAppointments[dayNumber]) {
-            pretifiedAppointments[dayNumber] = {
+        const { dayName, dayNumber, month } = convertDateString(appointment.date);
+        const key = `${dayNumber}/${month}`
+        if (!pretifiedAppointments[key]) {
+            pretifiedAppointments[key] = {
+                month,
                 dayName,
                 dayNumber,
                 disabled: (new Date()).getDate() > dayNumber,
@@ -173,15 +176,16 @@ const pretifyAppointmentsData = (data) => {
         const timeInfo = { time: appointment.time, _id: appointment._id, disabled: appointment.status !== 'available' }
 
         if (Number(appointment.time.split(':')) < 12)
-            pretifiedAppointments[dayNumber].appointmentsAM.push(timeInfo)
-        else pretifiedAppointments[dayNumber].appointmentsPM.push(timeInfo)
+            pretifiedAppointments[key].appointmentsAM.push(timeInfo)
+        else pretifiedAppointments[key].appointmentsPM.push(timeInfo)
     });
 
 
     return pretifiedAppointments;
 
     // {
-    //     5: {
+    //     5/12: {
+    //         month: 12,
     //         dayNumber: 5, 
     //         dayName: 'Sat'
     //         disabled: true,
@@ -191,76 +195,3 @@ const pretifyAppointmentsData = (data) => {
     // }
 }
 
-
-// "createdAppointments": [
-//     {
-//         "_id": "6701825648961721774d79d8",
-//         "date": "2024-10-01T00:00:00.000Z",
-//         "time": "15:30",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:15:50.200Z",
-//         "updatedAt": "2024-10-05T18:15:50.200Z",
-//         "__v": 0
-//     },
-//     {
-//         "_id": "6701826848961721774d79dd",
-//         "date": "2024-10-08T00:00:00.000Z",
-//         "time": "15:30",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:16:08.394Z",
-//         "updatedAt": "2024-10-05T18:16:08.394Z",
-//         "__v": 0
-//     },
-//     {
-//         "_id": "6701826d48961721774d79e2",
-//         "date": "2024-10-08T00:00:00.000Z",
-//         "time": "11:30",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:16:13.909Z",
-//         "updatedAt": "2024-10-05T18:16:13.909Z",
-//         "__v": 0
-//     },
-//     {
-//         "_id": "6701827548961721774d79e7",
-//         "date": "2024-10-08T00:00:00.000Z",
-//         "time": "12:30",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:16:21.376Z",
-//         "updatedAt": "2024-10-05T18:16:21.376Z",
-//         "__v": 0
-//     },
-//     {
-//         "_id": "6701827b48961721774d79ec",
-//         "date": "2024-10-08T00:00:00.000Z",
-//         "time": "12:00",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:16:27.595Z",
-//         "updatedAt": "2024-10-05T18:16:27.595Z",
-//         "__v": 0
-//     },
-//     {
-//         "_id": "6701828648961721774d79f1",
-//         "date": "2024-10-09T00:00:00.000Z",
-//         "time": "12:30",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:16:38.676Z",
-//         "updatedAt": "2024-10-05T18:16:38.676Z",
-//         "__v": 0
-//     },
-//     {
-//         "_id": "6701828c48961721774d79f6",
-//         "date": "2024-10-09T00:00:00.000Z",
-//         "time": "11:30",
-//         "status": "available",
-//         "doctor": "6701691de460030022321398",
-//         "createdAt": "2024-10-05T18:16:44.530Z",
-//         "updatedAt": "2024-10-05T18:16:44.530Z",
-//         "__v": 0
-//     }
-// ],
