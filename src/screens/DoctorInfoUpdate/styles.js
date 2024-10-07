@@ -167,6 +167,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 4,
   },
+  // In styles.js
+docsContainer: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-start',
+  marginVertical: 10,
+},
+docImage: {
+  width: 80,
+  height: 80,
+  marginRight: 10,
+  marginBottom: 10,
+  borderRadius: 8,
+},
+
 });
 
 export default styles;
