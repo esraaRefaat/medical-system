@@ -27,7 +27,7 @@ export default function AppointmentsToday({ navigation }) {
                     {/* <Text ellipsizeMode='tail' numberOfLines={1} style={styles.recordTitle}>Records added by {item.by}</Text>
                      */}
                     <Text style={styles.recordSubtitle}>{item.title}</Text>
-                    <Text style={styles.prescription}>1 Prescription</Text>
+                    {/* <Text style={styles.prescription}>1 Prescription</Text> */}
                 </View>
                 <TouchableOpacity style={styles.moreButton}>
                     <Text style={styles.moreIcon}>•••</Text>

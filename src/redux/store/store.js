@@ -3,6 +3,7 @@ import authReducer from "./slices/authSlice";
 import forgetPasswordReducer from "./slices/forgetpassword";
 import PasswordReducer from "./slices/setPassword";
 import putWithTokenReducer from "./slices/putWithTokenSlice.js";
+import MedicalRecordReducer from "./slices/getMedicalRecordSlice.js"
 
 
 const store = configureStore({
@@ -11,8 +12,9 @@ const store = configureStore({
         authForgetPasswerd: forgetPasswordReducer,
         authPasswerd: PasswordReducer,
         putWithToken: putWithTokenReducer,
+        getmedicalrecord: MedicalRecordReducer
     }
 })
- 
+
 export default store;
 

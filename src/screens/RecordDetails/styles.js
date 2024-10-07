@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     detail: {
         fontSize: 18,
         marginBottom: 10,
-        color: '#000',
-        fontFamily:'Regular'
+      
+      
     },
     Viewcontainer:{
         paddingHorizontal:16
