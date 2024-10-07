@@ -13,7 +13,7 @@ const ChooseTime = ({ title, data, activeTimeId, setActiveTimeId }) => {
                 contentContainerStyle={{ gap: 16 }}
                 data={data}
                 keyExtractor={(time) => time._id}
-                renderItem={({ item }) => <TimeSet onPress={() => { setActiveTimeId(item._id) }} active={activeTimeId === item._id} time={item.time} disapled={item.disapled} />}
+                renderItem={({ item }) => <TimeSet onPress={() => { setActiveTimeId(item._id) }} active={activeTimeId === item._id} time={item.time} disabled={item.disabled} />}
             />
         </View>
     )

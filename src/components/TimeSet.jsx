@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const TimeSet = ({ time, active, disapled, onPress }) => {
+const TimeSet = ({ time, active, disabled, onPress }) => {
     return (
-        <TouchableOpacity disabled={disapled} activeOpacity={0.8} onPress={onPress} style={[styles.container, disapled && styles.disapled, (active && !disapled) && styles.active]}>
-            <Text style={[disapled && styles.disapledText, (active && !disapled) && styles.activeText]}>{time}</Text>
+        <TouchableOpacity disabled={disabled} activeOpacity={0.8} onPress={onPress} style={[styles.container, disabled && styles.disapled, (active && !disabled) && styles.active]}>
+            <Text style={[disabled && styles.disapledText, (active && !disabled) && styles.activeText]}>{time}</Text>
         </TouchableOpacity>
     )
 }

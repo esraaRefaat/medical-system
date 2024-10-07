@@ -27,6 +27,7 @@ export default function App() {
           <Root></Root>
         </NavigationContainer>
         <StatusBar hidden></StatusBar>
+
       </Provider>
 
       <FlashMessage position="bottom" />
