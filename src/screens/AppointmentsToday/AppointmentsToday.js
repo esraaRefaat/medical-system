@@ -6,30 +6,26 @@ import { GREY, PRIMARY, TEXT_GREY } from '../../styles/colors';
 import styles from './styles';
 import routes from '../../utils/routes';
 
-export default function MedicalRecords({ navigation }) {
+export default function AppointmentsToday({ navigation }) {
     const [records, setRecords] = useState([
-        { id: '1', date: '27 FEB', title: 'Record for Luke', by: 'you', prescriptions: 1 },
-        { id: '2', date: '28 FEB', title: 'Record for Sara Doe', by: 'you', prescriptions: 1 },
-        { id: '3', date: '01 MAR', title: 'Record for Robert', by: 'your doctor', prescriptions: 1 },
-        { id: '1', date: '27 FEB', title: 'Record for Luke', by: 'you', prescriptions: 1 },
-        { id: '2', date: '28 FEB', title: 'Record for Sara Doe', by: 'you', prescriptions: 1 },
-        { id: '3', date: '01 MAR', title: 'Record for Robert', by: 'your doctor', prescriptions: 1 },
-        { id: '1', date: '27 FEB', title: 'Record for Luke', by: 'you', prescriptions: 1 },
-        { id: '2', date: '28 FEB', title: 'Record for Sara Doe', by: 'you', prescriptions: 1 },
-        { id: '3', date: '01 MAR', title: 'Record for Robert', by: 'your doctor', prescriptions: 1 },
+        { id: '1', title: 'Record for Luke' },
+        { id: '2', title: 'Record for Sara Doe' },
+        { id: '3', title: 'Record for Robert' },
+        { id: '4', title: 'Record for Jhon' },
     ]);
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
-            onPress={() => navigation.navigate(routes.recorddetails, { record: item })}
+            onPress={() => navigation.navigate(routes.medicalrecords)}
         >
             <View style={styles.card}>
-                <View style={styles.dateContainer}>
+                {/* <View style={styles.dateContainer}>
                     <Text style={styles.dateText}>{item.date}</Text>
                     <Text style={styles.newBadge}>NEW</Text>
-                </View>
+                </View> */}
                 <View style={styles.recordContent}>
-                    <Text ellipsizeMode='tail' numberOfLines={1} style={styles.recordTitle}>Records added by {item.by}</Text>
+                    {/* <Text ellipsizeMode='tail' numberOfLines={1} style={styles.recordTitle}>Records added by {item.by}</Text>
+                     */}
                     <Text style={styles.recordSubtitle}>{item.title}</Text>
                     <Text style={styles.prescription}>1 Prescription</Text>
                 </View>
@@ -47,7 +43,7 @@ export default function MedicalRecords({ navigation }) {
                     style={styles.image}
                 />
             </View>
-            <Text style={styles.title}>Add a medical record.</Text>
+            <Text style={styles.title}>There is no Appointments</Text>
             <Text style={styles.description}>
                 A detailed health history helps a doctor diagnose you better.
             </Text>
@@ -61,7 +57,7 @@ export default function MedicalRecords({ navigation }) {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <BACK_Arrow />
                 </TouchableOpacity>
-                <Text style={styles.headerText}>All Records</Text>
+                <Text style={styles.headerText}>Appointments Today</Text>
                 <Text style={styles.notificationIcon}></Text>
             </View>
             <FlatList
@@ -71,14 +67,6 @@ export default function MedicalRecords({ navigation }) {
                 ListEmptyComponent={<EmptyListComponent />}
                 style={styles.list}
             />
-            <View style={styles.footerButtons}>
-                <TouchableOpacity
-                    style={styles.addButton}
-                    onPress={() => navigation.navigate(routes.addrecordscreen)}
-                >
-                    <Text style={styles.footerButtonText}>Add a new record</Text>
-                </TouchableOpacity>
-            </View>
         </SafeAreaView>
     );
 }

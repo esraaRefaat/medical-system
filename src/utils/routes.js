@@ -19,6 +19,7 @@ const routes = Object.freeze({
     recorddetails:'recorddetails',
     doctorInfoUpdate:'doctorInfoUpdate',
     Profile: "Profile",
+    appointmentstoday:'appointmentstoday'
 })
 
 

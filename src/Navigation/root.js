@@ -20,6 +20,7 @@ import AddRecordScreen from "../screens/AddNewRecord/NewRecordScreen";
 import RecordDetailsScreen from "../screens/RecordDetails/RecordDetailsScreen";
 import DoctorInfoUpdateView from "../screens/DoctorInfoUpdate/DoctorInfoUpdate.js";
 import Profile from "../screens/profile/profile";
+import AppointmentsToday from "../screens/AppointmentsToday/AppointmentsToday.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -55,7 +56,7 @@ const Root = () => {
       <stack.Screen name={routes.recorddetails} component={RecordDetailsScreen} />
       <stack.Screen name={routes.doctorInfoUpdate} component={DoctorInfoUpdateView} />
       <stack.Screen name={routes.Profile} component={Profile} />
-
+      <stack.Screen name={routes.appointmentstoday} component={AppointmentsToday} />
     </stack.Navigator>
   );
 };
