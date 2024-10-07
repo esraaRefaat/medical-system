@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   profileImage: {
-    width: '100%',
-    height: '100%',
+    width: 'auto',
+    height: 'auto',
     borderRadius: 8,
   },
   imagePreviewContainer: {
@@ -174,12 +174,47 @@ docsContainer: {
   justifyContent: 'flex-start',
   marginVertical: 10,
 },
-docImage: {
-  width: 80,
-  height: 80,
+  docImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 8,
+  },
+loadingContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+loadingOverlay: {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+loadingText: {
+  marginTop: 10,
+  color: '#fff',
+  fontSize: 16,
+},
+removeDocButton: {
+  position: 'absolute',
+  top: -5,
+  right: -5,
+  backgroundColor: 'red',
+  borderRadius:100,
+  padding: 5,
+},
+removeDocText: {
+  color: 'white',
+  fontWeight: 'bold',
+},
+docWrapper: {
+  position: 'relative',
   marginRight: 10,
-  marginBottom: 10,
-  borderRadius: 8,
+  marginTop: 10,
 },
 
 });
