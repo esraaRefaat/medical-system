@@ -1,37 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SMS, PASSWORD, BACK_Arrow, User, ALERT_MSG } from '../../assets/svgIcons';
 import { GREY, PRIMARY, TEXT_GREY } from '../../styles/colors';
 import styles from './styles';
 import routes from '../../utils/routes';
+import { useDispatch, useSelector } from "react-redux";
+import { APP_BASE_URL, GET_APPOINTMENTS } from "@env";
+import { appointmentsAction } from "../../redux/store/slices/appointmentsSlice";
 
 export default function AppointmentsToday({ navigation }) {
-    const [records, setRecords] = useState([
-        { id: '1', title: 'Record for Luke' },
-        { id: '2', title: 'Record for Sara Doe' },
-        { id: '3', title: 'Record for Robert' },
-        { id: '4', title: 'Record for Jhon' },
-    ]);
+    const [records, setRecords] = useState([]);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(appointmentsAction({
+            url: APP_BASE_URL + GET_APPOINTMENTS,
+            doctorId: '6701691de460030022321398',
+            status: 'booked'
+        }))
+            .unwrap()
+            .then((response) => {
+                console.log("appointments", response.document[0].patient);
+                let arr = [];
+                arr.push(response.document[0].patient);
+                setRecords(arr)
+            })
+            .catch((error) => {
+                console.log(error.error)
+            });
+    }, [])
+
+  
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
             onPress={() => navigation.navigate(routes.medicalrecords)}
         >
             <View style={styles.card}>
-                {/* <View style={styles.dateContainer}>
-                    <Text style={styles.dateText}>{item.date}</Text>
-                    <Text style={styles.newBadge}>NEW</Text>
-                </View> */}
+                 <View style={styles.dateContainer}>
+                   <Image
+            source={{
+                uri: item.profilePicture,
+              }}
+            style={styles.imageStyle}
+            />
+                </View> 
                 <View style={styles.recordContent}>
-                    {/* <Text ellipsizeMode='tail' numberOfLines={1} style={styles.recordTitle}>Records added by {item.by}</Text>
-                     */}
-                    <Text style={styles.recordSubtitle}>{item.title}</Text>
-                    {/* <Text style={styles.prescription}>1 Prescription</Text> */}
+                    <Text style={styles.recordSubtitle}>{item.name}</Text>
                 </View>
-                <TouchableOpacity style={styles.moreButton}>
-                    <Text style={styles.moreIcon}>•••</Text>
-                </TouchableOpacity>
             </View>
         </TouchableOpacity>
     );
