@@ -1,9 +1,12 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileHeader from "../../components/Profile/pHeader";
 import RatingComponent from "../../components/Profile/rating";
-const doctorData = {
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
+import routes from "../../utils/routes";
+const doctorData1 = {
   name: "Dr. Omar Yasser",
   speciality: "Cardiologist",
   fees: "150",
@@ -58,13 +61,49 @@ const reviews = [
   },
 ];
 
-const Profile = () => {
+const Profile = ({ route }) => {
+  const { id } = route.params;
+  const [doctorData, setdoctorData] = useState(null);
+  const navigation = useNavigation();
+
+  const fetchDoctor = async () => {
+    try {
+      console.log(id);
+      let endpoint = `users/${id}`;
+      const res = await axios.get(endpoint);
+      setdoctorData(res.data.document);
+      console.log(res.data.document);
+    } catch (error) {
+      console.error("Error fetching doctor data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDoctor();
+  }, [id]);
+
+  const handleBookAppointment = () => {
+    console.log("Book Appointment clicked!");
+    navigation.navigate(routes.confirmAppointment);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <ProfileHeader doctor={doctorData}></ProfileHeader>
-        <RatingComponent reviews={reviews}></RatingComponent>
-      </ScrollView>
+      <View style={styles.innerContainer}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          {doctorData ? (
+            <>
+              <ProfileHeader doctor={doctorData1} />
+              <RatingComponent reviews={reviews} />
+            </>
+          ) : (
+            <Text>Loading...</Text> // Show a loading state until the data is fetched
+          )}
+        </ScrollView>
+        <Pressable style={styles.bookButton} onPress={handleBookAppointment}>
+          <Text style={styles.buttonText}>Book Appointment</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 };
@@ -72,6 +111,24 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
+  innerContainer: {
+    flex: 1,
+    justifyContent: "space-between", // Ensures space is distributed
+  },
+  scrollViewContent: {
+    paddingBottom: 80, // Extra padding to prevent content being hidden under the button
+  },
+  bookButton: {
+    backgroundColor: "#254EDB", // Change to your desired button color
+    padding: 16,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#FFFFFF", // Text color
+    fontSize: 16,
+  },
 });
 

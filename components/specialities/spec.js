@@ -1,9 +1,20 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
+import routes from "../../src/utils/routes";
 const Spec = (props) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        console.log(props.drSpecialties);
+        navigation.navigate(routes.findDoctor, {
+          drSpecialties: props.drSpecialties,
+        });
+      }}
+    >
       <View style={styles.iconview}>
         <Text style={styles.icon}>{props.icon}</Text>
       </View>
@@ -12,7 +23,7 @@ const Spec = (props) => {
         <Text style={styles.wide}>Wide selection of doctor's specialties</Text>
       </View>
       <MaterialIcons name="arrow-forward-ios" size={22} color="#254EDB" />
-    </View>
+    </Pressable>
   );
 };
 

@@ -15,7 +15,7 @@ import Specialities from "../screens/specialities";
 import MedicalRecords from "../screens/MedicalRecords/MedicalRecords";
 import ConfirmAppointment from "../screens/Appoinments/ConfirmAppointment";
 import AppointmentSuccess from "../screens/Appoinments/AppointmentSuccess";
-import FindDoctor from '../screens/FindDoctor/FindDoctor'
+import FindDoctor from "../screens/FindDoctor/FindDoctor";
 import AddRecordScreen from "../screens/AddNewRecord/NewRecordScreen";
 import RecordDetailsScreen from "../screens/RecordDetails/RecordDetailsScreen";
 import DoctorInfoUpdateView from "../screens/DoctorInfoUpdate/DoctorInfoUpdate.js";
@@ -28,7 +28,6 @@ const Root = () => {
       screenOptions={{ headerShown: false }}
       initialRouteName="Splash"
     >
-    
       <stack.Screen name={routes.splash} component={Splash} />
       <stack.Screen name={routes.welcome} component={WelcomeScreen} />
       <stack.Screen name={routes.onboarding} component={Onboarding} />
@@ -38,9 +37,9 @@ const Root = () => {
         name={routes.forgotPassword}
         component={ForgotPasswordView}
       />
+      <stack.Screen name={routes.specialities} component={Specialities} />
       <stack.Screen name={routes.newpassword} component={NewPasswordView} />
       <stack.Screen name={routes.mainapp} component={Tabs} />
-      <stack.Screen name={routes.specialities} component={Specialities} />
       <stack.Screen name={routes.medicalrecords} component={MedicalRecords} />
       <stack.Screen
         name={routes.confirmAppointment}
@@ -52,10 +51,15 @@ const Root = () => {
       />
       <stack.Screen name={routes.findDoctor} component={FindDoctor} />
       <stack.Screen name={routes.addrecordscreen} component={AddRecordScreen} />
-      <stack.Screen name={routes.recorddetails} component={RecordDetailsScreen} />
-      <stack.Screen name={routes.doctorInfoUpdate} component={DoctorInfoUpdateView} />
+      <stack.Screen
+        name={routes.recorddetails}
+        component={RecordDetailsScreen}
+      />
+      <stack.Screen
+        name={routes.doctorInfoUpdate}
+        component={DoctorInfoUpdateView}
+      />
       <stack.Screen name={routes.Profile} component={Profile} />
-
     </stack.Navigator>
   );
 };
