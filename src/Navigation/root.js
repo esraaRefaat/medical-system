@@ -61,7 +61,10 @@ const Root = () => {
         component={DoctorInfoUpdateView}
       />
       <stack.Screen name={routes.Profile} component={Profile} />
-      <stack.Screen name={routes.appointmentstoday} component={AppointmentsToday} />
+      <stack.Screen
+        name={routes.appointmentstoday}
+        component={AppointmentsToday}
+      />
     </stack.Navigator>
   );
 };
