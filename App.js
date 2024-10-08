@@ -6,7 +6,6 @@ import store from "./src/redux/store/store";
 import { useFonts } from 'expo-font';
 import FlashMessage from "react-native-flash-message";
 
-
 export default function App() {
   const [loaded] = useFonts({
     'Bold': require('./src/assets/fonts/Manrope-Bold.ttf'),
@@ -27,7 +26,6 @@ export default function App() {
           <Root></Root>
         </NavigationContainer>
         <StatusBar hidden></StatusBar>
-
       </Provider>
 
       <FlashMessage position="bottom" />
