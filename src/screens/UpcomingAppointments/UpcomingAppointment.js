@@ -10,7 +10,7 @@ import { APP_BASE_URL, GET_APPOINTMENTS } from "@env";
 import { appointmentsAction } from "../../redux/store/slices/appointmentsSlice";
 
 
-export default function AppointmentsToday({ navigation }) {
+export default function UpcomingAppointment({ navigation }) {
     const { user } = useSelector((state) => state.auth);
     const [records, setRecords] = useState([]);
     const dispatch = useDispatch();
@@ -18,19 +18,12 @@ export default function AppointmentsToday({ navigation }) {
         const today = new Date().toISOString().split('T')[0];
         dispatch(appointmentsAction({
             url: APP_BASE_URL + GET_APPOINTMENTS,
-            doctorId: '6701691de460030022321398'
-            //user.user_id
-            ,
+            doctorId: user.user_id,
             status: 'booked'
         }))
             .unwrap()
             .then((response) => {
-               // console.log("appoint", response.document);
-                const todaysAppointments = response.document.filter(appointment => {
-                    const appointmentDate = appointment.date.split('T')[0];
-                    return appointmentDate === today;
-                });
-                setRecords(todaysAppointments)
+                setRecords(response.document)
             })
             .catch((error) => {
                 console.log(error.error)
@@ -40,9 +33,6 @@ export default function AppointmentsToday({ navigation }) {
 
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity
-            onPress={() => navigation.navigate(routes.medicalrecords,{patientId:item.patient._id})}
-        >
             <View style={styles.card}>
                 <View style={styles.dateContainer}>
                     <Image
@@ -56,7 +46,6 @@ export default function AppointmentsToday({ navigation }) {
                     <Text style={styles.recordSubtitle}>{item.patient.name}</Text>
                 </View>
             </View>
-        </TouchableOpacity>
     );
     const EmptyListComponent = () => (
         <View>
@@ -80,7 +69,7 @@ export default function AppointmentsToday({ navigation }) {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <BACK_Arrow />
                 </TouchableOpacity>
-                <Text style={styles.headerText}>Appointments Today</Text>
+                <Text style={styles.headerText}>Upcoming Appointments</Text>
                 <Text style={styles.notificationIcon}></Text>
             </View>
             <FlatList

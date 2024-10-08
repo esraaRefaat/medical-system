@@ -11,30 +11,21 @@ import CalendarInput from '../../components/CalendarInput';
 import Input from '../../components/Input';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment'
-
+import { useRoute } from '@react-navigation/native';
+import { useDispatch, useSelector } from "react-redux";
+import { APP_BASE_URL, Add_New_Record } from "@env";
+import { newRecordAction } from "../../redux/store/slices/addNewRecord";
 
 const AddRecordScreen = ({ navigation }) => {
+    const route = useRoute()
+    console.log('id', route.params.patientId)
     const [appointmentDate, setAppointmentDate] = useState('');
     const [doctorNotes, setDoctorNotes] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [prescriptions, setPrescriptions] = useState('');
     const [followUpPlan, setFollowUpPlan] = useState('');
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
 
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
-
-    const handleConfirm = (date) => {
-       // console.warn("A date has been picked: ", date);
-        setAppointmentDate(moment(date).format('MM/DD/YYYY'))
-        hideDatePicker();
-
-    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -46,45 +37,64 @@ const AddRecordScreen = ({ navigation }) => {
                 <Text style={styles.notificationIcon}></Text>
             </View>
             <View style={{ paddingHorizontal: 16, marginTop: 25 }}>
-                <CalendarInput
-                    lable={"Appointment Date"}
-                    value={appointmentDate}
-                    containerStyle={{ marginBottom: 15 }}
-                    onPress={showDatePicker} />
-                <DateTimePickerModal
-                    isVisible={isDatePickerVisible}
-                    mode="date"
-                    onConfirm={handleConfirm}
-                    onCancel={hideDatePicker}
-                />
                 <Input
                     lable={"Doctor's Notes"}
                     Placeholder={"Enter doctor's notes"}
                     containerStyle={{ marginBottom: 15 }}
-                    OnPress
-                    Value
+                    onChangeText={(text) => {
+                        setDoctorNotes(text)
+                    }}
+                    Value={doctorNotes}
                 />
                 <Input
                     lable={"Diagnosis"}
                     Placeholder={"Enter diagnosis"}
                     containerStyle={{ marginBottom: 15 }}
+                    onChangeText={(text) => {
+                        setDiagnosis(text)
+                    }}
+                    Value={diagnosis}
                 />
                 <Input
                     lable={"Prescriptions"}
                     Placeholder={"Enter prescriptions"}
                     containerStyle={{ marginBottom: 15 }}
-
+                    onChangeText={(text) => {
+                        setPrescriptions(text)
+                    }}
+                    Value={prescriptions}
                 />
                 <Input
                     lable={"Follow-Up Plan"}
                     Placeholder={"Enter follow-up plan"}
                     containerStyle={{ marginBottom: 15 }}
+                    onChangeText={(text) => {
+                        setFollowUpPlan(text)
+                    }}
+                    Value={followUpPlan}
                 />
             </View>
             <CustomButton
                 text={'Add Record'}
                 containerStyle={styles.buttonStyle}
-                onPress={() => { console.log('test') }}
+                onPress={() => {
+                    dispatch(newRecordAction({
+                        url: APP_BASE_URL + Add_New_Record,
+                        doctorNotes: doctorNotes,
+                        diagnosis: diagnosis,
+                        prescriptions: prescriptions,
+                        followUpPlan: followUpPlan,
+                        id: route.params.patientId
+                    }))
+                        .unwrap()
+                        .then((response) => {
+                            console.log("res", response);
+                            navigation.navigate(routes.medicalrecords, { patientId: route.params.patientId })
+                        })
+                        .catch((error) => {
+                            console.log(error.error)
+                        });
+                }}
             />
         </SafeAreaView>
     );

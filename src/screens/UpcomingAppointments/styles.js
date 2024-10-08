@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     list: {
         flex: 1,
         paddingHorizontal: 16,
+        marginTop:20
     },
     card: {
         flexDirection: 'row',
@@ -55,17 +56,17 @@ const styles = StyleSheet.create({
     },
     recordTitle: {
         color: TEXT_GREY,
-        fontSize: 20,
+        fontSize: 16,
         fontFamily: 'Bold',
     },
     recordSubtitle: {
-        color: PRIMARY,
-        fontSize: 14,
-        fontFamily: 'Medium'
+        color: GREY,
+        fontSize: 16,
+        fontFamily: 'Bold'
     },
     prescription: {
         color: TEXT_GREY,
-        fontSize: 15,
+        fontSize: 12,
         fontFamily: 'Medium'
     },
 
@@ -140,6 +141,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
     },
+    imageStyle: {
+        width: 48,
+        height: 48,
+        borderRadius: 16,
+        borderWidth: 1,
+        borderColor: '#C6D4F1'
+    }
+
 });
 
 export default styles;

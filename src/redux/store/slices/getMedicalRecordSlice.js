@@ -1,11 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 export const medicalRecordAction = createAsyncThunk(
   "getmedicalrecord",
-  async ({  url }, { rejectWithValue }) => {
+  async ({ id, url, token }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(url);
+      const fullUrl = `${url}/${id}`;
+      const response = await axios.get(fullUrl, {
+        headers: {
+            token: token,
+            'Content-Type': 'application/json',
+        },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

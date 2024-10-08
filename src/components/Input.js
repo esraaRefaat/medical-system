@@ -8,7 +8,7 @@ import CustomText from './customText';
 const Input = ({
     lable,
     containerStyle,
-    OnPress,
+    onChangeText,
     Placeholder,
     Value }) => {
 
@@ -31,7 +31,9 @@ const Input = ({
                   style={{height:40,width:'100%'}}
                   placeholder={Placeholder}
                   placeholderTextColor={'#969696'}
-                  onPress={OnPress}
+                  onChangeText={(text) => {
+                    onChangeText(text)
+                }}
                   value={Value}
                   />
                 </View>

@@ -9,7 +9,7 @@ import CustomText from '../../components/customText';
 
 export default function RecordDetailsScreen({ route, navigation }) {
   const { record } = route.params;
-  console.log('record', record)
+ // console.log('record', record)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,7 +35,7 @@ export default function RecordDetailsScreen({ route, navigation }) {
           size={16}
         />
         <CustomText
-          text={record.date}
+          text={new Date(record.appointmentDate * 1000).toLocaleDateString()}
           color="TEXT_GREY"
           fontFamily='medium'
           size={12}
@@ -48,7 +48,7 @@ export default function RecordDetailsScreen({ route, navigation }) {
           size={16}
         />
         <CustomText
-          text={'Patient has shown significant improvement.'}
+          text={record.doctorNotes}
           color="TEXT_GREY"
           fontFamily='medium'
           size={12}
@@ -61,7 +61,7 @@ export default function RecordDetailsScreen({ route, navigation }) {
           size={16}
         />
         <CustomText
-          text={'Mild fever and cough.'}
+          text={record.diagnosis}
           color="TEXT_GREY"
           fontFamily='medium'
           size={12}
@@ -74,7 +74,7 @@ export default function RecordDetailsScreen({ route, navigation }) {
           size={16}
         />
         <CustomText
-          text={'Paracetamol 500mg, Vitamin C.'}
+          text={record.prescriptions}
           color="TEXT_GREY"
           fontFamily='medium'
           size={12}
@@ -87,7 +87,7 @@ export default function RecordDetailsScreen({ route, navigation }) {
           size={16}
         />
         <CustomText
-          text={'Follow-up after 2 weeks.'}
+          text={record.followUpPlan}
           color="TEXT_GREY"
           fontFamily='medium'
           size={12}

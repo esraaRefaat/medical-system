@@ -23,6 +23,7 @@ import Profile from "../screens/profile/profile";
 import AppointmentsToday from "../screens/AppointmentsToday/AppointmentsToday.js";
 import AllUsersList from "../screens/AdminUsersLists/allUsersList.js";
 import CreateAppointment from "../screens/Appoinments/CreateAppointment";
+import UpcomingAppointment from "../screens/UpcomingAppointments/UpcomingAppointment.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -73,6 +74,8 @@ const Root = () => {
       />
 
       <stack.Screen name={routes.alluserslist} component={AllUsersList} />
+      
+      <stack.Screen name={routes.UpcomingAppointment} component={UpcomingAppointment} />
     </stack.Navigator>
   );
 };

@@ -22,6 +22,7 @@ const routes = Object.freeze({
   appointmentstoday: "appointmentstoday",
   alluserslist: "alluserslist",
   CreateAppointment: "CreateAppointment",
+  UpcomingAppointment:'UpcomingAppointment'
 });
 
 export default routes;

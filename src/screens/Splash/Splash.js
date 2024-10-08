@@ -17,7 +17,7 @@ const Splash = () => {
         }, 1500);
       } else {
         setTimeout(function () {
-          navigation.dispatch(StackActions.replace(routes.signup));
+          navigation.dispatch(StackActions.replace(routes.login));
           // navigation.dispatch(
           //   StackActions.replace(routes.medicalrecords)
           // )
