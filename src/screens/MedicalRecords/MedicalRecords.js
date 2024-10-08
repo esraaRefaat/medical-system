@@ -16,6 +16,8 @@ export default function MedicalRecords({ navigation }) {
     const { user } = useSelector((state) => state.auth);
     const route = useRoute()
     console.log('id', route.params.patientId)
+
+
     useEffect(() => {
         dispatch(medicalRecordAction({
             url: APP_BASE_URL + Get_Medical_Records,
@@ -83,7 +85,7 @@ export default function MedicalRecords({ navigation }) {
             <View style={styles.footerButtons}>
                 <TouchableOpacity
                     style={styles.addButton}
-                    onPress={() => navigation.navigate(routes.addrecordscreen)}
+                    onPress={() => navigation.navigate(routes.addrecordscreen , {patientId:route.params.patientId})}
                 >
                     <Text style={styles.footerButtonText}>Add a new record</Text>
                 </TouchableOpacity>

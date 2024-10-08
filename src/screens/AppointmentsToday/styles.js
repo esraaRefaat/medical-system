@@ -147,7 +147,77 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         borderWidth: 1,
         borderColor: '#C6D4F1'
-    }
+    },
+    doneButton: {
+        backgroundColor: "green",
+        paddingVertical: 8, // Adjust padding for less height
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        marginRight:10,
+
+      },
+      doneButtonText: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 14, // Adjust font size if needed
+      },
+      cancelButton: {
+        backgroundColor: "red",
+        paddingVertical: 8, // Adjust padding for less height
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+      },
+      modalContent: {
+        width: "80%",
+        backgroundColor: "white",
+        borderRadius: 10,
+        padding: 20,
+        alignItems: "center",
+      },
+      modalTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 10,
+      },
+      modalMessage: {
+        fontSize: 16,
+        marginBottom: 20,
+        textAlign: "center",
+      },
+      buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%",
+      },
+      button: {
+        padding: 10,
+        borderRadius: 5,
+        width: "45%",
+      },
+      confirmButton: {
+        backgroundColor: "green",
+      },
+      rejectButton: {
+        backgroundColor: "red",
+      },
+
+      buttonText: {
+        color: "white",
+        textAlign: "center",
+      },
+      cancelButton1: {
+        backgroundColor: "gray",
+      },
 
 });
 

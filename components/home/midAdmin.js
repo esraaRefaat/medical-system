@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Image,
   Linking,
   Modal,
@@ -8,15 +9,66 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../src/utils/routes";
+import axios from "axios";
 
 const MidAdmin = () => {
   const navigation = useNavigation();
 
     // State to manage modal visibility
     const [modalVisible, setModalVisible] = useState(false);
+    const [roleCounts, setRoleCounts] = useState({
+      doctorCount: 0,
+      adminCount: 0,
+      patientCount: 0,
+    });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+      // Function to fetch user role counts from the API
+      const fetchRoleCounts = async () => {
+        try {
+          const response = await axios.get('https://medical-system-server.onrender.com/api/v1/users/count');  // Replace with your actual backend URL
+          
+          // Check if the response and data exist
+          if (response && response.data && response.data.data) {
+            setRoleCounts(response.data.data);
+          } else {
+            throw new Error("Invalid response structure");
+          }
+          setLoading(false);
+        } catch (error) {
+          setError(error.message || "Something went wrong");
+          setLoading(false);
+        }
+      };
+    
+      fetchRoleCounts();
+    }, []);
+    
+
+  // Render a loading indicator while data is being fetched
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Loading counts...</Text>
+      </View>
+    );
+  }
+
+  // Render an error message if there's an error
+  if (error) {
+    return (
+      <View style={styles.center}>
+        <Text style={styles.errorText}>Error: {error}</Text>
+      </View>
+    );
+  }
 
     // Function to handle option selection
     const handleOptionSelect = (role) => {
@@ -49,13 +101,13 @@ const MidAdmin = () => {
             
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            Doctors:
+            Doctors:{roleCounts.doctorCount}
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            Patients:
+            Patients:{roleCounts.patientCount}
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            Admins:
+            Admins:{roleCounts.adminCount}
           </Text>
         </Pressable>
         <Pressable
