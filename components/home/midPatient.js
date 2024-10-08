@@ -25,10 +25,10 @@ const MidPatient = () => {
           style={{ marginBottom: 20 }}
         ></Image>
         <Text style={{ fontSize: 16, fontWeight: "500" }}>
-          View your past Appointments
+          View booked Appointments
         </Text>
         <Text style={{ fontSize: 13, fontWeight: "400", color: "#71717A" }}>
-          find a Doctor or specialist
+          View all your booked appointments
         </Text>
       </Pressable>
       <Pressable
@@ -62,7 +62,7 @@ const MidPatient = () => {
           View your medical records
         </Text>
         <Text style={{ fontSize: 13, fontWeight: "400", color: "#71717A" }}>
-          find a Doctor or specialist
+          View your medical records
         </Text>
       </Pressable>
     </View>

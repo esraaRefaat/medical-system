@@ -79,16 +79,6 @@ const Root = () => {
       />
 
       <stack.Screen name={routes.alluserslist} component={AllUsersList} />
-      
-      <stack.Screen name={routes.UpcomingAppointment} component={UpcomingAppointment} />
-      <stack.Screen name={routes.ApproveDoctorsList} component={ApproveDoctorsList} />
-      <stack.Screen name={routes.AdminUserDetails} component={AdminUserDetails} />
-      <stack.Screen name={routes.BookedAppointments} component={BookedAppointments} />
-      <stack.Screen name={routes.rating} component={SubmitRating} />
-      <stack.Screen
-        name={routes.PatientProfile}
-        component={PatientProfile}
-      ></stack.Screen>
 
       <stack.Screen
         name={routes.UpcomingAppointment}
@@ -102,6 +92,15 @@ const Root = () => {
         name={routes.AdminUserDetails}
         component={AdminUserDetails}
       />
+      <stack.Screen
+        name={routes.BookedAppointments}
+        component={BookedAppointments}
+      />
+      <stack.Screen name={routes.rating} component={SubmitRating} />
+      <stack.Screen
+        name={routes.PatientProfile}
+        component={PatientProfile}
+      ></stack.Screen>
     </stack.Navigator>
   );
 };

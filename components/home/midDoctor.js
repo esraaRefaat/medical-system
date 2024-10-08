@@ -64,7 +64,7 @@ const MidDoc = ({ user }) => {
           <Pressable
             style={[styles.card, { backgroundColor: "#FEF6EE" }]}
             onPress={() => {
-              navigation.navigate(routes.onboarding);
+              // navigation.navigate(routes.onboarding);
             }}
           >
             <Image
@@ -89,7 +89,7 @@ const MidDoc = ({ user }) => {
               style={{ marginBottom: 15 }}
             ></Image>
             <Text style={{ fontSize: 18, fontWeight: "500" }}>
-              Today's Appointments: 0
+              Today's Appointments
             </Text>
             <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
               check your today's appointments

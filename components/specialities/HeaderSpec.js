@@ -24,12 +24,12 @@ const HomeHeader = () => {
             justifyContent: "center",
           }}
         >
-          <Pressable style={styles.iconbutton}>
+          {/* <Pressable style={styles.iconbutton}>
             <Ionicons name="notifications-outline" size={20} color="black" />
-          </Pressable>
+          </Pressable> */}
         </View>
       </View>
-      <SearchInput></SearchInput>
+      {/* <SearchInput></SearchInput> */}
     </View>
   );
 };

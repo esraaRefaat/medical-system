@@ -1,4 +1,11 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileHeader from "../../components/Profile/pHeader";
@@ -65,6 +72,10 @@ const reviews = [
 const Profile = ({ route }) => {
   const { user } = useSelector((state) => state.auth);
 
+  const handleSignOut = () => {
+    navigation.navigate(routes.login);
+  };
+
   const id = route?.params?.id || user.user_id;
   const [doctorData, setDoctorData] = useState(null);
   const navigation = useNavigation();
@@ -99,11 +110,20 @@ const Profile = ({ route }) => {
           <Text>Loading...</Text>
         )}
       </ScrollView>
-      {doctorData?.role === "patient" && (
+      {user?.user_role === "patient" && (
         <Pressable style={styles.bookButton} onPress={handleBookAppointment}>
           <Text style={styles.buttonText}>Book Appointment</Text>
         </Pressable>
       )}
+      {
+        user?.user_role === "doctor" && (
+          // <View style={styles.bottomContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleSignOut}>
+            <Text style={styles.buttonText}>Sign Out</Text>
+          </TouchableOpacity>
+        )
+        // </View>
+      }
     </SafeAreaView>
   );
 };
@@ -130,6 +150,30 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FFFFFF",
     fontSize: 16,
+  },
+  bottomContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    width: "100%",
+    paddingBottom: 30,
+    paddingHorizontal: 20,
+  },
+  button: {
+    backgroundColor: "#254EDB",
+    paddingVertical: 12,
+    width: "100%",
+    borderRadius: 30,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "600",
+    textAlign: "center",
   },
 });
 

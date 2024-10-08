@@ -9,6 +9,9 @@ import Profile from "../screens/profile/profile";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import PatientProfile from "../screens/patientProfile/PatientProfile";
+import BookedAppointments from "../screens/BookedAppointments/BookedAppointments";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import AppointmentsToday from "../screens/AppointmentsToday/AppointmentsToday";
 
 const tab = createBottomTabNavigator();
 
@@ -24,15 +27,30 @@ const Tabs = () => {
           tabBarIcon: () => <AntDesign name="home" size={24} color="black" />,
         }}
       />
+
       {user.user_role == "doctor" && (
         <tab.Screen
-          name={routes.Profile}
-          component={Profile}
+          name={routes.appointmentstoday}
+          component={AppointmentsToday}
           options={{
-            tabBarIcon: () => <Feather name="user" size={24} color="black" />,
+            tabBarIcon: () => (
+              <Ionicons name="document" size={24} color="black" />
+            ),
           }}
         />
       )}
+      {user.user_role == "patient" && (
+        <tab.Screen
+          name={routes.BookedAppointments}
+          component={BookedAppointments}
+          options={{
+            tabBarIcon: () => (
+              <Ionicons name="document" size={24} color="black" />
+            ),
+          }}
+        />
+      )}
+
       {user.user_role !== "doctor" && (
         <tab.Screen
           name={routes.PatientProfile}
@@ -42,9 +60,18 @@ const Tabs = () => {
           }}
         />
       )}
+      {user.user_role == "doctor" && (
+        <tab.Screen
+          name={routes.Profile}
+          component={Profile}
+          options={{
+            tabBarIcon: () => <Feather name="user" size={24} color="black" />,
+          }}
+        />
+      )}
 
       {/* <tab.Screen name={routes.about} component={About} /> */}
-      <tab.Screen name={routes.onboarding} component={Onboarding} />
+      {/* <tab.Screen name={routes.onboarding} component={Onboarding} /> */}
     </tab.Navigator>
   );
 };
