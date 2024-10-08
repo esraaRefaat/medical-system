@@ -39,7 +39,7 @@ export default function FindDoctor({ route }) {
 
   const fetchDoctors = async (cb) => {
     try {
-      const verifiedDoctor = "pending";
+      const verifiedDoctor = "true";
       let endpoint = `/users?role=doctor&verifiedDoctor=${verifiedDoctor}&page=${page}`;
       if (searchName) endpoint += `&keyword=${searchName}`;
       if (drSpecialties) endpoint += `&drSpecialties=${drSpecialties}`;

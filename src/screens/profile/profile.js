@@ -84,7 +84,7 @@ const Profile = ({ route }) => {
 
   const handleBookAppointment = () => {
     console.log("Book Appointment clicked!");
-    navigation.navigate(routes.confirmAppointment);
+    navigation.navigate(routes.confirmAppointment, { doctorId: id });
   };
 
   return (

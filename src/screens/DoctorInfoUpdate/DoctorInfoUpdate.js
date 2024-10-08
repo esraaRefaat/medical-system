@@ -107,7 +107,6 @@ const DoctorInfoUpdateView = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -146,7 +145,7 @@ const DoctorInfoUpdateView = () => {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: false,
-        allowsMultipleSelection:true,
+        allowsMultipleSelection: true,
         aspect: [4, 4],
         quality: 0.7,
         selectionLimit: 10, // Allow selecting up to 10 images
@@ -174,7 +173,6 @@ const DoctorInfoUpdateView = () => {
 
   const submit_info = useCallback(
     async (values) => {
-
       setLoading(true); // Set loading to true when request starts
 
       const formData = new FormData();
@@ -213,7 +211,6 @@ const DoctorInfoUpdateView = () => {
       });
 
       try {
-
         const response = await dispatch(
           putWithTokenAction({
             userData: formData,
@@ -241,7 +238,7 @@ const DoctorInfoUpdateView = () => {
           console.error("Error Message:", error.message);
           Alert.alert("Error", error.message || "Something went wrong");
         }
-      }finally {
+      } finally {
         setLoading(false); // Set loading to false after request completes
       }
     },
@@ -260,7 +257,7 @@ const DoctorInfoUpdateView = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.backbuttontouch}
-            onPress={() =>           navigation.navigate(routes.mainapp)}
+            onPress={() => navigation.navigate(routes.mainapp)}
           >
             <BACK_Arrow />
           </TouchableOpacity>
@@ -383,13 +380,12 @@ const DoctorInfoUpdateView = () => {
 
               {/* Display Selected Verifying Documents */}
               <View style={styles.docsContainer}>
-                {values.profilePicture &&
-                  
-                    <Image
-                      source={{ uri: values.profilePicture.uri }}
-                      style={styles.docImage}
-                    />
-                  }
+                {values.profilePicture && (
+                  <Image
+                    source={{ uri: values.profilePicture.uri }}
+                    style={styles.docImage}
+                  />
+                )}
               </View>
 
               {/* Verifying Documents */}
@@ -406,17 +402,23 @@ const DoctorInfoUpdateView = () => {
                 {values.verifyingDocs.length > 0 &&
                   values.verifyingDocs.map((doc, index) => (
                     <View key={index} style={styles.docWrapper}>
-                    <Image source={{ uri: doc.uri }} style={styles.docImage} />
-                    <TouchableOpacity
-                      style={styles.removeDocButton}
-                      onPress={() => {
-                        // Create a function to handle removing the document from Formik values
-                        const updatedDocs = values.verifyingDocs.filter((_, i) => i !== index);
-                        setFieldValue('verifyingDocs', updatedDocs); // Set the new array without the removed doc
-                      }}>
-                      <Text style={styles.removeDocText}>X</Text>
-                    </TouchableOpacity>
-                  </View>
+                      <Image
+                        source={{ uri: doc.uri }}
+                        style={styles.docImage}
+                      />
+                      <TouchableOpacity
+                        style={styles.removeDocButton}
+                        onPress={() => {
+                          // Create a function to handle removing the document from Formik values
+                          const updatedDocs = values.verifyingDocs.filter(
+                            (_, i) => i !== index
+                          );
+                          setFieldValue("verifyingDocs", updatedDocs); // Set the new array without the removed doc
+                        }}
+                      >
+                        <Text style={styles.removeDocText}>X</Text>
+                      </TouchableOpacity>
+                    </View>
                   ))}
               </View>
               {touched.verifyingDocs && errors.verifyingDocs && (
@@ -433,8 +435,8 @@ const DoctorInfoUpdateView = () => {
           )}
         </Formik>
       </ScrollView>
-            {/* Loading overlay */}
-            {loading && (
+      {/* Loading overlay */}
+      {loading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color="#0000ff" />
           <Text style={styles.loadingText}>Loading...</Text>
@@ -445,3 +447,4 @@ const DoctorInfoUpdateView = () => {
 };
 
 export default DoctorInfoUpdateView;
+

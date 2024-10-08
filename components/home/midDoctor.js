@@ -43,7 +43,7 @@ const MidDoc = ({ user }) => {
           <Pressable
             style={[styles.card, { backgroundColor: "#EDFCF2" }]}
             onPress={() => {
-              navigation.navigate(routes.appointmentstoday);
+              navigation.navigate(routes.UpcomingAppointment);
             }}
           >
             <Image
@@ -81,7 +81,7 @@ const MidDoc = ({ user }) => {
           <Pressable
             style={[styles.card, { backgroundColor: "#FEF3F2" }]}
             onPress={() => {
-              navigation.navigate(routes.onboarding);
+              navigation.navigate(routes.appointmentstoday);
             }}
           >
             <Image
