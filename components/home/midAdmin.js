@@ -10,7 +10,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../src/utils/routes";
 
-const MidDoc = () => {
+const MidAdmin = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -18,7 +18,7 @@ const MidDoc = () => {
         <Pressable
           style={[styles.card, { backgroundColor: "#EFE4FF" }]}
           onPress={() => {
-            navigation.navigate(routes.CreateAppointment);
+            navigation.navigate(routes.onboarding);
           }}
         >
           <Image
@@ -35,7 +35,7 @@ const MidDoc = () => {
         <Pressable
           style={[styles.card, { backgroundColor: "#EDFCF2" }]}
           onPress={() => {
-            navigation.navigate(routes.appointmentstoday);
+            navigation.navigate(routes.onboarding);
           }}
         >
           <Image
@@ -43,7 +43,7 @@ const MidDoc = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: "500" }}>
-            View Upcoming Appointments
+            View your Appointments
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
             see your upcoming appointments
@@ -90,7 +90,7 @@ const MidDoc = () => {
   );
 };
 
-export default MidDoc;
+export default MidAdmin;
 
 const styles = StyleSheet.create({
   container: {

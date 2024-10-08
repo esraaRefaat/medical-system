@@ -17,7 +17,7 @@ const MidPatient = () => {
       <Pressable
         style={styles.card}
         onPress={() => {
-          navigation.navigate(routes.onboarding);
+          navigation.navigate(routes.confirmAppointment);
         }}
       >
         <Image
@@ -25,7 +25,7 @@ const MidPatient = () => {
           style={{ marginBottom: 20 }}
         ></Image>
         <Text style={{ fontSize: 16, fontWeight: "500" }}>
-          Book an Appointment
+          View your past Appointments
         </Text>
         <Text style={{ fontSize: 13, fontWeight: "400", color: "#71717A" }}>
           find a Doctor or specialist

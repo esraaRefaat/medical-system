@@ -24,22 +24,22 @@ const HomeHeader = () => {
             justifyContent: "center",
           }}
         >
-          <Pressable style={styles.iconbutton}>
+          {/* <Pressable style={styles.iconbutton}>
             <Ionicons name="notifications-outline" size={20} color="black" />
-          </Pressable>
+          </Pressable> */}
         </View>
       </View>
-      <SearchInput></SearchInput>
+      {/* <SearchInput></SearchInput> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: { padding: 16 },
-  hiText: { fontSize: 20, fontWeight: 'bold' },
+  hiText: { fontSize: 20, fontWeight: "bold" },
   mayText: {
     fontSize: 14,
-    fontWeight:'medium',
+    fontWeight: "medium",
     color: "rgb(63,63,70)",
     marginTop: 4,
   },
