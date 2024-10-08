@@ -9,6 +9,7 @@ import { Calendar } from 'react-native-calendars'
 import dayjs from 'dayjs'
 import DatePickerArrow from '../../components/DatePickerArrow'
 import TimePicker from '../../components/TimePicker'
+import VerticalDivider from '../../components/VerticalDivider'
 
 axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
 
@@ -94,9 +95,17 @@ const CreateAppointment = () => {
                     />
 
 
-                    <TimePicker time={startTime} setTime={setStartTime} />
-                    <TimePicker time={endTime} setTime={setEndTime} />
-
+                    <View style={styles.rowWithVerticalDivider}>
+                        <View style={styles.timeInput}>
+                            <Text style={styles.boldText}>Start Time</Text>
+                            <TimePicker time={startTime} setTime={setStartTime} />
+                        </View>
+                        <VerticalDivider height={64} color="gray" />
+                        <View style={styles.timeInput}>
+                            <Text style={styles.boldText}>End Time</Text>
+                            <TimePicker time={endTime} setTime={setEndTime} />
+                        </View>
+                    </View>
 
                 </ScrollView>
                 <View style={styles.bottomAction}>
@@ -132,6 +141,13 @@ const styles = StyleSheet.create({
     topSection: {
         gap: 8
     },
+    rowWithVerticalDivider: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 32,
+        gap: 32
+    },
     bottomAction: {
         borderColor: '#e4e6ea',
         borderTopWidth: 1,
@@ -142,6 +158,16 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: 'white'
+    },
+    boldText: {
+        fontWeight: "bold",
+        fontSize: 20,
+        textAlign: 'center'
+    },
+    timeInput: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 4
     }
 })
 
