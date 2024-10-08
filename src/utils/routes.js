@@ -22,7 +22,10 @@ const routes = Object.freeze({
   appointmentstoday: "appointmentstoday",
   alluserslist: "alluserslist",
   CreateAppointment: "CreateAppointment",
-  UpcomingAppointment:'UpcomingAppointment'
+  UpcomingAppointment:'UpcomingAppointment',
+  ApproveDoctorsList:"ApproveDoctorsList",
+  AdminUserDetails:"AdminUserDetails",
+
 });
 
 export default routes;

@@ -12,37 +12,35 @@ import {
 import React, { useEffect, useState, useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import DoctorCardWithDelete from "../../components/DoctorCardWithDelete.jsx";
-
 import axios from "axios";
-import FAB from "../../components/FAB";
-import TopArrow from "../../components/Icons/TopArrow";
+import FAB from "../../components/FAB.jsx";
+import TopArrow from "../../components/Icons/TopArrow.jsx";
 import SearchIcon from "../../components/Icons/SearchIcon.jsx";
-import { deleteWithTokenAction } from "../../redux/store/slices/deleteWithTokenSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import DoctorCardWithApprove from "../../components/DoctorCardWithApprove.jsx";
+import { putDataWithTokenAction } from "../../redux/store/slices/putDataWithTokenSlice.js";
 
 const solidBlue = "#1552b4";
 
-export default function AllUsersList({ route }) {
-  const { role = "doctor" } = route.params || {};
+export default function ApproveDoctorsList({ route }) {
   const [searchName, setSearchName] = useState("");
   const [page, setPage] = useState(1);
   const [doctors, setDoctors] = useState([]);
   const [showFAB, setShowFAB] = useState(false);
   const [showLoading, setShowLoading] = useState(true);
   const flatListRef = useRef(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [doctorIdToDelete, setDoctorIdToDelete] = useState(null);
+  const [modalVisibleApprove, setModalVisibleApprove] = useState(false);
+  const [modalVisibleReject, setModalVisibleReject] = useState(false);  const [doctorIdToApprove, setDoctorIdToApprove] = useState(null);
 
+  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
 
   const fetchDoctors = async () => {
     try {
-      const url = `https://medical-system-server.onrender.com/api/v1/users?role=${role}&page=${page}${searchName ? `&keyword=${searchName}` : ''}`;
+      const url = `https://medical-system-server.onrender.com/api/v1/users?role=doctor&verifiedDoctor=pending&page=${page}${searchName ? `&keyword=${searchName}` : ''}`;
       
-      console.log(`Fetching from: ${url}`); // Debug log
       const res = await axios.get(url);
 
       setDoctors((prevDoctors) => {
@@ -57,9 +55,7 @@ export default function AllUsersList({ route }) {
       } else {
         setShowLoading(true);
       }
-      console.log(res.data.document); // Debug log
     } catch (e) {
-      console.log(e);
       setShowLoading(false);
     }
   };
@@ -67,56 +63,57 @@ export default function AllUsersList({ route }) {
   useEffect(() => {
     setShowLoading(true); // Set loading to true before fetching
     fetchDoctors();
-  }, [searchName, page, role]); // Include page to re-fetch on page change
+  }, [searchName, page]); // Include page to re-fetch on page change
 
   const handleScroll = (event) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     setShowFAB(offsetY > 100);
   };
 
-  const onDelete = (id) => {
-    setDoctorIdToDelete(id); // Set the ID to be deleted
-    setModalVisible(true); // Show the modal
+  const onApprove = (id) => {
+    setDoctorIdToApprove(id); // Set the ID to be Approved
+    setModalVisibleApprove(true); // Close the approve modal
   };
 
-  const confirmDelete = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzA0NmQ3NzA5MmI4NTdiMjZiMzY2ZDIiLCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImhhZHMzeWRkQGdtYWlsLmNvbSIsImlhdCI6MTcyODM0MzQxNX0.qzDk-pXKWeo_O09zMhJhLpAiqBm48X6P0e34_lUlqvU'; // Get your token from your auth state or context
-    const url = `https://medical-system-server.onrender.com/api/v1/users/admin/${doctorIdToDelete}`;
+  const onReject = (id) => {
+    setDoctorIdToApprove(id); // Set the ID to be Approved
+    setModalVisibleReject(true); // Close the reject modal
+  };
+
+  const confirmApprove = async () => {
+    const token = user.token; // Get your token from your auth state or context
+    const url = `https://medical-system-server.onrender.com/api/v1/users/admin/${doctorIdToApprove}`;
+    const userData = {verifiedDoctor: "true"}
     
-    console.log(url, token);
-    
-    const resultAction = await dispatch(deleteWithTokenAction({ token, url }));
+    const resultAction = await dispatch(putDataWithTokenAction({ token,userData, url }));
   
-    if (deleteWithTokenAction.fulfilled.match(resultAction)) {
-      setDoctors((prevDoctors) => prevDoctors.filter((doctor) => doctor._id !== doctorIdToDelete));
-      console.log("Doctor deleted successfully");
+    if (putDataWithTokenAction.fulfilled.match(resultAction)) {
+      setDoctors((prevDoctors) => prevDoctors.filter((doctor) => doctor._id !== doctorIdToApprove));
     } else {
-      console.error("Error deleting doctor:", resultAction.error);
+      console.error("Error Approving doctor:", resultAction.error);
     }
     
-    setModalVisible(false); // Close the modal
-    setDoctorIdToDelete(null); // Reset the ID
+    setModalVisibleApprove(false); // Close the approve modal
+    setDoctorIdToApprove(null); // Reset the ID
   };
 
 
-  // const onDelete =  async (id) => {
-  //   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzA0NmQ3NzA5MmI4NTdiMjZiMzY2ZDIiLCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImhhZHMzeWRkQGdtYWlsLmNvbSIsImlhdCI6MTcyODM0MzQxNX0.qzDk-pXKWeo_O09zMhJhLpAiqBm48X6P0e34_lUlqvU'; // Get your token from your auth state or context
-  //   const url = `https://medical-system-server.onrender.com/api/v1/users/admin/${id}`; // Adjust the URL as needed
-  
-  //   console.log(url,token);
+  const confirmReject = async () => {
+    const token = user.token; // Get your token from your auth state or context
+    const url = `https://medical-system-server.onrender.com/api/v1/users/admin/${doctorIdToApprove}`;
+    const userData = {verifiedDoctor: "false"}
     
-  //   // Dispatch delete action
-  //   const resultAction =  await dispatch(deleteWithTokenAction({ token, url }));
+    const resultAction = await dispatch(putDataWithTokenAction({ token,userData, url }));
   
-  //   if (deleteWithTokenAction.fulfilled.match(resultAction)) {
-  //     // Handle successful deletion
-  //     setDoctors((prevDoctors) => prevDoctors.filter((doctor) => doctor._id !== id));
-  //     console.log("Doctor deleted successfully");
-  //   } else {
-  //     // Handle the error case
-  //     console.error("Error deleting doctor:", resultAction.error);
-  //   }
-  // };
+    if (putDataWithTokenAction.fulfilled.match(resultAction)) {
+      setDoctors((prevDoctors) => prevDoctors.filter((doctor) => doctor._id !== doctorIdToApprove));
+    } else {
+      console.error("Error Approving doctor:", resultAction.error);
+    }
+    
+    setModalVisibleReject(false); // Close the reject modal
+    setDoctorIdToApprove(null); // Reset the ID
+  };
 
 
   return (
@@ -130,7 +127,7 @@ export default function AllUsersList({ route }) {
           <SearchIcon />
           <TextInput
             style={styles.textInput}
-            placeholder='Search'
+            placeholder='Search Doctor'
             value={searchName}
             onChangeText={(text) => {
               setSearchName(text); // Update search name on change
@@ -145,14 +142,16 @@ export default function AllUsersList({ route }) {
   contentContainerStyle={{ gap: 16 }}
   ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
   renderItem={({ item }) => (
-    <DoctorCardWithDelete
+    <DoctorCardWithApprove
       avatar={item.profilePicture || "https://s3-alpha-sig.figma.com/img/78ba/f237/b32634d9f131723a21fb54a51b0dc114?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=L8xYoPM28s5uBmO-rNZGuZ37lV2WltP0Jgc3bqWKevJ6gaJOAPMafIzWDVMfkJfY-jOi7H-JaDLufs9-pRmJEw2hjmdJk0h-mUbsahCez9GvDbjG3fcbqmOtm~ogOxnd6gEVybUqtTinrN13H1ToQ-KWTkCj64hJF2OnO1Jwk6Faa8GJuEJJO2RveyzGQYa0kQMeW-~rFV8FTDCF1w9dlOjFI3~cz2Wv-vf50nU4KLyBn83FAxembCH85Dcck1sNu7uvYViutvixrTxCZ2aOIyKRSZCEm2sO-eS4-4P2sOaL8kO3M5N-grbq5~~91I9DhLO60G0Sr3zpFNVaaITlfw__"}
       fullName={item.name}
       specialization={item.drSpecialties}
       fees={item.drSessionFees}
       rating={item.rating}
       id={item._id}
-      onDelete={() => onDelete(item._id)}
+      onApprove={() => onApprove(item._id)}
+      onReject={() => onReject(item._id)}
+
     />
   )}
   ListFooterComponent={() => {
@@ -187,21 +186,61 @@ export default function AllUsersList({ route }) {
         />
       )}
 
-<Modal
+      {/* Approval Modal */}
+      <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        visible={modalVisibleApprove}
+        onRequestClose={() => setModalVisibleApprove(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Confirm Deletion</Text>
-            <Text style={styles.modalMessage}>Are you sure you want to delete this doctor?</Text>
+            <Text style={styles.modalTitle}>Confirm Approval</Text>
+            <Text style={styles.modalMessage}>
+              Are you sure you want to approve this doctor?
+            </Text>
             <View style={styles.buttonContainer}>
-              <Pressable style={[styles.button, styles.confirmButton]} onPress={confirmDelete}>
+              <Pressable
+                style={[styles.button, styles.confirmButton]}
+                onPress={confirmApprove}
+              >
                 <Text style={styles.buttonText}>Yes</Text>
               </Pressable>
-              <Pressable style={[styles.button, styles.cancelButton]} onPress={() => setModalVisible(false)}>
+              <Pressable
+                style={[styles.button, styles.cancelButton]}
+                onPress={() => setModalVisibleApprove(false)}
+              >
+                <Text style={styles.buttonText}>No</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Rejection Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisibleReject}
+        onRequestClose={() => setModalVisibleReject(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Confirm Rejection</Text>
+            <Text style={styles.modalMessage}>
+              Are you sure you want to reject this doctor?
+            </Text>
+            <View style={styles.buttonContainer}>
+              <Pressable
+                style={[styles.button, styles.rejectButton]}
+                onPress={confirmReject}
+              >
+                <Text style={styles.buttonText}>Yes</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.cancelButton]}
+                onPress={() => setModalVisibleReject(false)}
+              >
                 <Text style={styles.buttonText}>No</Text>
               </Pressable>
             </View>
@@ -272,6 +311,9 @@ const styles = StyleSheet.create({
     width: "45%",
   },
   confirmButton: {
+    backgroundColor: "green",
+  },
+  rejectButton: {
     backgroundColor: "red",
   },
   cancelButton: {
