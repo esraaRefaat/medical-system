@@ -17,16 +17,17 @@ const ProfileHeader = ({ doctor }) => {
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{doctor.name}</Text>
           <Text style={styles.speciality}>
-            {doctor.speciality || "Speciality not specified"}
+            {doctor.drSpecialties || "Speciality not specified"}
           </Text>
           <Text style={styles.fees}>
-            Fees: <Text style={styles.bold}>EGP {doctor.fees || "N/A"}</Text>
+            Fees:{" "}
+            <Text style={styles.bold}>EGP {doctor.drSessionFees || "N/A"}</Text>
           </Text>
 
           <View style={styles.workingHoursContainer}>
             <Text style={styles.workingHoursTitle}>🕒 Working Hours</Text>
             <Text style={styles.workingHoursText}>
-              {doctor.workingHours || "Not available"}
+              {doctor.drWorkingHours || "Not available"}
             </Text>
           </View>
         </View>
@@ -35,14 +36,14 @@ const ProfileHeader = ({ doctor }) => {
       {/* Bio Section */}
       <View style={styles.bioContainer}>
         <Text style={styles.bioTitle}>📄 Bio</Text>
-        <Text style={styles.bioText}>{doctor.bio || "No bio available"}</Text>
+        <Text style={styles.bioText}>{doctor.drBio || "No bio available"}</Text>
       </View>
 
       {/* Location Section */}
       <View style={styles.locationContainer}>
         <Text style={styles.locationTitle}>📍 Location</Text>
         <Text style={styles.locationText}>
-          {doctor.location || "Location not provided"}
+          {doctor.drLocation || "Location not provided"}
         </Text>
       </View>
     </View>

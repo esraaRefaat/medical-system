@@ -7,7 +7,7 @@ const RatingComponent = ({ reviews }) => {
   const totalRatings = reviews.length;
   const averageRating =
     totalRatings > 0
-      ? reviews.reduce((acc, review) => acc + review.rating, 0) / totalRatings
+      ? reviews.reduce((acc, review) => acc + review.stars, 0) / totalRatings
       : 0;
 
   // Function to render star ratings
@@ -62,10 +62,10 @@ const RatingComponent = ({ reviews }) => {
               <View style={styles.reviewDetails}>
                 <Text style={styles.reviewerName}>{item.name}</Text>
                 <View style={styles.starsContainer}>
-                  {renderStars(item.rating)}
+                  {renderStars(item.stars)}
                 </View>
                 <Text style={styles.reviewDate}>{item.date}</Text>
-                <Text style={styles.reviewText}>{item.review}</Text>
+                <Text style={styles.reviewText}>{item.description}</Text>
               </View>
             </View>
 

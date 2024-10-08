@@ -7,15 +7,15 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../utils/routes";
 import { useSelector } from "react-redux";
-const doctorData1 = {
-  name: "Dr. Hady",
-  speciality: "Cardiologist",
-  fees: "150",
-  workingHours: "Mon-Fri: 9 AM - 5 PM",
-  bio: "Dr. Patricia Ahoy specialist in Ear, Nose & Throat, and work in RS. Hermina Malang. It is a long established fact that a reader will be distracted by the readable content.",
-  location:
-    "Jl. Tangkuban Perahu No.31-33, Kauman, Kec. Klojen, Kota Malang, Jawa Timur 65119",
-};
+// const doctorData1 = {
+//   name: "Dr. Hady",
+//   speciality: "Cardiologist",
+//   fees: "150",
+//   workingHours: "Mon-Fri: 9 AM - 5 PM",
+//   bio: "Dr. Patricia Ahoy specialist in Ear, Nose & Throat, and work in RS. Hermina Malang. It is a long established fact that a reader will be distracted by the readable content.",
+//   location:
+//     "Jl. Tangkuban Perahu No.31-33, Kauman, Kec. Klojen, Kota Malang, Jawa Timur 65119",
+// };
 const reviews = [
   {
     profilePicture: "https://example.com/images/user1.jpg",
@@ -93,7 +93,7 @@ const Profile = ({ route }) => {
         {doctorData ? (
           <>
             <ProfileHeader doctor={doctorData} />
-            <RatingComponent reviews={reviews} />
+            <RatingComponent reviews={doctorData.reviewsReceived} />
           </>
         ) : (
           <Text>Loading...</Text>
@@ -112,10 +112,10 @@ export default Profile;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Makes SafeAreaView take up the entire screen
+    flex: 1,
   },
   scrollViewContent: {
-    flexGrow: 1, // Ensures the ScrollView content takes up all available space
+    flexGrow: 1,
     paddingBottom: 16,
   },
   bookButton: {

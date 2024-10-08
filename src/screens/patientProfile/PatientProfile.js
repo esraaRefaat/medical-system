@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import routes from "../../utils/routes";
 import moment from "moment";
 import axios from "axios";
+import { Feather } from "@expo/vector-icons"; // Icons for better UI
 
 const PatientProfile = () => {
   const navigation = useNavigation();
   const { user } = useSelector((state) => state.auth);
   const [userData, setuserData] = useState("");
-  // const id = user.user_id;
 
   const handleSignOut = () => {
     navigation.navigate(routes.login);
   };
+
   const fetchUser = async () => {
     try {
       const res = await axios.get(
@@ -23,7 +24,7 @@ const PatientProfile = () => {
       setuserData(res.data.document[0]);
       console.log(res.data.document[0]);
     } catch (error) {
-      console.error("Error fetching doctor data:", error);
+      console.error("Error fetching user data:", error);
     }
   };
 
@@ -33,31 +34,65 @@ const PatientProfile = () => {
 
   return (
     <View style={styles.container}>
+      {/* Cover Photo */}
       <Image
         source={require("../../assets/cover1.png")}
         style={styles.coverPhoto}
         resizeMode="cover"
-        image
-        sour
       />
 
+      {/* Profile Picture */}
       <View style={styles.profilePicContainer}>
         <Image
-          source={{ uri: userData.profilePicture }}
+          source={{
+            uri: userData?.profilePicture || "../../assets/default.png",
+          }}
           style={styles.profilePic}
           resizeMode="cover"
         />
       </View>
 
+      {/* User Info */}
       <View style={styles.infoContainer}>
         <Text style={styles.name}>{userData?.name || "Doctor Name"}</Text>
-        <Text style={styles.email}>
-          {userData?.email || "doctor@example.com"}
-        </Text>
-        {/* Display Joined Date */}
-        <Text style={styles.joinedDate}>
-          Joined: {moment(userData?.createdAt).format("MMMM DD, YYYY")}
-        </Text>
+
+        {/* Additional User Info */}
+        <View style={styles.infoRow}>
+          <Feather name="mail" size={20} color="#7f8c8d" style={styles.icon} />
+          <Text style={styles.email}>
+            {userData?.email || "doctor@example.com"}
+          </Text>
+        </View>
+
+        {/* <View style={styles.infoRow}>
+          <Feather name="phone" size={20} color="#7f8c8d" style={styles.icon} />
+          <Text style={styles.phone}>{userData?.phone || "+123 456 789"}</Text>
+        </View>
+
+        <View style={styles.infoRow}>
+          <Feather
+            name="map-pin"
+            size={20}
+            color="#7f8c8d"
+            style={styles.icon}
+          />
+          <Text style={styles.address}>
+            {userData?.address || "1234 Medical St, City, Country"}
+          </Text>
+        </View> */}
+
+        {/* Joined Date (Now with icon and same size) */}
+        <View style={styles.infoRow}>
+          <Feather
+            name="calendar"
+            size={20}
+            color="#7f8c8d"
+            style={styles.icon}
+          />
+          <Text style={styles.joinedDate}>
+            Joined: {moment(userData?.createdAt).format("MMMM DD, YYYY")}
+          </Text>
+        </View>
       </View>
 
       {/* Sign Out Button */}
@@ -106,21 +141,35 @@ const styles = StyleSheet.create({
     color: "#2c3e50",
     marginTop: 10,
   },
+  infoRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  icon: {
+    marginRight: 10,
+  },
   email: {
     fontSize: 16,
     color: "#7f8c8d",
-    marginBottom: 10,
+  },
+  phone: {
+    fontSize: 16,
+    color: "#7f8c8d",
+  },
+  address: {
+    fontSize: 16,
+    color: "#7f8c8d",
   },
   joinedDate: {
-    fontSize: 14,
-    color: "#95a5a6",
-    marginTop: 10,
+    fontSize: 16,
+    color: "#7f8c8d",
   },
   bottomContainer: {
     flex: 1,
-    justifyContent: "flex-end", // Move the button to the bottom
+    justifyContent: "flex-end",
     width: "100%",
-    paddingBottom: 30, // Adjust as needed
+    paddingBottom: 30,
     paddingHorizontal: 20,
   },
   button: {
