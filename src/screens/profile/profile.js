@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../utils/routes";
 const doctorData1 = {
-  name: "Dr. Omar Yasser",
+  name: "Dr. Hady",
   speciality: "Cardiologist",
   fees: "150",
   workingHours: "Mon-Fri: 9 AM - 5 PM",
