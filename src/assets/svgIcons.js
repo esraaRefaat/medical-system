@@ -169,3 +169,105 @@ export const ALERT_MSG = ({ props, color }) => (
     />
   </Svg>
 )
+export const Calendar = ({ props, color }) => (
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={18}
+    height={18}
+    viewBox="0 0 50 50"
+    {...props}
+  >
+    <Defs>
+      <ClipPath id="a">
+        <Path d="M0 0H50V50H0z" />
+      </ClipPath>
+    </Defs>
+    <G data-name="calendar (2)" clipPath="url(#a)">
+      <G data-name="Group 126">
+        <G data-name="Group 125">
+          <Circle
+            data-name="Ellipse 29"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(35.742 18.555)"
+            fill={color}
+          />
+          <Path
+            data-name="Path 1166"
+            d="M42.188 3.906h-2.54V1.953a1.953 1.953 0 00-3.906 0v1.953h-8.887V1.953a1.953 1.953 0 00-3.906 0v1.953H14.16V1.953a1.953 1.953 0 00-3.906 0v1.953H7.813A7.821 7.821 0 000 11.719v30.469A7.821 7.821 0 007.813 50h14.941a1.953 1.953 0 000-3.906H7.813a3.911 3.911 0 01-3.906-3.906V11.719a3.911 3.911 0 013.906-3.906h2.441v1.953a1.953 1.953 0 003.906 0V7.813h8.789v1.953a1.953 1.953 0 003.906 0V7.813h8.887v1.953a1.953 1.953 0 003.906 0V7.813h2.539a3.911 3.911 0 013.906 3.906v11.133a1.953 1.953 0 003.906 0V11.719a7.821 7.821 0 00-7.811-7.813z"
+            fill={color}
+          />
+          <Path
+            data-name="Path 1167"
+            d="M281.816 270a11.816 11.816 0 1011.816 11.816A11.83 11.83 0 00281.816 270zm0 19.727a7.91 7.91 0 117.91-7.91 7.919 7.919 0 01-7.91 7.91z"
+            transform="translate(-243.633 -243.633)"
+            fill={color}
+          />
+          <Path
+            data-name="Path 1168"
+            d="M375.785 334h-.879v-2.051a1.953 1.953 0 00-3.906 0v4a1.953 1.953 0 001.953 1.953h2.832a1.953 1.953 0 000-3.906z"
+            transform="translate(-334.77 -297.773)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 30"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(27.246 18.555)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 31"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(18.75 27.051)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 32"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(10.254 18.555)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 33"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(10.254 27.051)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 34"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(10.254 35.547)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 35"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(18.75 35.547)"
+            fill={color}
+          />
+          <Circle
+            data-name="Ellipse 36"
+            cx={1.953}
+            cy={1.953}
+            r={1.953}
+            transform="translate(18.75 18.555)"
+            fill={color}
+          />
+        </G>
+      </G>
+    </G>
+  </Svg>
+)

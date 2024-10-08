@@ -7,6 +7,10 @@ import styles from './styles';
 import routes from '../../utils/routes';
 import AddRecord from '../../components/AddRecord';
 import CustomButton from '../../components/customButton';
+import CalendarInput from '../../components/CalendarInput';
+import Input from '../../components/Input';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment'
 
 
 const AddRecordScreen = ({ navigation }) => {
@@ -15,7 +19,22 @@ const AddRecordScreen = ({ navigation }) => {
     const [diagnosis, setDiagnosis] = useState('');
     const [prescriptions, setPrescriptions] = useState('');
     const [followUpPlan, setFollowUpPlan] = useState('');
-   
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+       // console.warn("A date has been picked: ", date);
+        setAppointmentDate(moment(date).format('MM/DD/YYYY'))
+        hideDatePicker();
+
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -26,51 +45,47 @@ const AddRecordScreen = ({ navigation }) => {
                 <Text style={styles.headerText}>Add New Record</Text>
                 <Text style={styles.notificationIcon}></Text>
             </View>
-            <View style={{ paddingHorizontal: 16, }}>
-                <Text style={styles.label}>Appointment Date</Text>
+            <View style={{ paddingHorizontal: 16, marginTop: 25 }}>
+                <CalendarInput
+                    lable={"Appointment Date"}
+                    value={appointmentDate}
+                    containerStyle={{ marginBottom: 15 }}
+                    onPress={showDatePicker} />
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                />
+                <Input
+                    lable={"Doctor's Notes"}
+                    Placeholder={"Enter doctor's notes"}
+                    containerStyle={{ marginBottom: 15 }}
+                    OnPress
+                    Value
+                />
+                <Input
+                    lable={"Diagnosis"}
+                    Placeholder={"Enter diagnosis"}
+                    containerStyle={{ marginBottom: 15 }}
+                />
+                <Input
+                    lable={"Prescriptions"}
+                    Placeholder={"Enter prescriptions"}
+                    containerStyle={{ marginBottom: 15 }}
 
-                <AddRecord
-                onPress={()=>{setAppointmentDate}}
-                text={"Enter appointment date"}
-                Value={appointmentDate}
                 />
-              
-
-                <Text style={styles.label}>Doctor's Notes</Text>
-                <AddRecord
-                onPress={()=>{setDoctorNotes}}
-                text={"Enter doctor's notes"}
-                Value={doctorNotes}
+                <Input
+                    lable={"Follow-Up Plan"}
+                    Placeholder={"Enter follow-up plan"}
+                    containerStyle={{ marginBottom: 15 }}
                 />
-               
-                <Text style={styles.label}>Diagnosis</Text>
-                <AddRecord
-                onPress={()=>{setDiagnosis}}
-                text={"Enter diagnosis"}
-                Value={diagnosis}
-                />
-
-                <Text style={styles.label}>Prescriptions</Text>
-                <AddRecord
-                onPress={()=>{setPrescriptions}}
-                text={"Enter prescriptions"}
-                Value={prescriptions}
-                />
-               
-
-                <Text style={styles.label}>Follow-Up Plan</Text>
-                <AddRecord
-                onPress={()=>{setFollowUpPlan}}
-                text={"Enter follow-up plan"}
-                Value={followUpPlan}
-                />
-              
             </View>
             <CustomButton
                 text={'Add Record'}
                 containerStyle={styles.buttonStyle}
                 onPress={() => { console.log('test') }}
-              />
+            />
         </SafeAreaView>
     );
 }

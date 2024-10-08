@@ -30,21 +30,21 @@ export default function AppointmentsToday({ navigation }) {
             });
     }, [])
 
-  
+
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
             onPress={() => navigation.navigate(routes.medicalrecords)}
         >
             <View style={styles.card}>
-                 <View style={styles.dateContainer}>
-                   <Image
-            source={{
-                uri: item.profilePicture,
-              }}
-            style={styles.imageStyle}
-            />
-                </View> 
+                <View style={styles.dateContainer}>
+                    <Image
+                        source={{
+                            uri: item.profilePicture,
+                        }}
+                        style={styles.imageStyle}
+                    />
+                </View>
                 <View style={styles.recordContent}>
                     <Text style={styles.recordSubtitle}>{item.name}</Text>
                 </View>
