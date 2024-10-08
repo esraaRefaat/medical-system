@@ -3,6 +3,8 @@ import authReducer from "./slices/authSlice";
 import forgetPasswordReducer from "./slices/forgetpassword";
 import PasswordReducer from "./slices/setPassword";
 import putWithTokenReducer from "./slices/putWithTokenSlice.js";
+import deleteWithTokenReducer from "./slices/deleteWithTokenSlice.js";
+
 import MedicalRecordReducer from "./slices/getMedicalRecordSlice.js"
 import AppointmentsReducer from "./slices/appointmentsSlice.js"
 
@@ -14,7 +16,9 @@ const store = configureStore({
         authPasswerd: PasswordReducer,
         putWithToken: putWithTokenReducer,
         getmedicalrecord: MedicalRecordReducer,
-        appointments: AppointmentsReducer
+        appointments: AppointmentsReducer,
+        deleteWithToken: deleteWithTokenReducer,
+        getmedicalrecord: MedicalRecordReducer
     }
 })
 
