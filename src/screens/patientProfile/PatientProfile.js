@@ -1,43 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import { signOutAction } from "../../redux/actions/authActions";
 import routes from "../../utils/routes";
+import moment from "moment";
+import axios from "axios";
 
-const ProfilePage = () => {
+const PatientProfile = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.auth);
+  const [userData, setuserData] = useState("");
+  // const id = user.user_id;
 
   const handleSignOut = () => {
-    dispatch(signOutAction());
-    navigation.navigate(routes.login); // Navigate to login after sign out
+    navigation.navigate(routes.login);
   };
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get(
+        `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
+      );
+      setuserData(res.data.document[0]);
+      console.log(res.data.document[0]);
+    } catch (error) {
+      console.error("Error fetching doctor data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [user]);
 
   return (
     <View style={styles.container}>
-      {/* Cover Photo */}
       <Image
-        source={require("../../src/assets/cover-photo.jpg")} // Replace with your cover image
+        source={require("../../assets/cover1.png")}
         style={styles.coverPhoto}
         resizeMode="cover"
+        image
+        sour
       />
 
-      {/* Profile Picture */}
       <View style={styles.profilePicContainer}>
         <Image
-          source={require("../../src/assets/5.png")}
+          source={{ uri: userData.profilePicture }}
           style={styles.profilePic}
           resizeMode="cover"
         />
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.name}>{user?.name || "Doctor Name"}</Text>
-        <Text style={styles.email}>{user?.email || "doctor@example.com"}</Text>
+        <Text style={styles.name}>{userData?.name || "Doctor Name"}</Text>
+        <Text style={styles.email}>
+          {userData?.email || "doctor@example.com"}
+        </Text>
+        {/* Display Joined Date */}
+        <Text style={styles.joinedDate}>
+          Joined: {moment(userData?.createdAt).format("MMMM DD, YYYY")}
+        </Text>
+      </View>
 
+      {/* Sign Out Button */}
+      <View style={styles.bottomContainer}>
         <TouchableOpacity style={styles.button} onPress={handleSignOut}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </TouchableOpacity>
@@ -58,13 +82,14 @@ const styles = StyleSheet.create({
   profilePicContainer: {
     alignSelf: "center",
     position: "absolute",
-    top: 150, // Adjust based on the cover photo
+    top: 150,
     width: 120,
     height: 120,
     borderRadius: 60,
     overflow: "hidden",
     borderWidth: 4,
     borderColor: "#fff",
+    backgroundColor: "white",
   },
   profilePic: {
     width: "100%",
@@ -84,26 +109,38 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 16,
     color: "#7f8c8d",
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+  joinedDate: {
+    fontSize: 14,
+    color: "#95a5a6",
+    marginTop: 10,
+  },
+  bottomContainer: {
+    flex: 1,
+    justifyContent: "flex-end", // Move the button to the bottom
+    width: "100%",
+    paddingBottom: 30, // Adjust as needed
+    paddingHorizontal: 20,
   },
   button: {
     backgroundColor: "#254EDB",
     paddingVertical: 12,
-    paddingHorizontal: 25,
+    width: "100%",
     borderRadius: 30,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 5,
     elevation: 3,
-    marginTop: 20,
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "600",
+    textAlign: "center",
   },
 });
 
-export default ProfilePage;
+export default PatientProfile;
 

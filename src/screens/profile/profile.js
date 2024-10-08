@@ -66,16 +66,14 @@ const Profile = ({ route }) => {
   const { user } = useSelector((state) => state.auth);
 
   const id = route?.params?.id || user.user_id;
-  const [doctorData, setdoctorData] = useState(null);
+  const [doctorData, setDoctorData] = useState(null);
   const navigation = useNavigation();
 
   const fetchDoctor = async () => {
     try {
-      console.log(id);
       let endpoint = `users/${id}`;
       const res = await axios.get(endpoint);
-      setdoctorData(res.data.document);
-      console.log(res.data.document);
+      setDoctorData(res.data.document[0]);
     } catch (error) {
       console.error("Error fetching doctor data:", error);
     }
@@ -86,27 +84,26 @@ const Profile = ({ route }) => {
   }, [id]);
 
   const handleBookAppointment = () => {
-    console.log("Book Appointment clicked!");
     navigation.navigate(routes.confirmAppointment, { doctorId: id });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.innerContainer}>
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          {doctorData ? (
-            <>
-              <ProfileHeader doctor={doctorData1} />
-              <RatingComponent reviews={reviews} />
-            </>
-          ) : (
-            <Text>Loading...</Text> // Show a loading state until the data is fetched
-          )}
-        </ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        {doctorData ? (
+          <>
+            <ProfileHeader doctor={doctorData} />
+            <RatingComponent reviews={reviews} />
+          </>
+        ) : (
+          <Text>Loading...</Text>
+        )}
+      </ScrollView>
+      {doctorData?.role === "patient" && (
         <Pressable style={styles.bookButton} onPress={handleBookAppointment}>
           <Text style={styles.buttonText}>Book Appointment</Text>
         </Pressable>
-      </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -115,22 +112,23 @@ export default Profile;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  innerContainer: {
-    flex: 1,
-    justifyContent: "space-between", // Ensures space is distributed
+    flex: 1, // Makes SafeAreaView take up the entire screen
   },
   scrollViewContent: {
-    paddingBottom: 80, // Extra padding to prevent content being hidden under the button
+    flexGrow: 1, // Ensures the ScrollView content takes up all available space
+    paddingBottom: 16,
   },
   bookButton: {
-    backgroundColor: "#254EDB", // Change to your desired button color
+    backgroundColor: "#254EDB",
     padding: 16,
     alignItems: "center",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   buttonText: {
-    color: "#FFFFFF", // Text color
+    color: "#FFFFFF",
     fontSize: 16,
   },
 });
