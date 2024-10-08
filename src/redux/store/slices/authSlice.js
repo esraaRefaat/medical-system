@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export const authAction = createAsyncThunk(
   "auth",
@@ -28,7 +28,6 @@ const authSlice = createSlice({
         state.error = false;
       })
       .addCase(authAction.fulfilled, (state, action) => {
-        AsyncStorage.setItem("token", action.payload.token);
         state.isLoading = false;
         state.user = action.payload;
       })

@@ -26,6 +26,8 @@ import CreateAppointment from "../screens/Appoinments/CreateAppointment";
 import UpcomingAppointment from "../screens/UpcomingAppointments/UpcomingAppointment.js";
 import ApproveDoctorsList from "../screens/AdminUsersLists/approveDoctorsList.js";
 import AdminUserDetails from "../screens/AdminUsersLists/adminUserDetails.js";
+import BookedAppointments from "../screens/BookedAppointments/BookedAppointments.js";
+import SubmitRating from "../screens/Rating/SubmitRating.jsx";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -80,8 +82,8 @@ const Root = () => {
       <stack.Screen name={routes.UpcomingAppointment} component={UpcomingAppointment} />
       <stack.Screen name={routes.ApproveDoctorsList} component={ApproveDoctorsList} />
       <stack.Screen name={routes.AdminUserDetails} component={AdminUserDetails} />
-
-
+      <stack.Screen name={routes.BookedAppointments} component={BookedAppointments} />
+      <stack.Screen name={routes.rating} component={SubmitRating} />
 
     </stack.Navigator>
   );

@@ -7,6 +7,7 @@ import putDataWithTokenReducer from "./slices/putDataWithTokenSlice.js";
 import deleteWithTokenReducer from "./slices/deleteWithTokenSlice.js";
 import MedicalRecordReducer from "./slices/getMedicalRecordSlice.js"
 import AppointmentsReducer from "./slices/appointmentsSlice.js"
+import AppointmetStatusReducer from "./slices/AppointmetStatus.js"
 
 
 const store = configureStore({
@@ -19,7 +20,8 @@ const store = configureStore({
         getmedicalrecord: MedicalRecordReducer,
         appointments: AppointmentsReducer,
         deleteWithToken: deleteWithTokenReducer,
-        getmedicalrecord: MedicalRecordReducer
+        getmedicalrecord: MedicalRecordReducer,
+        AppointmetStatus: AppointmetStatusReducer
     }
 })
 

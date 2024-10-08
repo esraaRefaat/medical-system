@@ -17,7 +17,7 @@ const MidPatient = () => {
       <Pressable
         style={styles.card}
         onPress={() => {
-          navigation.navigate(routes.confirmAppointment);
+          navigation.navigate(routes.BookedAppointments);
         }}
       >
         <Image

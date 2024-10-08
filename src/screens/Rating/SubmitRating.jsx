@@ -8,6 +8,10 @@ import TouchableButton from '../../components/TouchableButton';
 import axios from 'axios';
 import { useNavigation } from "@react-navigation/native";
 import routes from '../../utils/routes';
+import { useSelector } from 'react-redux';
+import { useRoute } from '@react-navigation/native';
+import { AppointmetStatusAction } from "../../redux/store/slices/AppointmetStatus";
+import { useDispatch } from "react-redux";
 
 axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
 
@@ -15,16 +19,17 @@ axios.defaults.baseURL = 'https://medical-system-server.onrender.com/api/v1'
 
 const SubmitRating = () => {
     const navigation = useNavigation();
-
+    const { user } = useSelector((state) => state.auth);
     const [description, setDescription] = useState('');
     const [stars, setStars] = useState('');
-
+    const route = useRoute()
+    const dispatch = useDispatch();
 
     const handleAddReview = async () => {
         try {
             if (description.trim() && stars) {
-                const doctor = '6704799764211d519b194d9a';
-                const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAwM2Y0YjczNjIyODkzNjgzNGQ3YTQiLCJyb2xlIjoicGF0aWVudCIsImlhdCI6MTcyODM0NjM1NX0.e9ENFoB_0wjDLgJfbC0h03tJXEfukSWj3ZAKbrsgLRk'
+                const doctor = route.params.docId;
+                const token = user.token
 
                 const res = await axios.post('/reviews', {
                     description,
@@ -35,8 +40,20 @@ const SubmitRating = () => {
                         token
                     }
                 });
-                setDescription('')
-                navigation.navigate(routes.home);
+                dispatch(AppointmetStatusAction({
+                    url: `https://medical-system-server.onrender.com/api/v1/appointments/${route.params.apponId}`,
+                    token: user.token
+                }))
+                    .unwrap()
+                    .then((response) => {
+                        console.log('jhhjhjhjhjhjhk', response)
+                        setDescription('')
+                        navigation.navigate(routes.home);
+                    })
+                    .catch((error) => {
+                        console.log('err', error.error)
+                    });
+
 
             } else {
                 Alert.alert('You Should add both description and rating!');

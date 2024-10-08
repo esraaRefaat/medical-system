@@ -25,6 +25,8 @@ const routes = Object.freeze({
   UpcomingAppointment:'UpcomingAppointment',
   ApproveDoctorsList:"ApproveDoctorsList",
   AdminUserDetails:"AdminUserDetails",
+  BookedAppointments:"BookedAppointments",
+  rating:'rating'
 
 });
 
