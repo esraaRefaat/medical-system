@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, ViewComponent } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HomeHeader from "../../components/home/Header";
@@ -7,23 +7,33 @@ import MidPatient from "../../components/home/midPatient";
 import MidDoc from "../../components/home/midDoctor";
 import { useSelector } from "react-redux";
 import MidAdmin from "../../components/home/midAdmin";
+import axios from "axios";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   first
+  const [userData, setuserData] = useState("");
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get(
+        `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
+      );
+      setuserData(res.data.document[0]);
+      console.log(res.data.document[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   return () => {
-  //     second
-  //   }
-  // }, [third])
+  useEffect(() => {
+    fetchUserData();
+  }, [user]);
 
   console.log(user);
   return (
     <SafeAreaView style={[{ flex: 1 }]}>
-      <HomeHeader></HomeHeader>
+      <HomeHeader user={userData}></HomeHeader>
       {user.user_role == "patient" && <MidPatient></MidPatient>}
-      {user.user_role == "doctor" && <MidDoc></MidDoc>}
+      {user.user_role == "doctor" && <MidDoc user={userData}></MidDoc>}
       {user.user_role == "admin" && <MidAdmin></MidAdmin>}
 
       <News></News>

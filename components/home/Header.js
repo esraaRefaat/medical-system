@@ -3,7 +3,7 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SearchInput from "./searchInput";
 
-const HomeHeader = () => {
+const HomeHeader = ({ user }) => {
   return (
     <View style={styles.container}>
       <View
@@ -14,7 +14,7 @@ const HomeHeader = () => {
         }}
       >
         <View>
-          <Text style={styles.hiText}>Hi Dwiky!</Text>
+          <Text style={styles.hiText}>Hi {user.name}!</Text>
           <Text style={styles.mayText}>
             May you always be in a good condition
           </Text>
