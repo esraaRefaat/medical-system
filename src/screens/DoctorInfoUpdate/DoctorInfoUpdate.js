@@ -103,7 +103,7 @@ const DoctorInfoUpdateSchema = Yup.object().shape({
 const DoctorInfoUpdateView = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token); // Ensure correct path
+  const { user } = useSelector((state) => state.auth);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -215,14 +215,12 @@ const DoctorInfoUpdateView = () => {
           putWithTokenAction({
             userData: formData,
             url: APP_BASE_URL + UPDATE_DR_INFO,
-            token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzAyYzg5YTYzMjc0MmIxMTk0MmVjZDkiLCJyb2xlIjoiZG9jdG9yIiwiZW1haWwiOiJoYWR5NDg5NGZkQGdtYWlsLmNvbSIsImlhdCI6MTcyODIzNTY3NH0.xgu1n4u0PFj129avgs-eBUCVCoVbionyedPA2W7fBqk", // Use dynamic token
-          })
+            token:user.token          })
         ).unwrap();
 
         if (response) {
           Alert.alert("Success", "Your info has been saved successfully");
-          navigation.navigate(routes.mainapp);
+          navigation.navigate(routes.home);
         }
       } catch (error) {
         if (error.response) {
@@ -242,7 +240,7 @@ const DoctorInfoUpdateView = () => {
         setLoading(false); // Set loading to false after request completes
       }
     },
-    [dispatch, navigation, token]
+    [dispatch, navigation,user]
   );
 
   return (

@@ -17,8 +17,11 @@ import { APP_BASE_URL, Add_New_Record } from "@env";
 import { newRecordAction } from "../../redux/store/slices/addNewRecord";
 
 const AddRecordScreen = ({ navigation }) => {
-    const route = useRoute()
-    console.log('id', route.params.patientId)
+    const route = useRoute();
+    const dispatch = useDispatch();
+
+    const { user } = useSelector((state) => state.auth);
+
     const [appointmentDate, setAppointmentDate] = useState('');
     const [doctorNotes, setDoctorNotes] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
@@ -78,13 +81,22 @@ const AddRecordScreen = ({ navigation }) => {
                 text={'Add Record'}
                 containerStyle={styles.buttonStyle}
                 onPress={() => {
+
+                    const url=APP_BASE_URL + Add_New_Record;
+                    const userData = {
+                        "patientId": route.params.patientId,
+                        "appointmentDate": "1672531200",
+                        "doctorNotes": doctorNotes,
+                        "diagnosis": diagnosis,
+                        "prescriptions": prescriptions,
+                        "followUpPlan": followUpPlan
+                    }
+
+
                     dispatch(newRecordAction({
-                        url: APP_BASE_URL + Add_New_Record,
-                        doctorNotes: doctorNotes,
-                        diagnosis: diagnosis,
-                        prescriptions: prescriptions,
-                        followUpPlan: followUpPlan,
-                        id: route.params.patientId
+                        url: url,
+                        userData,
+                        token: user.token
                     }))
                         .unwrap()
                         .then((response) => {
