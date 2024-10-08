@@ -6,6 +6,7 @@ import RatingComponent from "../../components/Profile/rating";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../utils/routes";
+import { useSelector } from "react-redux";
 const doctorData1 = {
   name: "Dr. Hady",
   speciality: "Cardiologist",
@@ -39,7 +40,7 @@ const reviews = [
     review: "The wait time was a bit long, but the consultation was thorough.",
   },
   {
-    profilePicture: null, // No profile picture
+    profilePicture: null,
     name: "David Brown",
     rating: 2,
     date: "2024-09-15",
@@ -62,7 +63,9 @@ const reviews = [
 ];
 
 const Profile = ({ route }) => {
-  const { id } = route.params;
+  const { user } = useSelector((state) => state.auth);
+
+  const id = route?.params?.id || user.user_id;
   const [doctorData, setdoctorData] = useState(null);
   const navigation = useNavigation();
 
