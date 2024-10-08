@@ -1,24 +1,41 @@
 import {
   Image,
   Linking,
+  Modal,
   Pressable,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../src/utils/routes";
 
 const MidAdmin = () => {
   const navigation = useNavigation();
+
+    // State to manage modal visibility
+    const [modalVisible, setModalVisible] = useState(false);
+
+    // Function to handle option selection
+    const handleOptionSelect = (role) => {
+      setModalVisible(false);
+
+      navigation.navigate(routes.alluserslist, { role: role });
+
+
+      // Add your navigation logic here based on the option selected
+    };
+
+
   return (
     <View style={styles.container}>
       <View style={styles.rowcontainer}>
         <Pressable
           style={[styles.card, { backgroundColor: "#EFE4FF" }]}
           onPress={() => {
-            navigation.navigate(routes.onboarding);
+            // navigation.navigate(routes.onboarding);
           }}
         >
           <Image
@@ -26,16 +43,25 @@ const MidAdmin = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: "500" }}>
-            Set your Appointments
+            App Statistics:
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            Set your availability as you see fit
+            
+          </Text>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
+            Doctors:
+          </Text>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
+            Patients:
+          </Text>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
+            Admins:
           </Text>
         </Pressable>
         <Pressable
           style={[styles.card, { backgroundColor: "#EDFCF2" }]}
           onPress={() => {
-            navigation.navigate(routes.onboarding);
+            navigation.navigate(routes.ApproveDoctorsList);
           }}
         >
           <Image
@@ -43,10 +69,13 @@ const MidAdmin = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: "500" }}>
-            View your Appointments
+            Approve Doctors
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            see your upcoming appointments
+
+          </Text>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
+            Verify and Approve Doctors Accounts 
           </Text>
         </Pressable>
       </View>
@@ -54,7 +83,7 @@ const MidAdmin = () => {
         <Pressable
           style={[styles.card, { backgroundColor: "#FEF6EE" }]}
           onPress={() => {
-            navigation.navigate(routes.onboarding);
+            // navigation.navigate(routes.onboarding);
           }}
         >
           <Image
@@ -62,16 +91,19 @@ const MidAdmin = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: "500" }}>
-            Patient Medical Record
+            Create Admin
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            view your patient's medical records
+
+          </Text>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
+            Create New Admin Account
           </Text>
         </Pressable>
         <Pressable
           style={[styles.card, { backgroundColor: "#FEF3F2" }]}
           onPress={() => {
-            navigation.navigate(routes.onboarding);
+            setModalVisible(true);
           }}
         >
           <Image
@@ -79,13 +111,47 @@ const MidAdmin = () => {
             style={{ marginBottom: 15 }}
           ></Image>
           <Text style={{ fontSize: 18, fontWeight: "500" }}>
-            Today's Appointments: 0
+            Delete Users
           </Text>
           <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-            check your today's appointments
+
+          </Text>
+          <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
+            Search and Delete Users
           </Text>
         </Pressable>
       </View>
+
+            {/* Modal for Options */}
+            <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Choose Type of User</Text>
+            <TouchableOpacity onPress={() => handleOptionSelect('patient')}>
+              <Text style={styles.optionText}>Patient</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleOptionSelect('doctor')}>
+              <Text style={styles.optionText}>Doctor</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleOptionSelect('admin')}>
+              <Text style={styles.optionText}>Admin</Text>
+            </TouchableOpacity>
+            <Pressable
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>Cancel</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -110,6 +176,39 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 5,
     flex: 1,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Dim background
+  },
+  modalContent: {
+    width: "80%",
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 15,
+  },
+  optionText: {
+    fontSize: 16,
+    color: "#007BFF",
+    marginVertical: 10,
+  },
+  closeButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: "#EDFCF2",
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    fontSize: 16,
+    color: "#000",
   },
 });
 

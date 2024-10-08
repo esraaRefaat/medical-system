@@ -5,13 +5,14 @@ import Star from "./Icons/Star";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../utils/routes";
 
-export default function DoctorCardWithDelete({
+export default function DoctorCardWithApprove({
   avatar,
   fullName,
   specialization,
 
   id,
-  onDelete, // onDelete prop to handle the delete action
+  onApprove, // onApprove prop to handle the Approve action
+  onReject
 }) {
   const navigation = useNavigation();
 
@@ -29,8 +30,11 @@ export default function DoctorCardWithDelete({
         <Text style={styles.boldText}>Dr. {fullName}</Text>
         <Text style={styles.grayText}>{specialization}</Text>
       </View>
-      <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
-        <Text style={styles.deleteButtonText}>Delete</Text> 
+      <TouchableOpacity style={styles.approveButton} onPress={onApprove}>
+        <Text style={styles.approveButtonText}>Approve</Text> 
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.rejectButton} onPress={onReject}>
+        <Text style={styles.approveButtonText}>Reject</Text> 
       </TouchableOpacity>
     </Pressable>
   );
@@ -65,7 +69,15 @@ const styles = StyleSheet.create({
     color: "gray",
     fontSize: 12, // Reduced font size
   },
-  deleteButton: {
+  approveButton: {
+    backgroundColor: "green",
+    paddingVertical: 8, // Adjust padding for less height
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rejectButton: {
     backgroundColor: "red",
     paddingVertical: 8, // Adjust padding for less height
     paddingHorizontal: 10,
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  deleteButtonText: {
+  approveButtonText: {
     color: "white",
     fontWeight: "bold",
     fontSize: 14, // Adjust font size if needed
