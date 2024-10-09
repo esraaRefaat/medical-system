@@ -40,7 +40,6 @@ export default function BookedAppointments({ navigation }) {
         console.error(err);
         setError("Failed to fetch user data.");
       } finally {
-        setLoading(false);
       }
     };
 
@@ -68,21 +67,22 @@ export default function BookedAppointments({ navigation }) {
           <View style={styles.dateContainer}>
             <TouchableOpacity
               onPress={() => {
+                
                 navigation.navigate(routes.rating, {
                   docId: item.doctor,
                   apponId: item._id,
                 });
               }}
               style={{
-                width: 48,
+                width: 80,
                 height: 48,
-                backgroundColor: PRIMARY,
+                backgroundColor: "yellow",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: 5,
               }}
             >
-              <Text style={{ color: "#fff" }}>review</Text>
+              <Text style={{ color: "black" }}>review</Text>
             </TouchableOpacity>
           </View>
         )}

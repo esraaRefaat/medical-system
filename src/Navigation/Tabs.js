@@ -21,7 +21,7 @@ const Tabs = () => {
   return (
     <tab.Navigator screenOptions={{ headerShown: false }}>
       <tab.Screen
-        name={routes.home}
+        name={"Home"}
         component={Home}
         options={{
           tabBarIcon: () => <AntDesign name="home" size={24} color="black" />,
@@ -30,7 +30,7 @@ const Tabs = () => {
 
       {user.user_role == "doctor" && (
         <tab.Screen
-          name={routes.appointmentstoday}
+          name={"Appointments Today"}
           component={AppointmentsToday}
           options={{
             tabBarIcon: () => (
@@ -41,7 +41,7 @@ const Tabs = () => {
       )}
       {user.user_role == "patient" && (
         <tab.Screen
-          name={routes.BookedAppointments}
+          name={"Booked Appointments"}
           component={BookedAppointments}
           options={{
             tabBarIcon: () => (
@@ -53,7 +53,7 @@ const Tabs = () => {
 
       {user.user_role !== "doctor" && (
         <tab.Screen
-          name={routes.PatientProfile}
+          name={"Profile"}
           component={PatientProfile}
           options={{
             tabBarIcon: () => <Feather name="user" size={24} color="black" />,
@@ -62,7 +62,7 @@ const Tabs = () => {
       )}
       {user.user_role == "doctor" && (
         <tab.Screen
-          name={routes.Profile}
+          name={"Profile"}
           component={Profile}
           options={{
             tabBarIcon: () => <Feather name="user" size={24} color="black" />,

@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
@@ -30,7 +30,7 @@ const SubmitRating = () => {
             if (description.trim() && stars) {
                 const doctor = route.params.docId;
                 const token = user.token
-
+                
                 const res = await axios.post('/reviews', {
                     description,
                     stars,
@@ -46,9 +46,11 @@ const SubmitRating = () => {
                 }))
                     .unwrap()
                     .then((response) => {
-                        console.log('jhhjhjhjhjhjhk', response)
                         setDescription('')
-                        navigation.navigate(routes.home);
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: routes.mainapp }],
+                          });
                     })
                     .catch((error) => {
                         console.log('err', error.error)
@@ -65,13 +67,14 @@ const SubmitRating = () => {
     };
 
 
-    useEffect(() => {
-        NavigationBar.setBackgroundColorAsync('white');
-    }, [])
+    // useEffect(() => {
+    //     NavigationBar.setBackgroundColorAsync('white');
+    // }, [])
 
 
     return (
         <SafeAreaView>
+            <ScrollView>
             <View style={styles.container}>
                 <View style={styles.topSection}>
                     <Text style={styles.h1}>Share with us your experiment</Text>
@@ -83,6 +86,7 @@ const SubmitRating = () => {
                 </View>
             </View>
             <StatusBar style='dark' />
+            </ScrollView>
         </SafeAreaView>
     )
 }
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 16,
         gap: 32,
-        height: '100%',
+        height: 500,
     },
     h1: {
         fontSize: 24,

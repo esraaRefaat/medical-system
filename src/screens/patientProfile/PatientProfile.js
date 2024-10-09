@@ -25,7 +25,6 @@ const PatientProfile = () => {
         `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
       );
       setuserData(res.data.document[0]);
-      console.log(res.data.document[0]);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }

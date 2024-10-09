@@ -10,7 +10,6 @@ export default function DoctorCard({
   fullName,
   specialization,
   fees,
-  rating,
   id,
 }) {
   const navigation = useNavigation();
@@ -30,10 +29,7 @@ export default function DoctorCard({
         <Text style={styles.grayText}>{specialization}</Text>
         <Text style={styles.boldText}>{fees} $</Text>
       </View>
-      <View style={styles.rating}>
-        <Star />
-        <Text style={styles.grayText}>{rating}</Text>
-      </View>
+
     </Pressable>
   );
 }

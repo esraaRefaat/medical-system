@@ -18,7 +18,6 @@ const Home = () => {
         `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
       );
       setuserData(res.data.document[0]);
-      console.log(res.data.document[0]);
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +27,6 @@ const Home = () => {
     fetchUserData();
   }, [user]);
 
-  console.log(user);
   return (
     <SafeAreaView style={[{ flex: 1 }]}>
       <HomeHeader user={userData}></HomeHeader>

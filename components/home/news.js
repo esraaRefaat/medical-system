@@ -69,7 +69,7 @@ const News = () => {
                 lineHeight: 24,
               }}
             >
-              Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
+              Eating More Vegetables Reduces Cancer Risk by Nearly 30%
             </Text>
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
               <Text style={{ fontSize: 12, fontWeight: "400", color: "white" }}>
@@ -98,7 +98,7 @@ const News = () => {
                 lineHeight: 24,
               }}
             >
-              Quitting Smoking Cuts Heart Attack Risk by Nearly 50%
+              Exercising Daily Lowers Risk of Diabetes by     Over 40%
             </Text>
             <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
               <Text style={{ fontSize: 12, fontWeight: "400", color: "white" }}>

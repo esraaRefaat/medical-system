@@ -28,6 +28,7 @@ import BookedAppointments from "../screens/BookedAppointments/BookedAppointments
 import SubmitRating from "../screens/Rating/SubmitRating.jsx";
 import PatientProfile from "../screens/patientProfile/PatientProfile";
 import AdminSignUpView from "../screens/AdminUsersLists/AdminSignUp/AdminSignUpView.js";
+import PatientMedicalRecords from "../screens/MedicalRecords/PatientMedicalRecords.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -103,6 +104,10 @@ const Root = () => {
 <stack.Screen
         name={routes.AdminSignUpView}
         component={AdminSignUpView}
+      ></stack.Screen>
+<stack.Screen
+        name={routes.PatientMedicalRecords}
+        component={PatientMedicalRecords}
       ></stack.Screen>
 
     </stack.Navigator>

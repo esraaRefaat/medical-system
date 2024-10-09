@@ -33,6 +33,7 @@ const routes = Object.freeze({
   AdminUserDetails: "AdminUserDetails",
   PatientProfile: "PatientProfile",
   AdminSignUpView:"AdminSignUpView",
+  PatientMedicalRecords:"PatientMedicalRecords",
 });
 
 export default routes;
