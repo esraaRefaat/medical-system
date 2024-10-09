@@ -25,7 +25,6 @@ export default function PatientMedicalRecords({ navigation }) {
         }))
             .unwrap()
             .then((response) => {
-                console.log(response)
                 setRecords(response.records)
             })
             .catch((error) => {

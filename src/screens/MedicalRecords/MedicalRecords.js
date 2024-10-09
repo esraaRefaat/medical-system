@@ -15,7 +15,6 @@ export default function MedicalRecords({ navigation }) {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
     const route = useRoute()
-    console.log('id', route.params.patientId)
 
 
     useEffect(() => {
@@ -26,7 +25,6 @@ export default function MedicalRecords({ navigation }) {
         }))
             .unwrap()
             .then((response) => {
-                console.log(response)
                 setRecords(response.records)
             })
             .catch((error) => {
@@ -78,7 +76,7 @@ export default function MedicalRecords({ navigation }) {
             <FlatList
                 data={records}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index.toString()}
                 ListEmptyComponent={<EmptyListComponent />}
                 style={styles.list}
             />
