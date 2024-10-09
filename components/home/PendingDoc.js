@@ -7,7 +7,7 @@ const VerificationPending = () => {
   const navigation = useNavigation();
 
   const handleGoHome = () => {
-    navigation.navigate(routes.home); // Navigate to the home page or dashboard
+    navigation.navigate(routes.mainapp); // Navigate to the home page or dashboard
   };
 
   return (

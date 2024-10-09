@@ -53,7 +53,7 @@ const ConfirmAppointment = () => {
           }
         );
         console.log(timeId);
-        navigation.navigate(routes.home);
+        navigation.navigate(routes.mainapp);
       } else {
         Alert.alert("Please Choose Specific Date And Time");
       }

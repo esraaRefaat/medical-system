@@ -47,7 +47,7 @@ const CreateAppointment = () => {
             );
             await new Promise((resolve) => {
               setTimeout(() => resolve, 3000);
-              navigation.navigate(routes.home);
+              navigation.navigate(routes.mainapp);
             });
           });
         });
@@ -67,6 +67,7 @@ const CreateAppointment = () => {
 
   return (
     <SafeAreaView>
+      <ScrollView>
       <View style={styles.container}>
         <View style={styles.topSection}>
           <Text style={styles.h1}>Which Time You Will be Available ?</Text>
@@ -75,7 +76,6 @@ const CreateAppointment = () => {
             them
           </Text>
         </View>
-        <ScrollView>
           <Calendar
             markingType={"period"}
             markedDates={{
@@ -129,8 +129,7 @@ const CreateAppointment = () => {
               <TimePicker time={endTime} setTime={setEndTime} />
             </View>
           </View>
-        </ScrollView>
-        <View style={styles.bottomAction}>
+          <View style={styles.bottomAction}>
           <TouchableButton
             onPress={() => {
               confirmAppointments();
@@ -138,9 +137,11 @@ const CreateAppointment = () => {
             title={"Create Appointments"}
           />
         </View>
+       
       </View>
 
       <StatusBar style="dark" />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     gap: 32,
-    height: "100%",
+    height: 920,
   },
   h1: {
     fontSize: 24,

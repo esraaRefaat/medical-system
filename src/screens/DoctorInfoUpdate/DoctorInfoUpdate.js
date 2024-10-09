@@ -220,7 +220,7 @@ const DoctorInfoUpdateView = () => {
 
         if (response) {
           Alert.alert("Success", "Your info has been saved successfully");
-          navigation.navigate(routes.home);
+          navigation.navigate(routes.mainapp);
         }
       } catch (error) {
         if (error.response) {
