@@ -22,7 +22,6 @@ const AddRecordScreen = ({ navigation }) => {
 
     const { user } = useSelector((state) => state.auth);
 
-    const [appointmentDate, setAppointmentDate] = useState('');
     const [doctorNotes, setDoctorNotes] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [prescriptions, setPrescriptions] = useState('');
@@ -85,7 +84,7 @@ const AddRecordScreen = ({ navigation }) => {
                     const url=APP_BASE_URL + Add_New_Record;
                     const userData = {
                         "patientId": route.params.patientId,
-                        "appointmentDate": "1672531200",
+                        "appointmentDate": String(Math.floor(Date.now() / 1000)),
                         "doctorNotes": doctorNotes,
                         "diagnosis": diagnosis,
                         "prescriptions": prescriptions,
@@ -100,7 +99,6 @@ const AddRecordScreen = ({ navigation }) => {
                     }))
                         .unwrap()
                         .then((response) => {
-                            console.log("res", response);
                             navigation.navigate(routes.medicalrecords, { patientId: route.params.patientId })
                         })
                         .catch((error) => {
