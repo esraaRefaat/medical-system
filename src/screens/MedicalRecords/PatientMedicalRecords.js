@@ -76,7 +76,7 @@ export default function PatientMedicalRecords({ navigation }) {
             <FlatList
                 data={records}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index.toString()}
                 ListEmptyComponent={<EmptyListComponent />}
                 style={styles.list}
             />
