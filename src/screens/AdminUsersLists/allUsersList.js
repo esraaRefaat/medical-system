@@ -159,7 +159,7 @@ export default function AllUsersList({ route }) {
     return showLoading ? (
       <ActivityIndicator size={50} color={solidBlue} />
     ) : (
-      <Text style={styles.endText}>✋ No More Doctors</Text>
+      <Text style={styles.endText}></Text>
     );
   }}
   ListFooterComponentStyle={

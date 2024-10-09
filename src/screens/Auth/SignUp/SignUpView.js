@@ -46,8 +46,8 @@ const SignUpView = () => {
   const [error, setError] = useState("");
   const [current, setCurrent] = useState("patient");
   const Options = [
-    { label: 'Patient', value: 'patient' },
-    { label: 'Doctor', value: 'doctor' },
+    { label: "Patient", value: "patient" },
+    { label: "Doctor", value: "doctor" },
     // { label: 'Admin', value: 'admin' },
   ];
 
@@ -55,10 +55,10 @@ const SignUpView = () => {
     dispatch(authAction({ userData: values, url: APP_BASE_URL + SIGN_UP }))
       .unwrap()
       .then((response) => {
-      //  console.log("jhhjhjhjhjhjhk", response);
-        navigation.dispatch(
-          StackActions.replace(routes.mainapp, { screen: routes.home })
-        );
+        navigation.reset({
+          index: 0,
+          routes: [{ name: routes.mainapp }],
+        });
       })
       .catch((error) => {
         //console.log(error.error)

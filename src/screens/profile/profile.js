@@ -73,7 +73,10 @@ const Profile = ({ route }) => {
   const { user } = useSelector((state) => state.auth);
 
   const handleSignOut = () => {
-    navigation.navigate(routes.login);
+    navigation.reset({
+      index: 0,
+      routes: [{ name: routes.login }],
+    });
   };
 
   const id = route?.params?.id || user.user_id;

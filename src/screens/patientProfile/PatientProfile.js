@@ -13,7 +13,10 @@ const PatientProfile = () => {
   const [userData, setuserData] = useState("");
 
   const handleSignOut = () => {
-    navigation.navigate(routes.login);
+    navigation.reset({
+      index: 0,
+      routes: [{ name: routes.login }],
+    });
   };
 
   const fetchUser = async () => {

@@ -1,3 +1,4 @@
+
 const routes = Object.freeze({
   home: "home",
   about: "about",
@@ -31,6 +32,7 @@ const routes = Object.freeze({
   ApproveDoctorsList: "ApproveDoctorsList",
   AdminUserDetails: "AdminUserDetails",
   PatientProfile: "PatientProfile",
+  AdminSignUpView:"AdminSignUpView",
 });
 
 export default routes;

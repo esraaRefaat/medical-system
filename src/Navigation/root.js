@@ -1,7 +1,5 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../screens/Home";
-import About from "../screens/About";
 import routes from "../utils/routes";
 import Tabs from "./Tabs";
 import Onboarding from "../screens/onboarding/onboarding";
@@ -29,6 +27,7 @@ import AdminUserDetails from "../screens/AdminUsersLists/adminUserDetails.js";
 import BookedAppointments from "../screens/BookedAppointments/BookedAppointments.js";
 import SubmitRating from "../screens/Rating/SubmitRating.jsx";
 import PatientProfile from "../screens/patientProfile/PatientProfile";
+import AdminSignUpView from "../screens/AdminUsersLists/AdminSignUp/AdminSignUpView.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -101,6 +100,11 @@ const Root = () => {
         name={routes.PatientProfile}
         component={PatientProfile}
       ></stack.Screen>
+<stack.Screen
+        name={routes.AdminSignUpView}
+        component={AdminSignUpView}
+      ></stack.Screen>
+
     </stack.Navigator>
   );
 };

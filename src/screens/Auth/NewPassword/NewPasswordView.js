@@ -48,7 +48,6 @@ const NewPasswordView = () => {
     dispatch(setPasswordAction({ userData: values, url: APP_BASE_URL + SET_NEW_PASSWORD }))
       .unwrap()
       .then((response) => {
-        console.log('jhhjhjhjhjhjhk', response)
         navigation.dispatch(
           StackActions.replace(routes.login)
         )

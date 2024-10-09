@@ -82,23 +82,22 @@ const AdminUserDetails = () => {
         <Text style={styles.detailTitle}>Role</Text>
         <Text style={styles.detailText}>{userData.role}</Text>
 
-        <Text style={styles.detailTitle}>Verified Doctor</Text>
-        <Text style={styles.detailText}>{userData.verifiedDoctor}</Text>
+        <Text style={styles.detailTitle}>Verified Doctor: {userData.verifiedDoctor}</Text>
 
-        <Text style={styles.detailTitle}>Bio</Text>
-        <Text style={styles.detailText}>{userData.drBio}</Text>
+        {userData.drBio&&<Text style={styles.detailTitle}>Bio</Text>}
+        {userData.drBio&&<Text style={styles.detailText}>{userData.drBio}</Text>}
 
-        <Text style={styles.detailTitle}>Location</Text>
-        <Text style={styles.detailText}>{userData.drLocation}</Text>
+        {userData.drLocation&&<Text style={styles.detailTitle}>Location</Text>}
+        {userData.drLocation&&<Text style={styles.detailText}>{userData.drLocation}</Text>}
 
-        <Text style={styles.detailTitle}>Session Fees</Text>
-        <Text style={styles.detailText}>${userData.drSessionFees}</Text>
+        {userData.drSessionFees&&<Text style={styles.detailTitle}>Session Fees</Text>}
+        {userData.drSessionFees&&<Text style={styles.detailText}>${userData.drSessionFees}</Text>}
 
-        <Text style={styles.detailTitle}>Specialties</Text>
-        <Text style={styles.detailText}>{userData.drSpecialties}</Text>
+        {userData.drSpecialties&&<Text style={styles.detailTitle}>Specialties</Text>}
+        {userData.drSpecialties&&<Text style={styles.detailText}>{userData.drSpecialties}</Text>}
 
-        <Text style={styles.detailTitle}>Working Hours</Text>
-        <Text style={styles.detailText}>{userData.drWorkingHours}</Text>
+        {userData.drWorkingHours&&<Text style={styles.detailTitle}>Working Hours</Text>}
+        {userData.drWorkingHours&&<Text style={styles.detailText}>{userData.drWorkingHours}</Text>}
 
         <Text style={styles.detailTitle}>Created At</Text>
         <Text style={styles.detailText}>{new Date(userData.createdAt).toLocaleString()}</Text>
