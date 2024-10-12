@@ -30,7 +30,7 @@ const Tabs = () => {
 
       {user.user_role == "doctor" && (
         <tab.Screen
-          name={"Appointments Today"}
+          name={"Appointments"}
           component={AppointmentsToday}
           options={{
             tabBarIcon: () => (
@@ -41,7 +41,7 @@ const Tabs = () => {
       )}
       {user.user_role == "patient" && (
         <tab.Screen
-          name={"Booked Appointments"}
+          name={"Appointments"}
           component={BookedAppointments}
           options={{
             tabBarIcon: () => (

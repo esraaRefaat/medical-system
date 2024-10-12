@@ -70,7 +70,7 @@ const LoginView = () => {
         contentContainerStyle={{ flexGrow: 1 }}
       >
         <View style={styles.backbutton}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             activeOpacity={1}
             style={styles.backbuttontouch}
             onPress={() => {
@@ -78,7 +78,7 @@ const LoginView = () => {
             }}
           >
             <BACK_Arrow />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <CustomText
           text={"Welcome Back"}

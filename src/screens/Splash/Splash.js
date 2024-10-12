@@ -9,24 +9,27 @@ const Splash = () => {
   const navigation = useNavigation();
 
   const navigateTo = () => {
-    AsyncStorage.getItem("notFirst").then((notFirst) => {
-      if (!notFirst) {
-        AsyncStorage.setItem("notFirst", "true");
-        setTimeout(function () {
-          navigation.dispatch(StackActions.replace(routes.onboarding));
-        }, 1500);
-      } else {
-        setTimeout(function () {
-          navigation.dispatch(StackActions.replace(routes.login));
-          // navigation.dispatch(
-          //   StackActions.replace(routes.medicalrecords)
-          // )
-          // navigation.dispatch(
-          //   StackActions.replace(routes.mainapp, { screen: routes.home })
-          // );
-        }, 1500);
-      }
-    });
+
+    setTimeout(function () {
+      navigation.dispatch(StackActions.replace(routes.onboarding));
+    }, 1500);
+
+    // AsyncStorage.getItem("notFirst").then((notFirst) => {
+    //   if (!notFirst) {
+    //     AsyncStorage.setItem("notFirst", "true");
+       
+    //   } else {
+    //     setTimeout(function () {
+    //       navigation.dispatch(StackActions.replace(routes.login));
+    //       // navigation.dispatch(
+    //       //   StackActions.replace(routes.medicalrecords)
+    //       // )
+    //       // navigation.dispatch(
+    //       //   StackActions.replace(routes.mainapp, { screen: routes.home })
+    //       // );
+    //     }, 3000);
+    //   }
+    // });
   };
 
   useEffect(() => {
