@@ -26,6 +26,7 @@ import CustomButton from "../../components/customButton.js";
 import CustomText from "../../components/customText.js";
 import { BACK_Arrow } from "../../assets/svgIcons.js";
 import routes from "../../utils/routes.js";
+import axios from "axios";
 
 // Define your specialties options
 const specialtiesOptions = [
@@ -105,7 +106,20 @@ const DoctorInfoUpdateView = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+    const [userData, setUserData] = useState(null);
+
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     (async () => {
@@ -120,7 +134,23 @@ const DoctorInfoUpdateView = () => {
         }
       }
     })();
-  }, []);
+    const fetchUserData = async () => {
+      try {
+        // Replace with your actual API endpoint
+        const response = await axios.get(`https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`);
+        setUserData(response.data.document[0]);
+      } catch (err) {
+        console.error(err);
+        setError('Failed to fetch user data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+
+
+  }, [user]);
 
   const pickProfilePicture = async (setFieldValue) => {
     try {
@@ -278,14 +308,29 @@ const DoctorInfoUpdateView = () => {
           style={styles.Text}
         />
         <Formik
-          initialValues={{
-            drSpecialties: "",
-            drLocation: "",
-            drWorkingHours: "",
-            drBio: "",
-            drSessionFees: "",
-            profilePicture: null,
-            verifyingDocs: [], // Add verifyingDocs field as an empty array
+                 enableReinitialize // Allows Formik to reset initialValues when they change
+                 initialValues={{
+                   drSpecialties: userData?.drSpecialties || "",
+                   drLocation: userData?.drLocation || "",
+                   drWorkingHours: userData?.drWorkingHours || "",
+                   drBio: userData?.drBio || "",
+                   drSessionFees: userData?.drSessionFees
+                     ? userData.drSessionFees.toString()
+                     : "",
+                   profilePicture: userData?.profilePicture
+                     ? {
+                         uri: userData.profilePicture,
+                         name: `profile_${Date.now()}.jpg`,
+                         type: "image/jpeg",
+                       }
+                     : null,
+                   verifyingDocs: userData?.verifyingDocs
+                     ? userData.verifyingDocs.map((doc, index) => ({
+                         uri: doc, // Adjust based on actual data structure
+                         name: `verifyingDoc_${index}_${Date.now()}.jpg`,
+                         type: "image/jpeg",
+                       }))
+                     : [],// Add verifyingDocs field as an empty array
           }}
           validationSchema={DoctorInfoUpdateSchema}
           onSubmit={submit_info}
@@ -300,19 +345,24 @@ const DoctorInfoUpdateView = () => {
             touched,
           }) => (
             <View style={styles.inputcontainerView}>
-              {/* Specialty */}
-              <Text style={styles.label}>Specialty</Text>
+             {/* Specialty */}
+             <Text style={styles.label}>Specialty</Text>
               <RNPickerSelect
                 onValueChange={handleChange("drSpecialties")}
                 onBlur={handleBlur("drSpecialties")}
                 items={specialtiesOptions}
-                style={{ inputIOS: styles.input, inputAndroid: styles.input }}
+                value={values.drSpecialties}
+                style={{
+                  inputIOS: styles.input,
+                  inputAndroid: styles.input,
+                }}
                 placeholder={{ label: "Select your specialty", value: null }}
               />
               {touched.drSpecialties && errors.drSpecialties && (
                 <Text style={styles.errorText}>{errors.drSpecialties}</Text>
               )}
 
+              
               {/* Location */}
               <Text style={styles.label}>Location</Text>
               <TextInput

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    marginTop: 16,
+    marginTop: 5,
   },
   inputLabel: {
     fontSize: 10,
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     color: TEXT_GREY,
     fontFamily: 'Regular',
     marginTop: 16,
-    marginBottom: 8,
   },
   specialtySelector: {
     height: 49,
