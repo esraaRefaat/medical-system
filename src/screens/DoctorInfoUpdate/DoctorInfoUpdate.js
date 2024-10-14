@@ -107,19 +107,7 @@ const DoctorInfoUpdateView = () => {
   const { user } = useSelector((state) => state.auth);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-    const [userData, setUserData] = useState(null);
-
-
-
-
-
-
-
-
-
-
-
-
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -137,19 +125,19 @@ const DoctorInfoUpdateView = () => {
     const fetchUserData = async () => {
       try {
         // Replace with your actual API endpoint
-        const response = await axios.get(`https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`);
+        const response = await axios.get(
+          `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
+        );
         setUserData(response.data.document[0]);
       } catch (err) {
         console.error(err);
-        setError('Failed to fetch user data.');
+        setError("Failed to fetch user data.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-
-
   }, [user]);
 
   const pickProfilePicture = async (setFieldValue) => {
@@ -245,7 +233,8 @@ const DoctorInfoUpdateView = () => {
           putWithTokenAction({
             userData: formData,
             url: APP_BASE_URL + UPDATE_DR_INFO,
-            token:user.token          })
+            token: user.token,
+          })
         ).unwrap();
 
         if (response) {
@@ -270,7 +259,7 @@ const DoctorInfoUpdateView = () => {
         setLoading(false); // Set loading to false after request completes
       }
     },
-    [dispatch, navigation,user]
+    [dispatch, navigation, user]
   );
 
   return (
@@ -281,23 +270,24 @@ const DoctorInfoUpdateView = () => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <View style={styles.backbutton}>
+        <View style={styles.headerContainer}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={styles.backbuttontouch}
-            onPress={() => navigation.navigate(routes.mainapp)}
+            onPress={() => navigation.navigate(routes.home)}
           >
             <BACK_Arrow />
           </TouchableOpacity>
+
+          {/* Header Text */}
+          <CustomText
+            text={"Complete Your Profile"}
+            color="GREY"
+            fontFamily="bold"
+            size={16}
+            style={styles.logoText}
+          />
         </View>
-        {/* Header Texts */}
-        <CustomText
-          text={"Complete Your Profile"}
-          color="GREY"
-          fontFamily="bold"
-          size={24}
-          style={styles.logoText}
-        />
         <CustomText
           text={
             "Please provide the following information to become a verified doctor"
@@ -308,29 +298,29 @@ const DoctorInfoUpdateView = () => {
           style={styles.Text}
         />
         <Formik
-                 enableReinitialize // Allows Formik to reset initialValues when they change
-                 initialValues={{
-                   drSpecialties: userData?.drSpecialties || "",
-                   drLocation: userData?.drLocation || "",
-                   drWorkingHours: userData?.drWorkingHours || "",
-                   drBio: userData?.drBio || "",
-                   drSessionFees: userData?.drSessionFees
-                     ? userData.drSessionFees.toString()
-                     : "",
-                   profilePicture: userData?.profilePicture
-                     ? {
-                         uri: userData.profilePicture,
-                         name: `profile_${Date.now()}.jpg`,
-                         type: "image/jpeg",
-                       }
-                     : null,
-                   verifyingDocs: userData?.verifyingDocs
-                     ? userData.verifyingDocs.map((doc, index) => ({
-                         uri: doc, // Adjust based on actual data structure
-                         name: `verifyingDoc_${index}_${Date.now()}.jpg`,
-                         type: "image/jpeg",
-                       }))
-                     : [],// Add verifyingDocs field as an empty array
+          enableReinitialize // Allows Formik to reset initialValues when they change
+          initialValues={{
+            drSpecialties: userData?.drSpecialties || "",
+            drLocation: userData?.drLocation || "",
+            drWorkingHours: userData?.drWorkingHours || "",
+            drBio: userData?.drBio || "",
+            drSessionFees: userData?.drSessionFees
+              ? userData.drSessionFees.toString()
+              : "",
+            profilePicture: userData?.profilePicture
+              ? {
+                  uri: userData.profilePicture,
+                  name: `profile_${Date.now()}.jpg`,
+                  type: "image/jpeg",
+                }
+              : null,
+            verifyingDocs: userData?.verifyingDocs
+              ? userData.verifyingDocs.map((doc, index) => ({
+                  uri: doc, // Adjust based on actual data structure
+                  name: `verifyingDoc_${index}_${Date.now()}.jpg`,
+                  type: "image/jpeg",
+                }))
+              : [], // Add verifyingDocs field as an empty array
           }}
           validationSchema={DoctorInfoUpdateSchema}
           onSubmit={submit_info}
@@ -345,8 +335,28 @@ const DoctorInfoUpdateView = () => {
             touched,
           }) => (
             <View style={styles.inputcontainerView}>
-             {/* Specialty */}
-             <Text style={styles.label}>Specialty</Text>
+              <View style={styles.container}>
+                <Text style={styles.label}>Choose Profile Picture</Text>
+                <TouchableOpacity
+                  style={styles.profileImagePicker}
+                  onPress={() => pickProfilePicture(setFieldValue)}
+                >
+                  {values.profilePicture ? (
+                    <Image
+                      source={{ uri: values.profilePicture.uri }}
+                      style={styles.profileImage}
+                    />
+                  ) : (
+                    <Text>Select Profile Picture</Text>
+                  )}
+                  <View style={styles.overlay}>
+                    <Text style={styles.plusText}>+</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              {/* Specialty */}
+              <Text style={styles.label}>Specialty</Text>
               <RNPickerSelect
                 onValueChange={handleChange("drSpecialties")}
                 onBlur={handleBlur("drSpecialties")}
@@ -362,7 +372,6 @@ const DoctorInfoUpdateView = () => {
                 <Text style={styles.errorText}>{errors.drSpecialties}</Text>
               )}
 
-              
               {/* Location */}
               <Text style={styles.label}>Location</Text>
               <TextInput
@@ -416,25 +425,6 @@ const DoctorInfoUpdateView = () => {
               {touched.drSessionFees && errors.drSessionFees && (
                 <Text style={styles.errorText}>{errors.drSessionFees}</Text>
               )}
-
-              {/* Profile Picture */}
-              <Text style={styles.label}>Profile Picture</Text>
-              <TouchableOpacity
-                style={styles.imagePicker}
-                onPress={() => pickProfilePicture(setFieldValue)}
-              >
-                <Text>Select Profile Picture </Text>
-              </TouchableOpacity>
-
-              {/* Display Selected Verifying Documents */}
-              <View style={styles.docsContainer}>
-                {values.profilePicture && (
-                  <Image
-                    source={{ uri: values.profilePicture.uri }}
-                    style={styles.docImage}
-                  />
-                )}
-              </View>
 
               {/* Verifying Documents */}
               <Text style={styles.label}>Verifying Documents</Text>
@@ -495,4 +485,3 @@ const DoctorInfoUpdateView = () => {
 };
 
 export default DoctorInfoUpdateView;
-

@@ -20,7 +20,7 @@ const Spec = (props) => {
       </View>
       <View style={{ gap: 5, flex: 1 }}>
         <Text style={styles.specName}>{props.name}</Text>
-        <Text style={styles.wide}>Wide selection of doctor's specialties</Text>
+        {/* <Text style={styles.wide}>Wide selection of doctor's specialties</Text> */}
       </View>
       <MaterialIcons name="arrow-forward-ios" size={22} color="#254EDB" />
     </Pressable>

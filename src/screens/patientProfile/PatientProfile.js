@@ -97,12 +97,12 @@ const PatientProfile = () => {
         </View>
       </View>
 
-      {/* Sign Out Button */}
+      {/* Sign Out Button
       <View style={styles.bottomContainer}>
         <TouchableOpacity style={styles.button} onPress={handleSignOut}>
           <Text style={styles.buttonText}>Sign Out</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };

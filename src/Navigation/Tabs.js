@@ -12,6 +12,7 @@ import PatientProfile from "../screens/patientProfile/PatientProfile";
 import BookedAppointments from "../screens/BookedAppointments/BookedAppointments";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AppointmentsToday from "../screens/AppointmentsToday/AppointmentsToday";
+import SettingScreen from "../screens/settingsScreen/settingScreen.js";
 
 const tab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ const Tabs = () => {
           component={AppointmentsToday}
           options={{
             tabBarIcon: () => (
-              <Ionicons name="document" size={24} color="black" />
+              <Ionicons name="document-outline" size={24} color="black" />
             ),
           }}
         />
@@ -45,7 +46,7 @@ const Tabs = () => {
           component={BookedAppointments}
           options={{
             tabBarIcon: () => (
-              <Ionicons name="document" size={24} color="black" />
+              <Ionicons name="document-outline" size={24} color="black" />
             ),
           }}
         />
@@ -69,6 +70,15 @@ const Tabs = () => {
           }}
         />
       )}
+      
+        <tab.Screen
+          name={"Settings"}
+          component={SettingScreen}
+          options={{
+            tabBarIcon: () => <Ionicons name="settings-outline" size={24} color="black" />,
+          }}
+        />
+      
 
       {/* <tab.Screen name={routes.about} component={About} /> */}
       {/* <tab.Screen name={routes.onboarding} component={Onboarding} /> */}

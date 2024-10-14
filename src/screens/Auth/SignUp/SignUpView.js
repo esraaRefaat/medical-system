@@ -100,13 +100,13 @@ const SignUpView = () => {
           size={24}
           style={styles.logoText}
         />
-        <CustomText
+        {/* <CustomText
           text={"Please enter a form to continue the register"}
           color="TEXT_GREY"
           fontFamily="Medium"
           size={14}
           style={styles.Text}
-        />
+        /> */}
         <Formik
           initialValues={{
             name: "",
@@ -135,7 +135,7 @@ const SignUpView = () => {
                 <CustomInput
                   lable={"Full Name"}
                   containerStyle={[styles.emailInput, { marginTop: 32 }]}
-                  placeholder={"Enter your full name"}
+                  placeholder={"Full Name"}
                   value={values.name}
                   onChangeText={handleChange("name")}
                   Blur={handleBlur("name")}
@@ -160,7 +160,7 @@ const SignUpView = () => {
                 <CustomInput
                   lable={"Email"}
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
-                  placeholder={"Enter your Email"}
+                  placeholder={"Email"}
                   value={values.email}
                   onChangeText={handleChange("email")}
                   Blur={handleBlur("email")}
@@ -186,7 +186,7 @@ const SignUpView = () => {
                   lable={"Password"}
                   password={true}
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
-                  placeholder={"Enter your password"}
+                  placeholder={"Password"}
                   value={values.password}
                   onChangeText={handleChange("password")}
                   Blur={handleBlur("password")}
@@ -212,7 +212,7 @@ const SignUpView = () => {
                   lable={"Confirm Password"}
                   password={true}
                   containerStyle={[styles.emailInput, { marginTop: 16 }]}
-                  placeholder={"Confirm your password"}
+                  placeholder={"Repeat Password"}
                   value={values.rePassword}
                   onChangeText={handleChange("rePassword")}
                   Blur={handleBlur("rePassword")}
@@ -270,7 +270,7 @@ const SignUpView = () => {
 
         <View style={styles.accountView}>
           <CustomText
-            text={"I have an account?"}
+            text={"Already have an account?"}
             color="TEXT_GREY"
             fontFamily="medium"
             size={14}
@@ -281,7 +281,7 @@ const SignUpView = () => {
             }}
           >
             <CustomText
-              text={" Sign in"}
+              text={" Sign In"}
               color="PRIMARY"
               fontFamily="medium"
               size={14}

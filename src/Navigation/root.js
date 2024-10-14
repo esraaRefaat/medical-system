@@ -29,6 +29,7 @@ import SubmitRating from "../screens/Rating/SubmitRating.jsx";
 import PatientProfile from "../screens/patientProfile/PatientProfile";
 import AdminSignUpView from "../screens/AdminUsersLists/AdminSignUp/AdminSignUpView.js";
 import PatientMedicalRecords from "../screens/MedicalRecords/PatientMedicalRecords.js";
+import Home from "../screens/Home.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -49,6 +50,7 @@ const Root = () => {
       <stack.Screen name={routes.specialities} component={Specialities} />
       <stack.Screen name={routes.newpassword} component={NewPasswordView} />
       <stack.Screen name={routes.mainapp} component={Tabs} />
+      <stack.Screen name={routes.home} component={Home} />
       <stack.Screen name={routes.medicalrecords} component={MedicalRecords} />
       <stack.Screen
         name={routes.confirmAppointment}

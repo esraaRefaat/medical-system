@@ -16,7 +16,7 @@ const HomeHeader = ({ user }) => {
         <View>
           <Text style={styles.hiText}>Hi {user.name}!</Text>
           <Text style={styles.mayText}>
-            May you always be in a good condition
+            May you always be in a good Health
           </Text>
         </View>
         <View

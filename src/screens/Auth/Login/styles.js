@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     forgetPass: {
         alignSelf: 'flex-end',
         justifyContent: 'flex-start',
-        height: 26
+        marginTop:10,
+        textDecorationLine: 'underline',    
     },
     ShowMsgstyle: {
         height: 60,

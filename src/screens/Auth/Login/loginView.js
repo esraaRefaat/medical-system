@@ -69,8 +69,8 @@ const LoginView = () => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <View style={styles.backbutton}>
-          {/* <TouchableOpacity
+        {/* <View style={styles.backbutton}>
+          <TouchableOpacity
             activeOpacity={1}
             style={styles.backbuttontouch}
             onPress={() => {
@@ -78,8 +78,8 @@ const LoginView = () => {
             }}
           >
             <BACK_Arrow />
-          </TouchableOpacity> */}
-        </View>
+          </TouchableOpacity>
+        </View> */}
         <CustomText
           text={"Welcome Back"}
           color="GREY"
@@ -87,13 +87,13 @@ const LoginView = () => {
           size={24}
           style={styles.logoText}
         />
-        <CustomText
+        {/* <CustomText
           text={"Please enter a form to login this app"}
           color="TEXT_GREY"
           fontFamily="Medium"
           size={14}
           style={styles.Text}
-        />
+        /> */}
         <Formik
           initialValues={{
             email: "",
@@ -175,9 +175,10 @@ const LoginView = () => {
                 >
                   <CustomText
                     text={"Forgot Password"}
-                    color="TEXT_GREY"
                     fontFamily="medium"
                     size={14}
+                    color="PRIMARY"
+
                     style={styles.forgetPass}
                   />
                 </TouchableOpacity>

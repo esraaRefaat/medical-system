@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View, Text, ViewComponent } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HomeHeader from "../../components/home/Header";
@@ -8,6 +8,7 @@ import MidDoc from "../../components/home/midDoctor";
 import { useSelector } from "react-redux";
 import MidAdmin from "../../components/home/midAdmin";
 import axios from "axios";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
@@ -23,9 +24,12 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUserData();
-  }, [user]);
+  // Use useFocusEffect to fetch data when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      fetchUserData();  // Fetch data when screen is focused
+    }, [user])  // Depend on the user
+  );
 
   return (
     <SafeAreaView style={[{ flex: 1 }]}>

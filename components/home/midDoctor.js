@@ -1,6 +1,5 @@
 import {
   Image,
-  Linking,
   Pressable,
   StyleSheet,
   Text,
@@ -11,7 +10,6 @@ import { useNavigation } from "@react-navigation/native";
 import routes from "../../src/utils/routes";
 import CompleteProfile from "./CompleteDoc";
 import VerificationPending from "./PendingDoc";
-import axios from "axios";
 
 const MidDoc = ({ user }) => {
   const navigation = useNavigation();
@@ -21,8 +19,9 @@ const MidDoc = ({ user }) => {
       {user.verifiedDoctor == "pending" && (
         <VerificationPending></VerificationPending>
       )}
+
       {user.verifiedDoctor == "true" && (
-        <View style={styles.rowcontainer}>
+        <>
           <Pressable
             style={[styles.card, { backgroundColor: "#EFE4FF" }]}
             onPress={() => {
@@ -57,27 +56,6 @@ const MidDoc = ({ user }) => {
               see your upcoming appointments
             </Text>
           </Pressable>
-        </View>
-      )}
-      {user.verifiedDoctor == "true" && (
-        <View style={styles.rowcontainer}>
-          <Pressable
-            style={[styles.card, { backgroundColor: "#FEF6EE" }]}
-            onPress={() => {
-              // navigation.navigate(routes.onboarding);
-            }}
-          >
-            <Image
-              source={require("../../src/assets/home/Icon3.png")}
-              style={{ marginBottom: 15 }}
-            ></Image>
-            <Text style={{ fontSize: 18, fontWeight: "500" }}>
-              Patient Medical Record
-            </Text>
-            <Text style={{ fontSize: 14, fontWeight: "400", color: "#71717A" }}>
-              view your patient's medical records
-            </Text>
-          </Pressable>
           <Pressable
             style={[styles.card, { backgroundColor: "#FEF3F2" }]}
             onPress={() => {
@@ -95,7 +73,7 @@ const MidDoc = ({ user }) => {
               check your today's appointments
             </Text>
           </Pressable>
-        </View>
+        </>
       )}
     </View>
   );
@@ -108,19 +86,12 @@ const styles = StyleSheet.create({
     padding: 16,
     flex: 1,
     justifyContent: "space-between",
-    gap: 16,
   },
-  rowcontainer: {
-    flexDirection: "row",
-    flex: 1,
-    gap: 16,
-  },
-
   card: {
     borderRadius: 12,
+    backgroundColor: "#EFE4FF",
     padding: 16,
     gap: 5,
-    flex: 1,
+    // flex: 1,
   },
 });
-

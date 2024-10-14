@@ -14,7 +14,7 @@ const HomeHeader = () => {
         }}
       >
         <View>
-          <Text style={styles.hiText}>Medical Specialties</Text>
+          {/* <Text style={styles.hiText}>Medical Specialties</Text> */}
           <Text style={styles.mayText}>
             Wide selection of doctor's specialties
           </Text>

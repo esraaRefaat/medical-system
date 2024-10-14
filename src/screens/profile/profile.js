@@ -15,6 +15,8 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import routes from "../../utils/routes";
 import { useSelector } from "react-redux";
+import CustomButton from "../../components/customButton.js";
+import { PRIMARY } from "../../styles/colors.js";
 // const doctorData1 = {
 //   name: "Dr. Hady",
 //   speciality: "Cardiologist",
@@ -73,12 +75,7 @@ const reviews = [
 const Profile = ({ route }) => {
   const { user } = useSelector((state) => state.auth);
 
-  const handleSignOut = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: routes.login }],
-    });
-  };
+
 
   const id = route?.params?.id || user.user_id;
   const [doctorData, setDoctorData] = useState(null);
@@ -117,19 +114,18 @@ const Profile = ({ route }) => {
         )}
       </ScrollView>
       {user?.user_role === "patient" && (
-        <Pressable style={styles.bookButton} onPress={handleBookAppointment}>
-          <Text style={styles.buttonText}>Book Appointment</Text>
-        </Pressable>
+
+<CustomButton
+text={"Book Appointment"}
+containerStyle={styles.bookButton}
+// disabled={!isValid}
+onPress={handleBookAppointment}
+/>
+
+
+
       )}
-      {
-        user?.user_role === "doctor" && (
-          // <View style={styles.bottomContainer}>
-          <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-            <Text style={styles.buttonText}>Sign Out</Text>
-          </TouchableOpacity>
-        )
-        // </View>
-      }
+
     </SafeAreaView>
   );
 };
@@ -145,13 +141,8 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   bookButton: {
-    backgroundColor: "#254EDB",
-    padding: 16,
-    alignItems: "center",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+    backgroundColor: PRIMARY,
+    alignSelf: 'center', 
   },
   buttonText: {
     color: "#FFFFFF",
@@ -164,17 +155,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingHorizontal: 20,
   },
-  button: {
-    backgroundColor: "#254EDB",
-    paddingVertical: 12,
-    width: "100%",
-    borderRadius: 30,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
-  },
+
   buttonText: {
     color: "#fff",
     fontSize: 18,

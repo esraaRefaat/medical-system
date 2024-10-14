@@ -1,106 +1,131 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import HomeHeader from "../../components/specialities/HeaderSpec";
 import Spec from "../../components/specialities/spec";
+import { BACK_Arrow } from "../assets/svgIcons.js";
+import CustomText from "../components/customText.js";
+import { useNavigation } from "@react-navigation/native";
+import routes from "../utils/routes.js";
 
 const specs = [
-  { name: "dentistry", icon: "🦷", drSpecialties: "dentistry" },
+  { name: "Dentistry", icon: "🦷", drSpecialties: "dentistry" },
   {
-    name: "ear, nose and throat",
+    name: "Ear, Nose and Throat",
     icon: "👂",
     drSpecialties: "ear-nose-and-throat",
   },
-  { name: "psychiatry", icon: "🧠", drSpecialties: "psychiatry" },
+  { name: "Psychiatry", icon: "🧠", drSpecialties: "psychiatry" },
   {
-    name: "pediatrics and new born",
+    name: "Pediatrics And New Born",
     icon: "👶",
     drSpecialties: "pediatrics-and-new-born",
   },
-  { name: "orthopedics", icon: "🦴", drSpecialties: "orthopedics" },
+  { name: "Orthopedics", icon: "🦴", drSpecialties: "orthopedics" },
   {
-    name: "gynaecology and infertility",
+    name: "Gynaecology And Infertility",
     icon: "🤰",
     drSpecialties: "gynaecology-and-infertility",
   },
   {
-    name: "cardiology and vascular disease",
+    name: "Cardiology And Vascular Disease",
     icon: "❤️",
     drSpecialties: "cardiology-and-vascular-disease",
   },
-  { name: "internal medicine", icon: "🩺", drSpecialties: "internal-medicine" },
+  { name: "Internal Medicine", icon: "🩺", drSpecialties: "internal-medicine" },
   {
-    name: "allergy and immunology",
+    name: "Allergy And Immunology",
     icon: "🤧",
     drSpecialties: "allergy-and-immunology",
   },
   {
-    name: "andrology and male infertility",
+    name: "Andrology And Male Infertility",
     icon: "👨‍⚕️",
     drSpecialties: "andrology-and-male-infertility",
   },
-  { name: "dermatology", icon: "🧴", drSpecialties: "dermatology" },
-  { name: "audiology", icon: "👂", drSpecialties: "audiology" },
-  { name: "neurology", icon: "🧠", drSpecialties: "neurology" },
+  { name: "Dermatology", icon: "🧴", drSpecialties: "dermatology" },
+  { name: "Audiology", icon: "👂", drSpecialties: "audiology" },
+  { name: "Neurology", icon: "🧠", drSpecialties: "neurology" },
   {
-    name: "cardiology and thoracic surgery",
+    name: "Cardiology And Thoracic Surgery",
     icon: "❤️‍🩹",
     drSpecialties: "cardiology-and-thoracic-surgery",
   },
   {
-    name: "chest and respiratory",
+    name: "Chest And Respiratory",
     icon: "🫁",
     drSpecialties: "chest-and-respiratory",
   },
   {
-    name: "diabetes and endocrinology",
+    name: "Diabetes And Endocrinology",
     icon: "💉",
     drSpecialties: "diabetes-and-endocrinology",
   },
   {
-    name: "diagnostic radiology",
+    name: "Diagnostic Radiology",
     icon: "📡",
     drSpecialties: "diagnostic-radiology",
   },
   {
-    name: "dietitian and nutrition",
+    name: "Dietitian And Nutrition",
     icon: "🍎",
     drSpecialties: "dietitian-and-nutrition",
   },
-  { name: "family medicine", icon: "🏥", drSpecialties: "family-medicine" },
+  { name: "Family Medicine", icon: "🏥", drSpecialties: "family-medicine" },
   {
-    name: "gastroenterology and endoscopy",
+    name: "Gastroenterology And Endoscopy",
     icon: "🦠",
     drSpecialties: "gastroenterology-and-endoscopy",
   },
-  { name: "geriatrics", icon: "👵", drSpecialties: "geriatrics" },
-  { name: "hematology", icon: "🩸", drSpecialties: "hematology" },
-  { name: "hepatology", icon: "🫀", drSpecialties: "hepatology" },
+  { name: "Geriatrics", icon: "👵", drSpecialties: "geriatrics" },
+  { name: "Hematology", icon: "🩸", drSpecialties: "hematology" },
+  { name: "Hepatology", icon: "🫀", drSpecialties: "hepatology" },
   {
-    name: "interventional radiology",
+    name: "Interventional Radiology",
     icon: "📡",
     drSpecialties: "interventional-radiology",
   },
   {
-    name: "ivf and infertility",
+    name: "Ivf And Infertility",
     icon: "🧬",
     drSpecialties: "ivf-and-infertility",
   },
-  { name: "laboratories", icon: "🧪", drSpecialties: "laboratories" },
-  { name: "nephrology", icon: "🩺", drSpecialties: "nephrology" },
-  { name: "neurosurgery", icon: "🧠", drSpecialties: "neurosurgery" },
+  { name: "Laboratories", icon: "🧪", drSpecialties: "laboratories" },
+  { name: "Nephrology", icon: "🩺", drSpecialties: "nephrology" },
+  { name: "Neurosurgery", icon: "🧠", drSpecialties: "neurosurgery" },
   {
-    name: "obesity and laparoscopic surgery",
+    name: "Obesity And Laparoscopic Surgery",
     icon: "⚖️",
     drSpecialties: "obesity-and-laparoscopic-surgery",
   },
-  { name: "oncology", icon: "🎗️", drSpecialties: "oncology" },
-  { name: "oncology surgery", icon: "🗡️", drSpecialties: "oncology-surgery" },
-  { name: "ophthalmology", icon: "👁️", drSpecialties: "ophthalmology" },
+  { name: "Oncology", icon: "🎗️", drSpecialties: "oncology" },
+  { name: "Oncology Surgery", icon: "🗡️", drSpecialties: "oncology-surgery" },
+  { name: "Ophthalmology", icon: "👁️", drSpecialties: "ophthalmology" },
 ];
 
 const Specialities = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView>
+              <View style={styles.headerContainer}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.backbuttontouch}
+            onPress={() => navigation.navigate(routes.mainapp)}
+          >
+            <BACK_Arrow />
+          </TouchableOpacity>
+
+          {/* Header Text */}
+          <CustomText
+            text={"Medical Specialties"}
+            color="GREY"
+            fontFamily="bold"
+            style={styles.logoText}
+          />
+        </View>
+
+
       <HomeHeader></HomeHeader>
       <ScrollView style={styles.scrollview}>
         {specs.map(({ name, icon, drSpecialties }) => {
@@ -122,5 +147,21 @@ export default Specialities;
 
 const styles = StyleSheet.create({
   scrollview: { paddingBottom: 200 },
+  headerContainer: {
+    justifyContent: "center", // Center the content horizontally
+    alignItems: "center", // Center the content vertically
+    position: "relative", // Relative positioning for arrow to stay at the left
+    width: "100%", // Ensure the container takes full width
+    paddingHorizontal: 20, // Add padding if necessary
+  },
+  backbuttontouch: {
+    position: "absolute", // Position the back button absolutely
+    left: 20, // Place it on the left side of the screen
+  },
+  logoText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center", // Ensure the text is centered
+  },
 });
 
