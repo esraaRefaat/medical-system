@@ -19,7 +19,7 @@ import FAB from "../../components/FAB";
 import TopArrow from "../../components/Icons/TopArrow";
 import SearchIcon from "../../components/Icons/SearchIcon.jsx";
 import { deleteWithTokenAction } from "../../redux/store/slices/deleteWithTokenSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const solidBlue = "#1552b4";
 
@@ -33,6 +33,7 @@ export default function AllUsersList({ route }) {
   const flatListRef = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [doctorIdToDelete, setDoctorIdToDelete] = useState(null);
+  const { user } = useSelector((state) => state.auth);
 
 
   const dispatch = useDispatch();
@@ -80,7 +81,7 @@ export default function AllUsersList({ route }) {
   };
 
   const confirmDelete = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzA0NmQ3NzA5MmI4NTdiMjZiMzY2ZDIiLCJyb2xlIjoiYWRtaW4iLCJlbWFpbCI6ImhhZHMzeWRkQGdtYWlsLmNvbSIsImlhdCI6MTcyODM0MzQxNX0.qzDk-pXKWeo_O09zMhJhLpAiqBm48X6P0e34_lUlqvU'; // Get your token from your auth state or context
+    const token = user.token // Get your token from your auth state or context
     const url = `https://medical-system-server.onrender.com/api/v1/users/admin/${doctorIdToDelete}`;
     
     console.log(url, token);

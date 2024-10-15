@@ -30,6 +30,8 @@ import PatientProfile from "../screens/patientProfile/PatientProfile";
 import AdminSignUpView from "../screens/AdminUsersLists/AdminSignUp/AdminSignUpView.js";
 import PatientMedicalRecords from "../screens/MedicalRecords/PatientMedicalRecords.js";
 import Home from "../screens/Home.js";
+import EditProfileInfoView from "../screens/settingsScreen/editProfileInfo/EditProfileInfo.js";
+import SettingScreen from "../screens/settingsScreen/settingScreen.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -111,6 +113,15 @@ const Root = () => {
         name={routes.PatientMedicalRecords}
         component={PatientMedicalRecords}
       ></stack.Screen>
+<stack.Screen
+        name={routes.EditProfileInfo}
+        component={EditProfileInfoView}
+      ></stack.Screen><stack.Screen
+      name={routes.Settings}
+      component={SettingScreen}
+    ></stack.Screen>
+
+
 
     </stack.Navigator>
   );
