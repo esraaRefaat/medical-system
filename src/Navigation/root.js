@@ -32,6 +32,7 @@ import PatientMedicalRecords from "../screens/MedicalRecords/PatientMedicalRecor
 import Home from "../screens/Home.js";
 import EditProfileInfoView from "../screens/settingsScreen/editProfileInfo/EditProfileInfo.js";
 import SettingScreen from "../screens/settingsScreen/settingScreen.js";
+import ChangePasswordView from "../screens/settingsScreen/NewPassword/ChangePasswordView.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -81,9 +82,7 @@ const Root = () => {
         name={routes.CreateAppointment}
         component={CreateAppointment}
       />
-
       <stack.Screen name={routes.alluserslist} component={AllUsersList} />
-
       <stack.Screen
         name={routes.UpcomingAppointment}
         component={UpcomingAppointment}
@@ -105,27 +104,31 @@ const Root = () => {
         name={routes.PatientProfile}
         component={PatientProfile}
       ></stack.Screen>
-<stack.Screen
+      <stack.Screen
         name={routes.AdminSignUpView}
         component={AdminSignUpView}
       ></stack.Screen>
-<stack.Screen
+      <stack.Screen
         name={routes.PatientMedicalRecords}
         component={PatientMedicalRecords}
       ></stack.Screen>
-<stack.Screen
+      <stack.Screen
         name={routes.EditProfileInfo}
         component={EditProfileInfoView}
-      ></stack.Screen><stack.Screen
-      name={routes.Settings}
-      component={SettingScreen}
-    ></stack.Screen>
+      ></stack.Screen>
+      <stack.Screen
+        name={routes.Settings}
+        component={SettingScreen}
+      ></stack.Screen>
+<stack.Screen
+        name={routes.ChangePasswordView}
+        component={ChangePasswordView}
+      ></stack.Screen>
 
 
-
+      
     </stack.Navigator>
   );
 };
 
 export default Root;
-

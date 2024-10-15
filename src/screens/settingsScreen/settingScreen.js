@@ -18,8 +18,13 @@ const SettingScreen = () => {
           routes: [{ name: routes.login }],
         });
       };
+
       const handleEditInfo = () => {
         navigation.navigate(routes.EditProfileInfo)
+      };
+
+      const handleChangePassword = () => {
+        navigation.navigate(routes.ChangePasswordView)
       };
 
       const onDelete = () => {
@@ -63,7 +68,7 @@ const confirmDelete = async () => {
                 <Ionicons name="person-circle-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Edit Profile Info</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => { /* Handle change password */ }}>
+            <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
                 <Ionicons name="key-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Change Password</Text>
             </TouchableOpacity>

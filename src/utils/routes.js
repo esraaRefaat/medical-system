@@ -36,7 +36,7 @@ const routes = Object.freeze({
   PatientMedicalRecords:"PatientMedicalRecords",
   Settings:"Settings",
   EditProfileInfo:"EditProfileInfo",
-
+  ChangePasswordView:"ChangePasswordView",
 });
 
 export default routes;
