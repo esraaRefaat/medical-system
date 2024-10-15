@@ -43,8 +43,7 @@ const confirmDelete = async () => {
         
         if (deleteWithTokenAction.fulfilled.match(resultAction)) {
             console.log("Account deleted successfully");
-            navigation.popToTop(); // Go back to the top of the stack
-            navigation.navigate(routes.signup);
+            navigation.navigate(routes.login);
         } else {
             console.error("Error deleting account:", resultAction.error);
         }
