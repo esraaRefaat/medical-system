@@ -1,4 +1,3 @@
-// src/screens/DoctorInfoUpdateView/DoctorInfoUpdateView.js
 
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
@@ -21,7 +20,7 @@ import RNPickerSelect from "react-native-picker-select";
 import * as ImagePicker from "expo-image-picker";
 import { APP_BASE_URL, UPDATE_DR_INFO } from "@env";
 import { putWithTokenAction } from "../../redux/store/slices/putWithTokenSlice.js";
-import styles from "./styles";
+import styles from "./styles.js";
 import CustomButton from "../../components/customButton.js";
 import CustomText from "../../components/customText.js";
 import { BACK_Arrow } from "../../assets/svgIcons.js";
