@@ -1,3 +1,4 @@
+// src/screens/DoctorInfoUpdateView/DoctorInfoUpdateView.js
 
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
@@ -100,7 +101,7 @@ const DoctorInfoUpdateSchema = Yup.object().shape({
   profilePicture: Yup.mixed().required("Profile picture is required"),
 });
 
-const DoctorInfoUpdateView = () => {
+const EditProfileInfoView = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -280,22 +281,21 @@ const DoctorInfoUpdateView = () => {
 
           {/* Header Text */}
           <CustomText
-            text={"Complete Your Profile"}
+            text={"Complete Your Information"}
             color="GREY"
             fontFamily="bold"
-            size={16}
             style={styles.logoText}
           />
         </View>
-        <CustomText
+        {/* <CustomText
           text={
-            "Please provide the following information to become a verified doctor"
+            "You can change your information from here: "
           }
           color="TEXT_GREY"
           fontFamily="Medium"
           size={14}
           style={styles.Text}
-        />
+        /> */}
         <Formik
           enableReinitialize // Allows Formik to reset initialValues when they change
           initialValues={{
@@ -483,4 +483,4 @@ const DoctorInfoUpdateView = () => {
   );
 };
 
-export default DoctorInfoUpdateView;
+export default EditProfileInfoView;

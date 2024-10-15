@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     backgroundColor: WHITE,
+    width: "auto",
   },
   backbutton: {
     alignSelf: "flex-start",
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     left: 20, // Place it on the left side of the screen
   },
   logoText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "center", // Ensure the text is centered
   },
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   inputcontainerView: {
-    width: "100%",
+    width: 400,
     paddingHorizontal: 16,
     marginTop: 20,
   },
