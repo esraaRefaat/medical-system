@@ -101,7 +101,7 @@ const DoctorInfoUpdateSchema = Yup.object().shape({
   profilePicture: Yup.mixed().required("Profile picture is required"),
 });
 
-const EditProfileInfoView = () => {
+const DoctorInfoUpdateView = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -329,6 +329,7 @@ const EditProfileInfoView = () => {
             handleBlur,
             handleSubmit,
             setFieldValue,
+            setFieldTouched, // Ensure this is destructured
             values,
             errors,
             touched,
@@ -357,15 +358,17 @@ const EditProfileInfoView = () => {
               {/* Specialty */}
               <Text style={styles.label}>Specialty</Text>
               <RNPickerSelect
-                onValueChange={handleChange("drSpecialties")}
-                onBlur={handleBlur("drSpecialties")}
+                onValueChange={(value) => {
+                  handleChange("drSpecialties")(value);
+                  setFieldTouched("drSpecialties", true);
+                }}
                 items={specialtiesOptions}
                 value={values.drSpecialties}
                 style={{
                   inputIOS: styles.input,
                   inputAndroid: styles.input,
                 }}
-                placeholder={{ label: "Select your specialty", value: null }}
+                placeholder={{ label: "Select your specialty", value: "" }} // Use empty string
               />
               {touched.drSpecialties && errors.drSpecialties && (
                 <Text style={styles.errorText}>{errors.drSpecialties}</Text>
@@ -483,4 +486,4 @@ const EditProfileInfoView = () => {
   );
 };
 
-export default EditProfileInfoView;
+export default DoctorInfoUpdateView;
