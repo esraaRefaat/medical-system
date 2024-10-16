@@ -21,6 +21,11 @@ const authSlice = createSlice({
     isLoading: false,
     error: false,
   },
+  reducers: {
+    signOut: (state) => {
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(authAction.pending, (state) => {
@@ -37,6 +42,7 @@ const authSlice = createSlice({
       });
   },
 });
+export const { signOut } = authSlice.actions; // Export the signOut action
 
 export default authSlice.reducer;
 

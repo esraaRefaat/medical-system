@@ -98,6 +98,9 @@ const Profile = ({ route }) => {
   const handleBookAppointment = () => {
     navigation.navigate(routes.confirmAppointment, { doctorId: id });
   };
+  const handleLogIn = () => {
+    navigation.navigate(routes.login);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -121,9 +124,16 @@ containerStyle={styles.bookButton}
 // disabled={!isValid}
 onPress={handleBookAppointment}
 />
+      )}
 
+{!user && (
 
-
+<CustomButton
+text={"Log In To Book Appointment"}
+containerStyle={styles.bookButton}
+// disabled={!isValid}
+onPress={handleLogIn}
+/>
       )}
 
     </SafeAreaView>

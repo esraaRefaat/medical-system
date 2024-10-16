@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import routes from '../../utils/routes.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteWithTokenAction } from '../../redux/store/slices/deleteWithTokenSlice.js';
+import { signOut } from '../../redux/store/slices/authSlice.js';
 
 const SettingScreen = () => {
     const navigation = useNavigation();
@@ -13,6 +14,8 @@ const SettingScreen = () => {
     const dispatch = useDispatch();
 
     const handleSignOut = () => {
+      dispatch(signOut());
+
         navigation.reset({
           index: 0,
           routes: [{ name: routes.login }],
@@ -54,31 +57,45 @@ const confirmDelete = async () => {
     }
 };
 
+const onLogin = () => {
+  navigation.navigate(routes.login)
+};
 
-
-
+const onSignup = () => {
+  navigation.navigate(routes.signup)
+};
 
 
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Account Settings</Text>
-            <TouchableOpacity style={styles.button} onPress={handleEditInfo}>
+            {user && <Text style={styles.header}>Account Settings</Text>}
+            {!user && <Text style={styles.header2}>Please Log In or Sign Up</Text>}
+
+            {user && <TouchableOpacity style={styles.button} onPress={handleEditInfo}>
                 <Ionicons name="person-circle-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Edit Profile Info</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
+            </TouchableOpacity>}
+            {user && <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
                 <Ionicons name="key-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Change Password</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={onDelete}>
+            </TouchableOpacity>}
+            {user && <TouchableOpacity style={styles.button} onPress={onDelete}>
                 <Ionicons name="trash-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Delete Account</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleSignOut}>
+            </TouchableOpacity>}
+            {user && <TouchableOpacity style={styles.button} onPress={handleSignOut}>
                 <Ionicons name="log-out-outline" size={24} color="black" />
                 <Text style={styles.buttonText}>Sign Out</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
+            {!user && <TouchableOpacity style={styles.button} onPress={onLogin}>
+                <Ionicons name="log-in-outline" size={24} color="black" />
+                <Text style={styles.buttonText}>Log In</Text>
+            </TouchableOpacity>}
+            {!user && <TouchableOpacity style={styles.button} onPress={onSignup}>
+                <Ionicons name="log-in-outline" size={24} color="black" />
+                <Text style={styles.buttonText}>Sign Up</Text>
+            </TouchableOpacity>}
             <Modal
         animationType="slide"
         transparent={true}
@@ -118,6 +135,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 24,
     },
+    header2: {
+      fontSize: 18,
+      marginBottom: 24,
+  },
     button: {
         flexDirection: 'row',
         alignItems: 'center',

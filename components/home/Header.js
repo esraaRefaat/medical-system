@@ -14,7 +14,7 @@ const HomeHeader = ({ user }) => {
         }}
       >
         <View>
-          <Text style={styles.hiText}>Hi {user.name}!</Text>
+          <Text style={styles.hiText}>Hi {user.name || "Guest"}!</Text>
           <Text style={styles.mayText}>
             May you always be in a good Health
           </Text>

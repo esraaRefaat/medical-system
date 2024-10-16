@@ -61,6 +61,14 @@ const LoginView = () => {
       });
   }, []);
 
+  const handleGuest = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: routes.mainapp }],
+    });
+  }
+
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -188,6 +196,12 @@ const LoginView = () => {
                 containerStyle={styles.buttonStyle}
                 // disabled={!isValid}
                 onPress={handleSubmit}
+              />
+              <CustomButton
+                text={"Sign In As A Guest"}
+                containerStyle={styles.buttonStyle}
+                // disabled={!isValid}
+                onPress={handleGuest}
               />
             </>
           )}

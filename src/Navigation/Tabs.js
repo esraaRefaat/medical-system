@@ -29,7 +29,7 @@ const Tabs = () => {
         }}
       />
 
-      {user.user_role == "doctor" && (
+      {user && user.user_role == "doctor" && (
         <tab.Screen
           name={"Appointments"}
           component={AppointmentsToday}
@@ -40,7 +40,7 @@ const Tabs = () => {
           }}
         />
       )}
-      {user.user_role == "patient" && (
+      {user &&  user.user_role == "patient" && (
         <tab.Screen
           name={"Appointments"}
           component={BookedAppointments}
@@ -52,7 +52,7 @@ const Tabs = () => {
         />
       )}
 
-      {user.user_role !== "doctor" && (
+      {user &&  user.user_role !== "doctor" && (
         <tab.Screen
           name={"Profile"}
           component={PatientProfile}
@@ -61,7 +61,7 @@ const Tabs = () => {
           }}
         />
       )}
-      {user.user_role == "doctor" && (
+      {user && user.user_role == "doctor" && (
         <tab.Screen
           name={"Profile"}
           component={Profile}

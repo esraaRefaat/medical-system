@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     buttonStyle: {
-        marginTop: 70,
+        marginTop: 30,
         backgroundColor: PRIMARY,
         alignSelf: 'center',
     },

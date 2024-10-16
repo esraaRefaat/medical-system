@@ -9,16 +9,19 @@ import { useSelector } from "react-redux";
 import MidAdmin from "../../components/home/midAdmin";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
+import MidGuestPatient from "../../components/home/midGuestPatient.js";
 
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
   const [userData, setuserData] = useState("");
   const fetchUserData = async () => {
     try {
-      const res = await axios.get(
-        `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
-      );
-      setuserData(res.data.document[0]);
+      if (user){
+        const res = await axios.get(
+          `https://medical-system-server.onrender.com/api/v1/users/${user.user_id}`
+        );
+        setuserData(res.data.document[0]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -34,9 +37,10 @@ const Home = () => {
   return (
     <SafeAreaView style={[{ flex: 1 }]}>
       <HomeHeader user={userData}></HomeHeader>
-      {user.user_role == "patient" && <MidPatient></MidPatient>}
-      {user.user_role == "doctor" && <MidDoc user={userData}></MidDoc>}
-      {user.user_role == "admin" && <MidAdmin></MidAdmin>}
+      {user && user.user_role == "patient" && <MidPatient></MidPatient>}
+      {user && user.user_role == "doctor" && <MidDoc user={userData}></MidDoc>}
+      {user && user.user_role == "admin" && <MidAdmin></MidAdmin>}
+      {!user && <MidGuestPatient></MidGuestPatient>}
 
       <News></News>
     </SafeAreaView>
