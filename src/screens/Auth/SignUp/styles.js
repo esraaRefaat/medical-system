@@ -7,11 +7,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
     },
-    backbutton: {
-        alignSelf: "flex-start",
-        paddingHorizontal: 24,
-        marginTop: 20,
-    },
+    // backbutton: {
+    //     alignSelf: "flex-start",
+    //     paddingHorizontal: 24,
+    //     marginTop: 20,
+    // },
     backbuttontouch: {
         width: 24,
         height: 24,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     logoText: {
         alignSelf: "flex-start",
        // paddingHorizontal: 16,
-        marginTop: 16
+        marginTop: 8
     },
     Text: {
         alignSelf: "flex-start",
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
       //  paddingHorizontal: 16,
     },
     buttonStyle: {
-        marginTop: 70,
+        marginTop: 42,
         backgroundColor: PRIMARY,
         alignSelf: 'center',
     },
