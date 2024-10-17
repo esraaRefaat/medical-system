@@ -19,8 +19,8 @@ export const BACK_Arrow = ({ props }) => (
   <Svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
-    width={8}
-    height={14}
+    width={20}
+    height={40}
     fill="none"
   >
     <Path
