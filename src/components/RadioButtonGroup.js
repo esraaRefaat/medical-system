@@ -8,7 +8,7 @@ const RadioButtonGroup = ({ field, options, form }) => {
   const { setFieldValue } = form;
 
   return (
-    <View style={{marginTop:16 , flexDirection:"row" , }}>
+    <View style={{marginTop:5 , flexDirection:"row" , }}>
       {options.map((option) => (
         <TouchableOpacity
           key={option.value}

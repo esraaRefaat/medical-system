@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     },
     logoText: {
         alignSelf: "flex-start",
-        paddingHorizontal: 16,
-        marginTop: 16
+      //  paddingHorizontal: 16,
+        marginTop: 100
     },
     Text: {
         alignSelf: "flex-start",
@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     },
     inputcontainerView: {
         width: '100%',
-        paddingHorizontal: 16
+       // paddingHorizontal: 16
     },
     emailInput: {
         height: 49,
-        borderRadius: 8,
+        borderRadius: 12,
         flexDirection: 'row',
-        paddingHorizontal: 16,
+       // paddingHorizontal: 16,
     },
     buttonStyle: {
         marginTop: 30,

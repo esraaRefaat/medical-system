@@ -85,13 +85,13 @@ const ForgotPasswordView = () => {
           size={24}
           style={styles.logoText}
         />
-        <CustomText
+        {/* <CustomText
           text={'Please enter the email you use to sign in'}
           color="TEXT_GREY"
           fontFamily='Medium'
           size={14}
           style={styles.Text}
-        />
+        /> */}
         <Formik
           initialValues={{
             email: "",
@@ -107,7 +107,7 @@ const ForgotPasswordView = () => {
               <View style={styles.inputcontainerView}>
                 <CustomInput
                   lable={'Email'}
-                  containerStyle={[styles.emailInput, { marginTop: 32 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={'Enter your Email'}
                   value={values.email}
                   onChangeText={handleChange('email')}
@@ -116,7 +116,11 @@ const ForgotPasswordView = () => {
                   TextInputHeight={18}
                   TextInputSize={14}
                   leftIcon={<SMS />}
-                  lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
+                  lableStyle={{
+                    fontSize: 14,
+                    color: TEXT_GREY,
+                    fontFamily: 'Bold',
+                  }}
                 />
                 {errors.email && touched.email && (
                   <CustomText

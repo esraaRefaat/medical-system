@@ -92,13 +92,13 @@ const NewPasswordView = () => {
           size={24}
           style={styles.logoText}
         />
-        <CustomText
+        {/* <CustomText
           text={'Please enter a form to set a new password'}
           color="TEXT_GREY"
           fontFamily='Medium'
           size={14}
           style={styles.Text}
-        />
+        /> */}
         <Formik
           initialValues={{
             email: route.params.useremail,
@@ -118,7 +118,7 @@ const NewPasswordView = () => {
                 <CustomInput
                   lable={'Password'}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 32 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={'Enter your password'}
                   value={values.password}
                   onChangeText={handleChange('newPassword')}
@@ -127,7 +127,11 @@ const NewPasswordView = () => {
                   TextInputHeight={18}
                   TextInputSize={14}
                   leftIcon={<PASSWORD />}
-                  lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
+                  lableStyle={{
+                    fontSize: 14,
+                    color: TEXT_GREY,
+                    fontFamily: 'Bold',
+                  }}
                 />
                 {errors.newPassword && touched.newPassword && (
                   <CustomText
@@ -140,7 +144,7 @@ const NewPasswordView = () => {
                 <CustomInput
                   lable={'Confirm Password'}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={'Confirm your password'}
                   value={values.confirmPassword}
                   onChangeText={handleChange('rePassword')}
@@ -150,7 +154,11 @@ const NewPasswordView = () => {
                   TextInputSize={14}
                   TextInputColor={'#5F5F5F'}
                   leftIcon={<PASSWORD />}
-                  lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
+                  lableStyle={{
+                    fontSize: 14,
+                    color: TEXT_GREY,
+                    fontFamily: 'Bold',
+                  }}
                 />
                 {errors.rePassword && touched.rePassword && (
                   <CustomText
@@ -165,7 +173,7 @@ const NewPasswordView = () => {
 
                 <CustomInput
                   lable={'OTP'}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={'OTP'}
                   value={values.confirmPassword}
                   onChangeText={handleChange('otp')}
@@ -175,7 +183,11 @@ const NewPasswordView = () => {
                   TextInputSize={14}
                   TextInputColor={'#5F5F5F'}
                   leftIcon={<OTP />}
-                  lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
+                  lableStyle={{
+                    fontSize: 14,
+                    color: TEXT_GREY,
+                    fontFamily: 'Bold',
+                  }}
                 />
                 {errors.otp && touched.otp && (
                   <CustomText

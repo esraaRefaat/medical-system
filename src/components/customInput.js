@@ -26,17 +26,24 @@ const CustomInput = ({
 
 
     return (
-        <View style={[styles.container, containerStyle, { borderColor: focus ? PRIMARY : INACTIVE, borderWidth: 1 }]}>
-            <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}>
-                {leftIcon}
-                <View style={{ flexDirection: 'column', marginLeft: 8 }}>
-                    <View
-                        style={styles.textView}
-                    >
-                        {(text != "" || focus || forceLable) &&
-                            <Text style={lableStyle}>{lable}</Text>
-                        }
-                    </View>
+        <>
+        <View 
+    //     style={{ flexDirection: 'column', marginLeft: 8 }
+    // }
+    >
+        <View
+             style={styles.textView}
+        >
+            {(text != "" || focus || forceLable) &&
+                <Text style={lableStyle}>{lable}</Text>
+            }
+        </View>
+        <View style={[styles.container, containerStyle, 
+         { borderColor: focus ? PRIMARY : '#D2D6DB', borderWidth: 1 }
+        ]}>
+            <View style={{ width: '90%', flexDirection: 'row', alignItems: 'center', }}>
+                {/* {leftIcon} */}
+              
                     <View
                         style={styles.textInputView}
                     >
@@ -84,6 +91,7 @@ const CustomInput = ({
                 </TouchableOpacity>}
             </View>
         </View>
+        </>
     )
 }
 
@@ -93,7 +101,8 @@ const styles = StyleSheet.create({
     },
     textInput: {
         width: '90%',
-        paddingVertical: 0
+        paddingVertical: 0,
+        paddingHorizontal:12
     },
     text: {
         marginLeft: (8),
@@ -103,6 +112,7 @@ const styles = StyleSheet.create({
         width: '96%',
         flexDirection: 'row',
         height: (33),
+      
     },
     showPassTouch: {
         height: (18),
@@ -110,7 +120,9 @@ const styles = StyleSheet.create({
 
     },
     textView: {
-        width: '100%',
+        marginBottom:10,
+        marginTop:16
+      //  width: '100%',
     }
 
 })

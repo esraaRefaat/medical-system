@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authAction } from "../../../redux/store/slices/authSlice";
 import { APP_BASE_URL, SIGN_UP } from "@env";
 import { showMessage } from "react-native-flash-message";
-import { TEXT_GREY } from "../../../styles/colors";
+import { GREY, TEXT_GREY } from "../../../styles/colors";
 
 const passwordPattern =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -134,7 +134,7 @@ const SignUpView = () => {
               <View style={styles.inputcontainerView}>
                 <CustomInput
                   lable={"Full Name"}
-                  containerStyle={[styles.emailInput, { marginTop: 32 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={"Full Name"}
                   value={values.name}
                   onChangeText={handleChange("name")}
@@ -144,9 +144,9 @@ const SignUpView = () => {
                   TextInputSize={14}
                   leftIcon={<User />}
                   lableStyle={{
-                    fontSize: 10,
+                    fontSize: 14,
                     color: TEXT_GREY,
-                    fontFamily: "Regular",
+                    fontFamily: 'Bold',
                   }}
                 />
                 {errors.name && touched.name && (
@@ -159,7 +159,7 @@ const SignUpView = () => {
                 )}
                 <CustomInput
                   lable={"Email"}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={[styles.emailInput]}
                   placeholder={"Email"}
                   value={values.email}
                   onChangeText={handleChange("email")}
@@ -169,9 +169,9 @@ const SignUpView = () => {
                   TextInputSize={14}
                   leftIcon={<SMS />}
                   lableStyle={{
-                    fontSize: 10,
+                    fontSize: 14,
                     color: TEXT_GREY,
-                    fontFamily: "Regular",
+                    fontFamily: 'Bold',
                   }}
                 />
                 {errors.email && touched.email && (
@@ -185,7 +185,7 @@ const SignUpView = () => {
                 <CustomInput
                   lable={"Password"}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={[styles.emailInput]}
                   placeholder={"Password"}
                   value={values.password}
                   onChangeText={handleChange("password")}
@@ -195,9 +195,9 @@ const SignUpView = () => {
                   TextInputSize={14}
                   leftIcon={<PASSWORD />}
                   lableStyle={{
-                    fontSize: 10,
+                    fontSize: 14,
                     color: TEXT_GREY,
-                    fontFamily: "Regular",
+                    fontFamily: 'Bold',
                   }}
                 />
                 {errors.password && touched.password && (
@@ -211,7 +211,7 @@ const SignUpView = () => {
                 <CustomInput
                   lable={"Confirm Password"}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={[styles.emailInput]}
                   placeholder={"Repeat Password"}
                   value={values.rePassword}
                   onChangeText={handleChange("rePassword")}
@@ -222,9 +222,9 @@ const SignUpView = () => {
                   TextInputColor={"#5F5F5F"}
                   leftIcon={<PASSWORD />}
                   lableStyle={{
-                    fontSize: 10,
+                    fontSize: 14,
                     color: TEXT_GREY,
-                    fontFamily: "Regular",
+                    fontFamily: 'Bold',
                   }}
                 />
                 {errors.rePassword && touched.rePassword && (
@@ -237,9 +237,9 @@ const SignUpView = () => {
                 )}
                 <View style={styles.radioView}>
                   <CustomText
-                    text={"Select Role :"}
+                    text={"Select Role:"}
                     color="TEXT_GREY"
-                    fontFamily="Medium"
+                    fontFamily="bold"
                     size={14}
                     style={{ marginRight: 5 }}
                   />

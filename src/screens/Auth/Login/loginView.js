@@ -126,7 +126,7 @@ const LoginView = () => {
               <View style={styles.inputcontainerView}>
                 <CustomInput
                   lable={"Email"}
-                  containerStyle={[styles.emailInput, { marginTop: 32 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={"Enter your Email"}
                   value={values.email}
                   onChangeText={handleChange("email")}
@@ -136,9 +136,9 @@ const LoginView = () => {
                   TextInputSize={14}
                   leftIcon={<SMS />}
                   lableStyle={{
-                    fontSize: 10,
+                    fontSize: 14,
                     color: TEXT_GREY,
-                    fontFamily: "Regular",
+                    fontFamily: 'Bold',
                   }}
                 />
                 {errors.email && touched.email && (
@@ -152,7 +152,7 @@ const LoginView = () => {
                 <CustomInput
                   lable={"Password"}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={"Enter your password"}
                   value={values.password}
                   onChangeText={handleChange("password")}
@@ -162,9 +162,9 @@ const LoginView = () => {
                   TextInputSize={14}
                   leftIcon={<PASSWORD />}
                   lableStyle={{
-                    fontSize: 10,
+                    fontSize: 14,
                     color: TEXT_GREY,
-                    fontFamily: "Regular",
+                    fontFamily: 'Bold',
                   }}
                 />
                 {errors.password && touched.password && (

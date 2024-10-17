@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     },
     backbutton: {
         alignSelf: "flex-start",
-        paddingHorizontal: 24,
-        marginTop: 20,
+      //  paddingHorizontal: 24,
+        marginTop: 50,
     },
     backbuttontouch: {
        width:24,
@@ -18,23 +18,23 @@ const styles = StyleSheet.create({
     },
     logoText: {
         alignSelf: "flex-start",
-        paddingHorizontal: 16,
+       // paddingHorizontal: 16,
         marginTop: 16
     },
     Text: {
         alignSelf: "flex-start",
-        paddingHorizontal: 16,
+       // paddingHorizontal: 16,
         marginTop: 8
     },
     inputcontainerView: {
         width: '100%',
-        paddingHorizontal: 16
+     //   paddingHorizontal: 16
     },
     emailInput: {
         height: 49,
-        borderRadius: 8,
+        borderRadius: 12,
         flexDirection: 'row',
-        paddingHorizontal: 16,
+       // paddingHorizontal: 16,
     },
     buttonStyle: {
         marginTop:70,
