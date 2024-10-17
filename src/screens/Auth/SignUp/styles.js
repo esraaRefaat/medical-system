@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     logoText: {
         alignSelf: "flex-start",
         // paddingHorizontal: 16,
-        marginTop: 15
+        marginTop: 50
     },
     Text: {
         alignSelf: "flex-start",
