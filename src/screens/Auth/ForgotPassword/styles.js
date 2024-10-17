@@ -4,8 +4,9 @@ import { PRIMARY } from '../../../styles/colors';
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+      //  alignItems: 'center',
         flex: 1,
+        paddingHorizontal:10
     },
     backbutton: {
         alignSelf: "flex-start",
