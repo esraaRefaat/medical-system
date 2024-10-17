@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView, Modal, View, TouchableOpacity, Text, Platform ,ScrollView} from "react-native";
+import { SafeAreaView, Modal, View, TouchableOpacity, Text, Platform, ScrollView } from "react-native";
 import { KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as Yup from "yup";
@@ -88,7 +88,8 @@ const SignUpView = () => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              register_user(values);
+              const { termsAccepted, ...userData } = values;
+              register_user(userData);
             }}
           >
             {({
