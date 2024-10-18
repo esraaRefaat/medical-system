@@ -65,9 +65,9 @@ export default function NewFindDoctor({ route }) {
                 data={doctors}
                 keyExtractor={(item) => item._id.toString()}
                 ItemSeparatorComponent={() => <View style={{ height: 38 }} />}
-                ListEmptyComponent={() =>
-                    <Text style={styles.endText}>✋ No More Doctors</Text>
-                }
+                // ListEmptyComponent={() =>
+                //     <Text style={styles.endText}>✋ No More Doctors</Text>
+                // }
                 ListHeaderComponent={
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', alignItems: 'center', marginBottom: 25 }}>
                         <View style={{
