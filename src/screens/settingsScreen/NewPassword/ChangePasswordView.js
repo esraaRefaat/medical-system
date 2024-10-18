@@ -110,7 +110,7 @@ const ChangePasswordView = () => {
                 <CustomInput
                   lable={'Current Password'}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 32 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={'Enter your current password'}
                   value={values.password}
                   onChangeText={handleChange('password')}
@@ -119,7 +119,7 @@ const ChangePasswordView = () => {
                   TextInputHeight={18}
                   TextInputSize={14}
                   leftIcon={<PASSWORD />}
-                  lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
+                  lableStyle={{ fontSize: 14, color: TEXT_GREY, fontFamily: "Bold" }}
                 />
                 {errors.password && touched.password && (
                   <CustomText
@@ -133,7 +133,7 @@ const ChangePasswordView = () => {
                 <CustomInput
                   lable={'New Password'}
                   password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
+                  containerStyle={styles.emailInput}
                   placeholder={'Enter your new password'}
                   value={values.newPassword}
                   onChangeText={handleChange('newPassword')}
@@ -143,7 +143,7 @@ const ChangePasswordView = () => {
                   TextInputSize={14}
                   TextInputColor={'#5F5F5F'}
                   leftIcon={<PASSWORD />}
-                  lableStyle={{ fontSize: 10, color: TEXT_GREY, fontFamily: 'Regular' }}
+                  lableStyle={{ fontSize: 14, color: TEXT_GREY, fontFamily: "Bold" }}
                 />
                 {errors.newPassword && touched.newPassword && (
                   <CustomText
