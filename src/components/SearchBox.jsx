@@ -11,7 +11,8 @@ const SearchBox = ({ setSearchName }) => {
         }}>
             <View style={styles.container}>
                 <SearchIcon />
-                <TextInput ref={input} style={styles.textInput} value={searchValue} placeholder='Search Doctor' onChangeText={(e) => {
+                <TextInput ref={input} style={styles.textInput} value={searchValue} placeholder='Search Doctor' 
+                onChangeText={(e) => {
                     setSearchValue(e)
                 }} onSubmitEditing={(e) => {
                     setSearchName(searchValue);

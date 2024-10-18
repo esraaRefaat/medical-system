@@ -33,6 +33,7 @@ import Home from "../screens/Home.js";
 import EditProfileInfoView from "../screens/settingsScreen/editProfileInfo/EditProfileInfo.js";
 import SettingScreen from "../screens/settingsScreen/settingScreen.js";
 import ChangePasswordView from "../screens/settingsScreen/NewPassword/ChangePasswordView.js";
+import NewFindDoctor from "../screens/NewFindDoctor/NewFindDoctor.js";
 
 const stack = createNativeStackNavigator();
 const Root = () => {
@@ -123,6 +124,10 @@ const Root = () => {
 <stack.Screen
         name={routes.ChangePasswordView}
         component={ChangePasswordView}
+      ></stack.Screen>
+      <stack.Screen
+        name={routes.newfindDoctor}
+        component={NewFindDoctor}
       ></stack.Screen>
 
 

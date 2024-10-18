@@ -10,7 +10,7 @@ const Spec = (props) => {
       style={styles.container}
       onPress={() => {
         console.log(props.drSpecialties);
-        navigation.navigate(routes.findDoctor, {
+        navigation.navigate(routes.newfindDoctor, {
           drSpecialties: props.drSpecialties,
         });
       }}

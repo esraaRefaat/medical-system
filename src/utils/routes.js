@@ -16,6 +16,7 @@ const routes = Object.freeze({
   confirmAppointment: "confirmAppointment",
   appointmentSuccess: "appointmentSuccess",
   findDoctor: "findDoctor",
+  newfindDoctor:"newfindDoctor",
   addrecordscreen: "addrecordscreen",
   recorddetails: "recorddetails",
   doctorInfoUpdate: "doctorInfoUpdate",
