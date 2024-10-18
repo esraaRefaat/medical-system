@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useNavigation, StackActions } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
-import { View, ScrollView, TouchableOpacity, Text } from "react-native";
+import { View, ScrollView, TouchableOpacity, Text, KeyboardAvoidingView, Platform } from "react-native";
 import styles from "./styles";
 import CustomText from "../../../components/customText";
 import CustomInput from "../../../components/customInput";
@@ -23,6 +23,7 @@ import { APP_BASE_URL, SIGN_UP } from "@env";
 import { showMessage } from "react-native-flash-message";
 import { TEXT_GREY } from "../../../styles/colors";
 import { adminAuthAction } from "../../../redux/store/slices/adminAuthSlice.js";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const passwordPattern =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -74,13 +75,27 @@ const AdminSignUpView = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        horizontal={false}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{ flexGrow: 1 }}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
       >
-        <View style={[styles.backbutton, { width: 24, height: 24 }]}>
+        <KeyboardAwareScrollView
+          horizontal={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ paddingBottom: 220 }}
+        >
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}>
+              <BACK_Arrow />
+            </TouchableOpacity>
+            <Text style={styles.headerText}>Add New Admin</Text>
+            <Text style={styles.notificationIcon}></Text>
+          </View>
+
+          {/* <View style={[styles.backbutton, { width: 24, height: 24 }]}>
           <TouchableOpacity
             activeOpacity={1}
             style={styles.backbuttontouch}
@@ -89,162 +104,147 @@ const AdminSignUpView = () => {
             }}>
             <BACK_Arrow />
           </TouchableOpacity>
-        </View>
-        <CustomText
-          text={"Register New Admin"}
+        </View> */}
+          {/* <CustomText
+          text={"Add New Admin"}
           color="GREY"
           fontFamily="bold"
           size={24}
           style={styles.logoText}
-        />
-        <CustomText
+        /> */}
+          {/* <CustomText
           text={"Please enter a form to continue the register"}
           color="TEXT_GREY"
           fontFamily="Medium"
           size={14}
           style={styles.Text}
-        />
-        <Formik
-          initialValues={{
-            name: "",
-            email: "",
-            password: "",
-            rePassword: "",
-            role: "admin",
-          }}
-          validationSchema={SignupSchema}
-          onSubmit={(values) => {
-            register_user(values);
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            setFieldTouched,
-            isValid,
-            handleSubmit,
-            handleBlur,
-          }) => (
-            <>
-              <View style={styles.inputcontainerView}>
-                <CustomInput
-                  lable={"Full Name"}
-                  containerStyle={[styles.emailInput, { marginTop: 32 }]}
-                  placeholder={"Enter the user full name"}
-                  value={values.name}
-                  onChangeText={handleChange("name")}
-                  Blur={handleBlur("name")}
-                  forceLable={true}
-                  TextInputHeight={18}
-                  TextInputSize={14}
-                  leftIcon={<User />}
-                  lableStyle={{
-                    fontSize: 10,
-                    color: TEXT_GREY,
-                    fontFamily: "Regular",
-                  }}
-                />
-                {errors.name && touched.name && (
-                  <CustomText
-                    text={errors.name}
-                    color="DARK_RED"
-                    fontFamily="Regular"
-                    size={10}
+        /> */}
+          <Formik
+            initialValues={{
+              name: "",
+              email: "",
+              password: "",
+              rePassword: "",
+              role: "admin",
+            }}
+            validationSchema={SignupSchema}
+            onSubmit={(values) => {
+              register_user(values);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              setFieldTouched,
+              isValid,
+              handleSubmit,
+              handleBlur,
+            }) => (
+              <>
+                <View style={styles.inputcontainerView}>
+                  <CustomInput
+                    lable={"Full Name"}
+                    containerStyle={styles.emailInput}
+                    placeholder={"Enter the user full name"}
+                    value={values.name}
+                    onChangeText={handleChange("name")}
+                    Blur={handleBlur("name")}
+                    forceLable={true}
+                    TextInputHeight={18}
+                    TextInputSize={14}
+                    leftIcon={<User />}
+                    lableStyle={{ fontSize: 14, color: TEXT_GREY, fontFamily: "Bold" }}
                   />
-                )}
-                <CustomInput
-                  lable={"Email"}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
-                  placeholder={"Enter the user Email"}
-                  value={values.email}
-                  onChangeText={handleChange("email")}
-                  Blur={handleBlur("email")}
-                  forceLable={true}
-                  TextInputHeight={18}
-                  TextInputSize={14}
-                  leftIcon={<SMS />}
-                  lableStyle={{
-                    fontSize: 10,
-                    color: TEXT_GREY,
-                    fontFamily: "Regular",
-                  }}
-                />
-                {errors.email && touched.email && (
-                  <CustomText
-                    text={errors.email}
-                    color="DARK_RED"
-                    fontFamily="Regular"
-                    size={10}
+                  {errors.name && touched.name && (
+                    <CustomText
+                      text={errors.name}
+                      color="DARK_RED"
+                      fontFamily="Regular"
+                      size={10}
+                    />
+                  )}
+                  <CustomInput
+                    lable={"Email"}
+                    containerStyle={styles.emailInput}
+                    placeholder={"Enter the user Email"}
+                    value={values.email}
+                    onChangeText={handleChange("email")}
+                    Blur={handleBlur("email")}
+                    forceLable={true}
+                    TextInputHeight={18}
+                    TextInputSize={14}
+                    leftIcon={<SMS />}
+                    lableStyle={{ fontSize: 14, color: TEXT_GREY, fontFamily: "Bold" }}
                   />
-                )}
-                <CustomInput
-                  lable={"Password"}
-                  password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
-                  placeholder={"Enter password"}
-                  value={values.password}
-                  onChangeText={handleChange("password")}
-                  Blur={handleBlur("password")}
-                  forceLable={true}
-                  TextInputHeight={18}
-                  TextInputSize={14}
-                  leftIcon={<PASSWORD />}
-                  lableStyle={{
-                    fontSize: 10,
-                    color: TEXT_GREY,
-                    fontFamily: "Regular",
-                  }}
-                />
-                {errors.password && touched.password && (
-                  <CustomText
-                    text={errors.password}
-                    color="DARK_RED"
-                    fontFamily="Regular"
-                    size={10}
+                  {errors.email && touched.email && (
+                    <CustomText
+                      text={errors.email}
+                      color="DARK_RED"
+                      fontFamily="Regular"
+                      size={10}
+                    />
+                  )}
+                  <CustomInput
+                    lable={"Password"}
+                    password={true}
+                    containerStyle={styles.emailInput}
+                    placeholder={"Enter password"}
+                    value={values.password}
+                    onChangeText={handleChange("password")}
+                    Blur={handleBlur("password")}
+                    forceLable={true}
+                    TextInputHeight={18}
+                    TextInputSize={14}
+                    leftIcon={<PASSWORD />}
+                    lableStyle={{ fontSize: 14, color: TEXT_GREY, fontFamily: "Bold" }}
                   />
-                )}
-                <CustomInput
-                  lable={"Confirm Password"}
-                  password={true}
-                  containerStyle={[styles.emailInput, { marginTop: 16 }]}
-                  placeholder={"Confirm password"}
-                  value={values.rePassword}
-                  onChangeText={handleChange("rePassword")}
-                  Blur={handleBlur("rePassword")}
-                  forceLable={true}
-                  TextInputHeight={18}
-                  TextInputSize={14}
-                  TextInputColor={"#5F5F5F"}
-                  leftIcon={<PASSWORD />}
-                  lableStyle={{
-                    fontSize: 10,
-                    color: TEXT_GREY,
-                    fontFamily: "Regular",
-                  }}
-                />
-                {errors.rePassword && touched.rePassword && (
-                  <CustomText
-                    text={errors.rePassword}
-                    color="DARK_RED"
-                    fontFamily="Regular"
-                    size={10}
+                  {errors.password && touched.password && (
+                    <CustomText
+                      text={errors.password}
+                      color="DARK_RED"
+                      fontFamily="Regular"
+                      size={10}
+                    />
+                  )}
+                  <CustomInput
+                    lable={"Confirm Password"}
+                    password={true}
+                    containerStyle={styles.emailInput}
+                    placeholder={"Confirm password"}
+                    value={values.rePassword}
+                    onChangeText={handleChange("rePassword")}
+                    Blur={handleBlur("rePassword")}
+                    forceLable={true}
+                    TextInputHeight={18}
+                    TextInputSize={14}
+                    TextInputColor={"#5F5F5F"}
+                    leftIcon={<PASSWORD />}
+                    lableStyle={{ fontSize: 14, color: TEXT_GREY, fontFamily: "Bold" }}
                   />
-                )}
+                  {errors.rePassword && touched.rePassword && (
+                    <CustomText
+                      text={errors.rePassword}
+                      color="DARK_RED"
+                      fontFamily="Regular"
+                      size={10}
+                    />
+                  )}
 
-              </View>
-              <CustomButton
-                text={"Sign Up"}
-                containerStyle={styles.buttonStyle}
-                // disabled={!isValid}
-                onPress={handleSubmit}
-              />
-            </>
-          )}
-        </Formik>
+                </View>
+                <CustomButton
+                  text={"Sign Up"}
+                  containerStyle={styles.buttonStyle}
+                  // disabled={!isValid}
+                  onPress={handleSubmit}
+                />
+              </>
+            )}
+          </Formik>
 
-      </ScrollView>
+        </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

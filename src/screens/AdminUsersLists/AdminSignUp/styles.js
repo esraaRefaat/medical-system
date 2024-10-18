@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         flex: 1,
+        paddingHorizontal:10
     },
     backbutton: {
         alignSelf: "flex-start",
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     },
     logoText: {
         alignSelf: "flex-start",
-        paddingHorizontal: 16,
+     //   paddingHorizontal: 16,
         marginTop: 16
     },
     Text: {
@@ -28,13 +29,13 @@ const styles = StyleSheet.create({
     },
     inputcontainerView: {
         width: '100%',
-        paddingHorizontal: 16
+     //   paddingHorizontal: 16
     },
     emailInput: {
         height: 49,
         borderRadius: 8,
         flexDirection: 'row',
-        paddingHorizontal: 16,
+       // paddingHorizontal: 16,
     },
     buttonStyle: {
         marginTop: 70,
@@ -60,7 +61,21 @@ const styles = StyleSheet.create({
         bottom: 16,
         width: '90%',
         alignSelf: 'center'
-      }
+      },
+      header: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+       // paddingHorizontal: 16,
+        paddingBottom: 34,
+        paddingTop: 16
+    },
+    headerText: {
+        fontSize: 16,
+        fontFamily: 'Bold',
+        color: GRAY,
+    },
 
 
 })
