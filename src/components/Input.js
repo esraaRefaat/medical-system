@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Calendar } from '../assets/svgIcons';
 import { Text, View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import CustomText from './customText';
+import { GREY, PRIMARY, TEXT_GREY } from '../styles/colors';
 
 
 
@@ -12,30 +13,35 @@ const Input = ({
     Placeholder,
     Value }) => {
 
-
+    const [focus, setFocus] = useState(false)
     return (
-        <View style={[styles.container, containerStyle, {
-            backgroundColor: '#F7F7F7'
-        }]}>
+        <View style={[styles.container, containerStyle]}>
 
             <View style={{ flexDirection: 'column' }}>
                 <View
                     style={styles.textView}
                 >
-                    <Text style={[styles.lableStyle, { color: '#969696' }]}>{lable}</Text>
+                    <Text style={styles.lableStyle}>{lable}</Text>
                 </View>
                 <View
-                    style={styles.textInputView}
+                    style={[styles.textInputView, { borderColor: focus ? PRIMARY : '#D2D6DB', borderWidth: 1 }]}
                 >
-                  <TextInput 
-                  style={{height:40,width:'100%'}}
-                  placeholder={Placeholder}
-                  placeholderTextColor={'#969696'}
-                  onChangeText={(text) => {
-                    onChangeText(text)
-                }}
-                  value={Value}
-                  />
+                    <TextInput
+                        style={{ height: '100%', width: '100%', paddingHorizontal: 12, color: GREY }}
+                        onFocus={() => {
+                            setFocus(true)
+
+                        }}
+                        onEndEditing={() =>
+                            setFocus(false)
+                        }
+                        placeholder={Placeholder}
+                        placeholderTextColor={'#969696'}
+                        onChangeText={(text) => {
+                            onChangeText(text)
+                        }}
+                        value={Value}
+                    />
                 </View>
             </View>
         </View>
@@ -49,10 +55,9 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     lableStyle: {
-        paddingHorizontal: 16,
-        paddingTop: 6,
-        fontSize: 10,
-        fontFamily: 'Regular'
+        fontSize: 14, 
+        color: TEXT_GREY,
+         fontFamily: "Bold" ,
     },
     textInput: {
         paddingVertical: 0,
@@ -67,15 +72,15 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        height: 40,
-        paddingHorizontal: 16,
+        height: 49,
+        borderRadius: 12,
     },
     showPassTouch: {
         alignSelf: 'center',
 
     },
     textView: {
-        width: '100%',
+       paddingBottom:10
     }
 
 })

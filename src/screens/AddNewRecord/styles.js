@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     buttonStyle: {
-        marginTop: 20,
+        marginTop: 50,
         backgroundColor: PRIMARY,
         alignSelf: 'center',
     },

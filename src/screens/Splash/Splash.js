@@ -11,7 +11,7 @@ const Splash = () => {
   const navigateTo = () => {
 
     setTimeout(function () {
-      navigation.dispatch(StackActions.replace(routes.onboarding));
+      navigation.dispatch(StackActions.replace(routes.addrecordscreen));
     }, 1500);
 
     // AsyncStorage.getItem("notFirst").then((notFirst) => {
