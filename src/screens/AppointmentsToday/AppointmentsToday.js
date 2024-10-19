@@ -10,27 +10,19 @@ import {
   Pressable,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  SMS,
-  PASSWORD,
-  BACK_Arrow,
-  User,
-  ALERT_MSG,
-} from "../../assets/svgIcons";
-import { GREY, PRIMARY, TEXT_GREY } from "../../styles/colors";
-import styles from "./styles";
-import routes from "../../utils/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { APP_BASE_URL, GET_APPOINTMENTS } from "@env";
 import { appointmentsAction } from "../../redux/store/slices/appointmentsSlice";
 import { putDataWithTokenAction } from "../../redux/store/slices/putDataWithTokenSlice.js";
+import routes from "../../utils/routes";
+import moment from "moment";
 
 export default function AppointmentsToday({ navigation }) {
   const { user } = useSelector((state) => state.auth);
   const [records, setRecords] = useState([]);
   const dispatch = useDispatch();
   const [modalVisibleDone, setModalVisibleDone] = useState(false);
-  const [modalVisibleCancel, setModalVisibleCancel] = useState(false);  
+  const [modalVisibleCancel, setModalVisibleCancel] = useState(false);
   const [appointmentId, setAppointmentId] = useState(null);
 
   useEffect(() => {
@@ -44,7 +36,6 @@ export default function AppointmentsToday({ navigation }) {
     )
       .unwrap()
       .then((response) => {
-        // console.log("appoint", response.document);
         const todaysAppointments = response.document.filter((appointment) => {
           const appointmentDate = appointment.date.split("T")[0];
           return appointmentDate === today;
@@ -56,101 +47,106 @@ export default function AppointmentsToday({ navigation }) {
       });
   }, []);
 
-  const onDone = (id)=>{
-    setAppointmentId(id); // Set the ID to be Approved
-    setModalVisibleDone(true); // Close the approve modal
-  };
-  const onCancel = (id)=>{
-    setAppointmentId(id); // Set the ID to be Approved
-    setModalVisibleCancel(true); // Close the approve modal
+  const onDone = (id) => {
+    setAppointmentId(id);
+    setModalVisibleDone(true);
   };
 
-
+  const onCancel = (id) => {
+    setAppointmentId(id);
+    setModalVisibleCancel(true);
+  };
 
   const confirmDone = async () => {
-    const token = user.token; // Get your token from your auth state or context
+    const token = user.token;
     const url = `https://medical-system-server.onrender.com/api/v1/appointments/${appointmentId}`;
-    const userData = {status: "done"}
-    
-    const resultAction = await dispatch(putDataWithTokenAction({ token,userData, url }));
-  
-    if (putDataWithTokenAction.fulfilled.match(resultAction)) {
-      setRecords((prevAppointment) => prevAppointment.filter((appointment) => appointment._id !== appointmentId));
-    } else {
-      console.error("Error Approving doctor:", resultAction.error);
-    }
-    
-    setModalVisibleDone(false); // Close the approve modal
-    setAppointmentId(null); // Reset the ID
-  };
+    const userData = { status: "done" };
 
+    const resultAction = await dispatch(
+      putDataWithTokenAction({ token, userData, url })
+    );
+
+    if (putDataWithTokenAction.fulfilled.match(resultAction)) {
+      setRecords((prevAppointment) =>
+        prevAppointment.filter(
+          (appointment) => appointment._id !== appointmentId
+        )
+      );
+    } else {
+      console.error("Error approving appointment:", resultAction.error);
+    }
+
+    setModalVisibleDone(false);
+    setAppointmentId(null);
+  };
 
   const confirmCancel = async () => {
-    const token = user.token; // Get your token from your auth state or context
+    const token = user.token;
     const url = `https://medical-system-server.onrender.com/api/v1/appointments/${appointmentId}`;
-    const userData = {status: "cancelled"}
-    
-    const resultAction = await dispatch(putDataWithTokenAction({ token,userData, url }));
-  
+    const userData = { status: "cancelled" };
+
+    const resultAction = await dispatch(
+      putDataWithTokenAction({ token, userData, url })
+    );
+
     if (putDataWithTokenAction.fulfilled.match(resultAction)) {
-      setRecords((prevAppointment) => prevAppointment.filter((appointment) => appointment._id !== appointmentId));
+      setRecords((prevAppointment) =>
+        prevAppointment.filter(
+          (appointment) => appointment._id !== appointmentId
+        )
+      );
     } else {
-      console.error("Error Approving doctor:", resultAction.error);
+      console.error("Error canceling appointment:", resultAction.error);
     }
-    
-    setModalVisibleCancel(false); // Close the reject modal
-    setAppointmentId(null); // Reset the ID
+
+    setModalVisibleCancel(false);
+    setAppointmentId(null);
   };
 
-
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => {
-        console.log(item.patient._id);
-        navigation.navigate(routes.medicalrecords, {
-          patientId: item.patient._id,
-        });
-      }}
-    >
-      <View style={styles.card}>
-        <View style={styles.dateContainer}>
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate(routes.medicalrecords, {
+            patientId: item.patient._id,
+          });
+        }}
+      >
+        <View style={styles.card}>
           <Image
-            source={{
-              uri: item.patient.profilePicture,
-            }}
+            source={{ uri: item.patient.profilePicture }}
             style={styles.imageStyle}
           />
-        </View>
-        <View style={styles.recordContent}>
           <Text style={styles.recordSubtitle}>{item.patient.name}</Text>
+          <Text style={styles.dateText}>
+            {moment(item.date).format("DD-MM-YYYY")}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.doneButton}
+              onPress={() => onDone(item._id)}
+            >
+              <Text style={styles.buttonText}>Done</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => onCancel(item._id)}
+            >
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* Corrected onPress handlers */}
-        <TouchableOpacity
-          style={styles.doneButton}
-          onPress={() => onDone(item._id)} // Wrap in arrow function
-        >
-          <Text style={styles.doneButtonText}>Done</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.cancelButton}
-          onPress={() => onCancel(item._id)} // Wrap in arrow function
-        >
-          <Text style={styles.doneButtonText}>Cancel</Text>
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
-  );
-  
+      </TouchableOpacity>
+    );
+  };
+
   const EmptyListComponent = () => (
-    <View>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/medical.png")}
-          style={styles.image}
-        />
-      </View>
-      <Text style={styles.title}>There is no Appointments</Text>
+    <View style={styles.emptyContainer}>
+      <Image
+        source={require("../../assets/medical.png")}
+        style={styles.emptyImage}
+      />
+      <Text style={styles.title}>There are no Appointments</Text>
       <Text style={styles.description}>
         A detailed health history helps a doctor diagnose you better.
       </Text>
@@ -158,14 +154,7 @@ export default function AppointmentsToday({ navigation }) {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <BACK_Arrow />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Appointments Today</Text>
-        <Text style={styles.notificationIcon}></Text>
-      </View>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
       <FlatList
         data={records}
         renderItem={renderItem}
@@ -173,8 +162,9 @@ export default function AppointmentsToday({ navigation }) {
         ListEmptyComponent={<EmptyListComponent />}
         style={styles.list}
       />
-       {/* Approval Modal */}
-       <Modal
+
+      {/* Done Modal */}
+      <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisibleDone}
@@ -182,11 +172,11 @@ export default function AppointmentsToday({ navigation }) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Confirm Approval</Text>
+            <Text style={styles.modalTitle}>Confirm Appointment is Done</Text>
             <Text style={styles.modalMessage}>
-              Are you sure The Appointment is Done?
+              Are you sure the appointment is done?
             </Text>
-            <View style={styles.buttonContainer}>
+            <View style={styles.modalButtons}>
               <Pressable
                 style={[styles.button, styles.confirmButton]}
                 onPress={confirmDone}
@@ -204,7 +194,7 @@ export default function AppointmentsToday({ navigation }) {
         </View>
       </Modal>
 
-      {/* Rejection Modal */}
+      {/* Cancel Modal */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -213,13 +203,13 @@ export default function AppointmentsToday({ navigation }) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Confirm Rejection</Text>
+            <Text style={styles.modalTitle}>Confirm Cancelation</Text>
             <Text style={styles.modalMessage}>
               Are you sure you want to cancel the appointment?
             </Text>
-            <View style={styles.buttonContainer}>
+            <View style={styles.modalButtons}>
               <Pressable
-                style={[styles.button, styles.rejectButton]}
+                style={[styles.button, styles.confirmButton]}
                 onPress={confirmCancel}
               >
                 <Text style={styles.buttonText}>Yes</Text>
@@ -234,9 +224,131 @@ export default function AppointmentsToday({ navigation }) {
           </View>
         </View>
       </Modal>
-
-
     </SafeAreaView>
   );
 }
+
+// Styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#f5f5f5",
+  },
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 16,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  imageStyle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginBottom: 10,
+  },
+  recordSubtitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  doneButton: {
+    backgroundColor: "#33b249",
+    paddingVertical: 10,
+    width: "100%",
+    borderRadius: 5,
+    marginBottom: 8,
+  },
+  cancelButton: {
+    backgroundColor: "#ED0800",
+    paddingVertical: 10,
+    width: "100%",
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  emptyContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  emptyImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  description: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    width: 300,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  modalMessage: {
+    fontSize: 14,
+    color: "#666",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  modalButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  confirmButton: {
+    backgroundColor: "#4CAF50",
+    paddingVertical: 10,
+    width: "45%",
+    borderRadius: 5,
+  },
+  cancelButton1: {
+    backgroundColor: "#f44336",
+    paddingVertical: 10,
+    width: "45%",
+    borderRadius: 5,
+  },
+  dateText: {
+    fontSize: 16,
+    color: "#666",
+    marginBottom: 10,
+    fontWeight: "bold",
+  },
+});
 
