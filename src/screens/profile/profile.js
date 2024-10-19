@@ -26,56 +26,9 @@ import { PRIMARY } from "../../styles/colors.js";
 //   location:
 //     "Jl. Tangkuban Perahu No.31-33, Kauman, Kec. Klojen, Kota Malang, Jawa Timur 65119",
 // };
-const reviews = [
-  {
-    profilePicture: "https://example.com/images/user1.jpg",
-    name: "Alice Smith",
-    rating: 4,
-    date: "2024-10-01",
-    review:
-      "Dr. John was very attentive and answered all my questions. Highly recommend!",
-  },
-  {
-    profilePicture: "https://example.com/images/user2.jpg",
-    name: "Bob Johnson",
-    rating: 5,
-    date: "2024-09-25",
-    review: "Best experience I've had! Dr. John is a true professional.",
-  },
-  {
-    profilePicture: "https://example.com/images/user3.jpg",
-    name: "Cathy Lee",
-    rating: 3,
-    date: "2024-09-20",
-    review: "The wait time was a bit long, but the consultation was thorough.",
-  },
-  {
-    profilePicture: null,
-    name: "David Brown",
-    rating: 2,
-    date: "2024-09-15",
-    review: "I was not satisfied with my visit. I expected more clarity.",
-  },
-  {
-    profilePicture: "https://example.com/images/user4.jpg",
-    name: "Eva Green",
-    rating: 5,
-    date: "2024-09-10",
-    review: "Amazing doctor! Very caring and knowledgeable.",
-  },
-  {
-    profilePicture: "https://example.com/images/user5.jpg",
-    name: "Frank White",
-    rating: 4,
-    date: "2024-09-05",
-    review: "Great experience overall. Would definitely recommend to others.",
-  },
-];
 
 const Profile = ({ route }) => {
   const { user } = useSelector((state) => state.auth);
-
-
 
   const id = route?.params?.id || user.user_id;
   const [doctorData, setDoctorData] = useState(null);
@@ -103,7 +56,7 @@ const Profile = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {doctorData ? (
           <>
@@ -112,30 +65,27 @@ const Profile = ({ route }) => {
           </>
         ) : (
           <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#0000ff" />
-        </View>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
         )}
       </ScrollView>
       {user?.user_role === "patient" && (
-
-<CustomButton
-text={"Book Appointment"}
-containerStyle={styles.bookButton}
-// disabled={!isValid}
-onPress={handleBookAppointment}
-/>
+        <CustomButton
+          text={"Book Appointment"}
+          containerStyle={styles.bookButton}
+          // disabled={!isValid}
+          onPress={handleBookAppointment}
+        />
       )}
 
-{!user && (
-
-<CustomButton
-text={"Log In To Book Appointment"}
-containerStyle={styles.bookButton}
-// disabled={!isValid}
-onPress={handleLogIn}
-/>
+      {!user && (
+        <CustomButton
+          text={"Log In To Book Appointment"}
+          containerStyle={styles.bookButton}
+          // disabled={!isValid}
+          onPress={handleLogIn}
+        />
       )}
-
     </SafeAreaView>
   );
 };
@@ -152,7 +102,7 @@ const styles = StyleSheet.create({
   },
   bookButton: {
     backgroundColor: PRIMARY,
-    alignSelf: 'center', 
+    alignSelf: "center",
   },
   buttonText: {
     color: "#FFFFFF",
@@ -173,14 +123,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   loadingOverlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

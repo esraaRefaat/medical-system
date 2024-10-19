@@ -79,7 +79,7 @@ export default function FindDoctor({ route }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView edges={["bottom"]}>
       <FlatList
         style={{ height: "100%" }}
         ref={flatListRef}
@@ -99,8 +99,7 @@ export default function FindDoctor({ route }) {
         ItemSeparatorComponent={() => <View style={{ height: 38 }} />}
         renderItem={({ item }) => (
           <DoctorCard
-            avatar={
-item.profilePicture            }
+            avatar={item.profilePicture}
             fullName={item.name}
             specialization={item.drSpecialties}
             fees={item.drSessionFees}

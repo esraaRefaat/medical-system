@@ -52,9 +52,17 @@ const Root = () => {
       />
       <stack.Screen name={routes.specialities} component={Specialities} />
       <stack.Screen name={routes.newpassword} component={NewPasswordView} />
-      <stack.Screen name={routes.mainapp} component={Tabs} />
+      <stack.Screen
+        name={routes.mainapp}
+        component={Tabs}
+        options={{ title: "Home" }}
+      />
       <stack.Screen name={routes.home} component={Home} />
-      <stack.Screen name={routes.medicalrecords} component={MedicalRecords} />
+      <stack.Screen
+        name={routes.medicalrecords}
+        component={MedicalRecords}
+        options={{ title: "Records" }}
+      />
       <stack.Screen
         name={routes.confirmAppointment}
         component={ConfirmAppointment}
@@ -63,20 +71,30 @@ const Root = () => {
         name={routes.appointmentSuccess}
         component={AppointmentSuccess}
       />
-      <stack.Screen name={routes.findDoctor} component={FindDoctor} />
+      <stack.Screen
+        name={routes.findDoctor}
+        component={FindDoctor}
+        options={{ headerShown: true, title: "Find a doctor" }}
+      />
       <stack.Screen name={routes.addrecordscreen} component={AddRecordScreen} />
       <stack.Screen
         name={routes.recorddetails}
         component={RecordDetailsScreen}
+        options={{ headerShown: true, title: "Record Details" }}
       />
       <stack.Screen
         name={routes.doctorInfoUpdate}
         component={DoctorInfoUpdateView}
       />
-      <stack.Screen name={routes.Profile} component={Profile} />
+      <stack.Screen
+        name={routes.Profile}
+        component={Profile}
+        options={{ headerShown: true, title: "Profile" }}
+      />
       <stack.Screen
         name={routes.appointmentstoday}
         component={AppointmentsToday}
+        options={{ headerShown: true, title: "Appointments" }}
       />
       <stack.Screen
         name={routes.CreateAppointment}
@@ -86,6 +104,7 @@ const Root = () => {
       <stack.Screen
         name={routes.UpcomingAppointment}
         component={UpcomingAppointment}
+        options={{ headerShown: true, title: "Appointments" }}
       />
       <stack.Screen
         name={routes.ApproveDoctorsList}
@@ -98,6 +117,7 @@ const Root = () => {
       <stack.Screen
         name={routes.BookedAppointments}
         component={BookedAppointments}
+        options={{ headerShown: true, title: "Appointments" }}
       />
       <stack.Screen name={routes.rating} component={SubmitRating} />
       <stack.Screen
@@ -111,6 +131,7 @@ const Root = () => {
       <stack.Screen
         name={routes.PatientMedicalRecords}
         component={PatientMedicalRecords}
+        options={{ headerShown: true, title: "Medical Records" }}
       ></stack.Screen>
       <stack.Screen
         name={routes.EditProfileInfo}
@@ -120,15 +141,13 @@ const Root = () => {
         name={routes.Settings}
         component={SettingScreen}
       ></stack.Screen>
-<stack.Screen
+      <stack.Screen
         name={routes.ChangePasswordView}
         component={ChangePasswordView}
       ></stack.Screen>
-
-
-      
     </stack.Navigator>
   );
 };
 
 export default Root;
+

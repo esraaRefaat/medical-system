@@ -40,7 +40,7 @@ const Tabs = () => {
           }}
         />
       )}
-      {user &&  user.user_role == "patient" && (
+      {user && user.user_role == "patient" && (
         <tab.Screen
           name={"Appointments"}
           component={BookedAppointments}
@@ -52,12 +52,14 @@ const Tabs = () => {
         />
       )}
 
-      {user &&  user.user_role !== "doctor" && (
+      {user && user.user_role !== "doctor" && (
         <tab.Screen
           name={"Profile"}
           component={PatientProfile}
           options={{
             tabBarIcon: () => <Feather name="user" size={24} color="black" />,
+            headerShown: true,
+            title: "Profile",
           }}
         />
       )}
@@ -67,18 +69,21 @@ const Tabs = () => {
           component={Profile}
           options={{
             tabBarIcon: () => <Feather name="user" size={24} color="black" />,
+            headerShown: true,
+            title: "Profile",
           }}
         />
       )}
-      
-        <tab.Screen
-          name={"Settings"}
-          component={SettingScreen}
-          options={{
-            tabBarIcon: () => <Ionicons name="settings-outline" size={24} color="black" />,
-          }}
-        />
-      
+
+      <tab.Screen
+        name={"Settings"}
+        component={SettingScreen}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="settings-outline" size={24} color="black" />
+          ),
+        }}
+      />
 
       {/* <tab.Screen name={routes.about} component={About} /> */}
       {/* <tab.Screen name={routes.onboarding} component={Onboarding} /> */}
