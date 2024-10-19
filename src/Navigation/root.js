@@ -149,6 +149,7 @@ const Root = () => {
       <stack.Screen
         name={routes.newfindDoctor}
         component={NewFindDoctor}
+        options={{ headerShown: true, title: "Find Doctor" }}
       ></stack.Screen>
 
 
