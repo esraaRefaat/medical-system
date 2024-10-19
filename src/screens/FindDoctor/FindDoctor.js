@@ -94,7 +94,7 @@ export default function FindDoctor({ route }) {
           </View>
         }
         data={doctors}
-        keyExtractor={(_id) => _id}
+        keyExtractor={(item) => item._id}
         contentContainerStyle={{ gap: 16 }}
         ItemSeparatorComponent={() => <View style={{ height: 38 }} />}
         renderItem={({ item }) => (
@@ -146,22 +146,67 @@ export default function FindDoctor({ route }) {
 
 const styles = StyleSheet.create({
   listHeader: {
-    gap: 8,
-    paddingTop: 8,
-    paddingBottom: 24,
+    gap: 12, // Increased gap for cleaner separation
+    paddingTop: 16, // More padding for better spacing
+    paddingBottom: 28,
+    backgroundColor: "#f9f9f9", // Light background for a cleaner feel
+    borderBottomWidth: 1,
+    borderBottomColor: "#ececec",
   },
   listHeaderFirstSection: {
     paddingHorizontal: 20,
-    gap: 8,
+    gap: 12,
     flexDirection: "row",
+    alignItems: "center", // Ensuring everything is aligned in the middle
   },
   searchBox: {
     flexGrow: 1,
+    borderRadius: 8, // Modern rounded corners for input
+    overflow: "hidden", // Ensuring children respect the border radius
   },
   endText: {
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 22,
+    fontSize: 18, // Slightly smaller for a cleaner look
+    color: "#666", // Use a softer color instead of pure black
+    paddingVertical: 12, // Added padding for breathing space
+  },
+  doctorCard: {
+    borderRadius: 12, // Rounded corners for cards
+    shadowColor: "#000", // Shadow for elevation
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1, // Subtle shadow for a soft, modern effect
+    shadowRadius: 6,
+    backgroundColor: "white", // Clean background for cards
+    padding: 16,
+    marginHorizontal: 16, // Adds consistent margin between cards
+  },
+  button: {
+    backgroundColor: solidBlue,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  fab: {
+    position: "absolute",
+    bottom: 16,
+    right: 16,
+    backgroundColor: solidBlue,
+    padding: 16,
+    borderRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
 });
 
