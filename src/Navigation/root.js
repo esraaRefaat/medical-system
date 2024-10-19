@@ -137,6 +137,7 @@ const Root = () => {
       <stack.Screen
         name={routes.EditProfileInfo}
         component={EditProfileInfoView}
+        options={{ headerShown: true, title: "Edit Profile" }}
       ></stack.Screen>
       <stack.Screen
         name={routes.Settings}
@@ -151,9 +152,6 @@ const Root = () => {
         component={NewFindDoctor}
         options={{ headerShown: true, title: "Find Doctor" }}
       ></stack.Screen>
-
-
-      
     </stack.Navigator>
   );
 };

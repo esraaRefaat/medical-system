@@ -270,23 +270,6 @@ const EditProfileInfoView = () => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.backbuttontouch}
-            onPress={() => navigation.navigate(routes.home)}
-          >
-            <BACK_Arrow />
-          </TouchableOpacity>
-
-          {/* Header Text */}
-          <CustomText
-            text={"Edit Your Information"}
-            color="GREY"
-            fontFamily="bold"
-            style={styles.logoText}
-          />
-        </View>
         {/* <CustomText
           text={
             "You can change your information from here: "
@@ -484,3 +467,4 @@ const EditProfileInfoView = () => {
 };
 
 export default EditProfileInfoView;
+
