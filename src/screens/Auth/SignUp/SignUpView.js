@@ -219,7 +219,19 @@ const SignUpView = () => {
                     style={styles.modalTitle}
                   />
                   <Text style={styles.modalText}>
-                    Welcome to our app! By signing up, you agree to the following terms...
+                    Welcome to CureChain, a medical record management application powered by blockchain technology. By using our services, you agree to comply with the following terms and conditions.
+                    {'\n'}1. Acceptance of Terms:
+                    {'\n'}By accessing or using CureChain, you agree to be bound by these Terms and Conditions. If you do not agree to these Terms, you may not use the App.
+                    {'\n'}2. Privacy and Data Security:
+                    {'\n'}We value your privacy. All personal health information that you store or share via the App is protected in accordance with our Privacy Policy. While blockchain technology ensures that your data is encrypted and secure, no system is completely foolproof. By using the App, you acknowledge and accept the risks inherent to digital transactions.
+
+                    {'\n'}3. Blockchain Technology:
+                    {'\n'}The App uses blockchain technology to store and verify your medical records. Blockchain technology ensures that the records are immutable and cannot be altered once uploaded. However, you are responsible for ensuring that the information you upload is accurate. Any inaccuracies or mistakes must be corrected by creating new records, as blockchain records cannot be deleted.
+                    {'\n'}4. User Responsibilities:
+                    {'\n'}You are solely responsible for the security of your account and any activities that occur under your account. Always safeguard your login credentials and report any unauthorized access immediately. You must not use the App for any illegal or unauthorized purposes.
+
+                    {'\n'}5. Medical Information Disclaimer:
+                    {'\n'}CureChain is not intended to provide medical advice, diagnosis, or treatment. The App serves as a platform for storing and sharing medical records. All medical information must be provided by healthcare professionals. Always consult your doctor or other qualified healthcare provider with any questions you may have regarding a medical condition.
                   </Text>
                 </ScrollView>
                 <TouchableOpacity
