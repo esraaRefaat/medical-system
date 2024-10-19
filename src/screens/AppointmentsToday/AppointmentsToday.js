@@ -119,7 +119,7 @@ export default function AppointmentsToday({ navigation }) {
           />
           <Text style={styles.recordSubtitle}>{item.patient.name}</Text>
           <Text style={styles.dateText}>
-            {moment(item.date).format("DD-MM-YYYY ,h:mm:ss a")}
+            {moment(item.date).format("DD-MM-YYYY")}
           </Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
