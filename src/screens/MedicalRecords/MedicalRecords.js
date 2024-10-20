@@ -88,13 +88,13 @@ export default function MedicalRecords({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <BACK_Arrow />
         </TouchableOpacity>
         <Text style={styles.headerText}>All Records</Text>
         <Text style={styles.notificationIcon}></Text>
-      </View>
+      </View> */}
       <FlatList
         data={records}
         renderItem={renderItem}

@@ -37,6 +37,8 @@ const Tabs = () => {
             tabBarIcon: () => (
               <Ionicons name="document-outline" size={24} color="black" />
             ),
+            headerShown: true,
+            title: "Appointments",
           }}
         />
       )}
@@ -48,6 +50,8 @@ const Tabs = () => {
             tabBarIcon: () => (
               <Ionicons name="document-outline" size={24} color="black" />
             ),
+            headerShown: true,
+            title: "Appointments",
           }}
         />
       )}

@@ -1,4 +1,11 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import HomeHeader from "../../components/specialities/HeaderSpec";
 import Spec from "../../components/specialities/spec";
@@ -107,25 +114,6 @@ const Specialities = () => {
 
   return (
     <SafeAreaView>
-              <View style={styles.headerContainer}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.backbuttontouch}
-            onPress={() => navigation.navigate(routes.mainapp)}
-          >
-            <BACK_Arrow />
-          </TouchableOpacity>
-
-          {/* Header Text */}
-          <CustomText
-            text={"Medical Specialties"}
-            color="GREY"
-            fontFamily="bold"
-            style={styles.logoText}
-          />
-        </View>
-
-
       <HomeHeader></HomeHeader>
       <ScrollView style={styles.scrollview}>
         {specs.map(({ name, icon, drSpecialties }) => {

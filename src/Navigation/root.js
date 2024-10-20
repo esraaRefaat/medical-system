@@ -51,7 +51,11 @@ const Root = () => {
         name={routes.forgotPassword}
         component={ForgotPasswordView}
       />
-      <stack.Screen name={routes.specialities} component={Specialities} />
+      <stack.Screen
+        name={routes.specialities}
+        component={Specialities}
+        options={{ headerShown: true, title: "Specialities" }}
+      />
       <stack.Screen name={routes.newpassword} component={NewPasswordView} />
       <stack.Screen
         name={routes.mainapp}
@@ -62,7 +66,7 @@ const Root = () => {
       <stack.Screen
         name={routes.medicalrecords}
         component={MedicalRecords}
-        options={{ title: "Records" }}
+        options={{ headerShown: true, title: "Records" }}
       />
       <stack.Screen
         name={routes.confirmAppointment}
@@ -77,7 +81,11 @@ const Root = () => {
         component={FindDoctor}
         options={{ headerShown: true, title: "Find a doctor" }}
       />
-      <stack.Screen name={routes.addrecordscreen} component={AddRecordScreen} />
+      <stack.Screen
+        name={routes.addrecordscreen}
+        component={AddRecordScreen}
+        options={{ headerShown: true, title: "Add Record" }}
+      />
       <stack.Screen
         name={routes.recorddetails}
         component={RecordDetailsScreen}
@@ -151,9 +159,6 @@ const Root = () => {
         component={NewFindDoctor}
         options={{ headerShown: true, title: "Find Doctor" }}
       ></stack.Screen>
-
-
-      
     </stack.Navigator>
   );
 };
